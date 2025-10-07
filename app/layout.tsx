@@ -22,9 +22,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: Readonly<{children: ReactNode}>) {
   return (
-    <html lang="he" dir="rtl" className="h-full">
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100`}>
-        <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
+    <html lang="he" dir="rtl" className="h-full dark">
+      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-slate-950 text-slate-100 antialiased`}>
+        <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100">
           {children}
         </div>
       </body>

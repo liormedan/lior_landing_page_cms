@@ -22,7 +22,6 @@ vi.mock('next/link', () => {
     }
   }
 })
-import React from 'react'
 
 // Mock Intersection Observer
 global.IntersectionObserver = vi.fn().mockImplementation(() => ({

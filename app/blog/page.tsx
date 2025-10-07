@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRightIcon } from "@heroicons/react/24/outline"
 
 import { PostCard } from "@/components/post-card"
+import Footer from "@/components/footer"
 import { sanityFetch } from "@/lib/sanity.client"
 import { POSTS_QUERY } from "@/lib/queries"
 import type { PostListItem } from "@/types/sanity"
@@ -94,6 +95,7 @@ export default async function BlogPage() {
           </div>
         )}
       </div>
+      <Footer />
     </main>
   )
 }

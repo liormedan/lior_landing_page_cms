@@ -7,6 +7,7 @@ import FAQSection from "@/components/faq-section"
 import PricingSection from "@/components/pricing-section"
 import ContactSection from "@/components/contact-section"
 import RecentPosts from "@/components/recent-posts"
+import Footer from "@/components/footer"
 import { getHeroContent, getTechnologies, getProjectTypes, getServices, getDemoContent, getFAQItems, getPricingPackages } from "@/lib/landing-page-content"
 import { sanityFetch } from "@/lib/sanity.client"
 import { RECENT_POSTS_QUERY } from "@/lib/queries"
@@ -60,6 +61,7 @@ export default async function HomePage() {
         <RecentPosts posts={recentPosts} />
         <ContactSection />
       </div>
+      <Footer />
     </main>
   )
 }

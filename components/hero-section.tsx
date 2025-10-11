@@ -3,6 +3,7 @@
 import { HeroContent } from '@/types/landing-page'
 import { useState, useEffect } from 'react'
 import AnimatedText from './animated-text'
+import SpinningPlus3D from './spinning-plus-3d'
 
 interface HeroSectionProps {
   hero: HeroContent
@@ -62,9 +63,9 @@ export function HeroSection({ hero, onContactClick }: HeroSectionProps) {
                     {titlePrimary}
                   </AnimatedText>
                 </span>
-                <span className="flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 rounded-3xl border border-sky-200/60 dark:border-sky-500/40 bg-white/80 dark:bg-slate-900/70 shadow-[0_20px_45px_rgba(14,165,233,0.25)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-sky-600 dark:text-sky-300 backdrop-blur">
-                  +
-                </span>
+                <div className="flex items-center justify-center">
+                  <SpinningPlus3D />
+                </div>
                 <span className="relative inline-flex">
                   <span
                     className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/40 via-blue-500/30 to-sky-400/40 blur-3xl opacity-70 dark:from-cyan-500/25 dark:via-indigo-500/20 dark:to-sky-400/25"

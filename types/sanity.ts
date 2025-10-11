@@ -29,11 +29,19 @@ export interface Post extends SanityDocument {
   }
   excerpt?: string
   content: PortableTextBlock[]
+  body?: PortableTextBlock[]
   coverImage?: SanityImage
+  mainImage?: SanityImage
   author?: Author
   publishedAt: string
   tags?: Tag[]
+  categories?: Category[]
   featured?: boolean
+  seo?: {
+    metaDescription?: string
+    metaTitle?: string
+    keywords?: string[]
+  }
 }
 
 // Author Types
@@ -45,6 +53,8 @@ export interface Author extends SanityDocument {
   }
   bio?: PortableTextBlock[]
   image?: SanityImage
+  avatar?: SanityImage
+  role?: string
 }
 
 // Tag Types
@@ -66,11 +76,16 @@ export interface PostListItem {
   }
   excerpt?: string
   coverImage?: SanityImage
+  mainImage?: SanityImage
+  featured?: boolean
+  categories?: Category[]
   author?: {
     name: string
     slug: {
       current: string
     }
+    avatar?: SanityImage
+    role?: string
   }
   publishedAt: string
   tags?: {
@@ -85,6 +100,7 @@ export interface PostListItem {
 export interface Category extends SanityDocument {
   _type: 'category'
   name: string
+  title: string
   slug: {
     current: string
   }

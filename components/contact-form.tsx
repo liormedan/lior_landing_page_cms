@@ -19,7 +19,8 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
     },
     errors: {},
     isSubmitting: false,
-    isSubmitted: false
+    isSubmitted: false,
+    isSuccess: false
   })
 
   // Project types from the content
@@ -201,7 +202,8 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
       },
       errors: {},
       isSubmitting: false,
-      isSubmitted: false
+      isSubmitted: false,
+      isSuccess: false
     })
   }
 

@@ -71,6 +71,23 @@ export interface ContactFormData {
   selectedPackage?: string
 }
 
+export interface ContactFormErrors {
+  name?: string
+  email?: string
+  projectType?: string
+  message?: string
+  general?: string
+}
+
+export interface ContactFormState {
+  data: ContactFormData
+  errors: ContactFormErrors
+  isSubmitting: boolean
+  isSuccess: boolean
+  isSubmitted: boolean
+  submitError?: string
+}
+
 // Landing Page Content Types
 export interface LandingPageContent {
   hero: HeroContent

@@ -57,7 +57,6 @@ export interface FAQItem {
 export interface PricingPackage {
   name: string
   price: string
-  description: string
   features: string[]
   highlighted?: boolean
   ctaText: string

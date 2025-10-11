@@ -130,17 +130,19 @@ export function SlideInFromSide({
 }
 
 // אפקט הקלדה מתקדם
+type TypewriterEffectProps = {
+  text: string
+  speed?: number
+  className?: string
+  onComplete?: () => void
+}
+
 export function TypewriterEffect({ 
   text, 
   speed = 100,
   className = '',
-  onComplete?: () => void 
-}: {
-  text: string;
-  speed?: number;
-  className?: string;
-  onComplete?: () => void;
-}) {
+  onComplete
+}: TypewriterEffectProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 

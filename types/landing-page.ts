@@ -9,17 +9,21 @@ export interface HeroContent {
 // Technology Types
 export interface Technology {
   name: string
+  logo: string
   description: string
-  icon: string
-  color: string
+  benefits: string[]
+  category: string
 }
 
 // Project Types
 export interface ProjectType {
   title: string
   description: string
-  features: string[]
   image: string
+  features: string[]
+  examples: string[]
+  ctaLabel?: string
+  ctaHref?: string
   demoUrl?: string
 }
 
@@ -27,7 +31,7 @@ export interface ProjectType {
 export interface Service {
   title: string
   description: string
-  features: string[]
+  benefits: string[]
   icon: string
   price?: string
 }
@@ -36,15 +40,17 @@ export interface Service {
 export interface DemoContent {
   title: string
   description: string
+  features: string[]
+  screenshots: string[]
   videoUrl?: string
   imageUrl?: string
-  features: string[]
 }
 
 // FAQ Types
 export interface FAQItem {
   question: string
   answer: string
+  category: string
 }
 
 // Pricing Types

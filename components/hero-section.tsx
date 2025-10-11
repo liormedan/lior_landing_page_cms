@@ -3,7 +3,7 @@
 import { HeroContent } from '@/types/landing-page'
 import { useState, useEffect } from 'react'
 import AnimatedText from './animated-text'
-import SpinningPlus3D from './spinning-plus-3d'
+import SimplePlus from './spinning-plus-3d'
 
 interface HeroSectionProps {
   hero: HeroContent
@@ -64,7 +64,7 @@ export function HeroSection({ hero, onContactClick }: HeroSectionProps) {
                   </AnimatedText>
                 </span>
                 <div className="flex items-center justify-center">
-                  <SpinningPlus3D />
+                  <SimplePlus />
                 </div>
                 <span className="relative inline-flex">
                   <span
@@ -96,7 +96,7 @@ export function HeroSection({ hero, onContactClick }: HeroSectionProps) {
           </h1>
 
           {/* Description */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4">
             {descriptionLines.map((line, index) => (
               <span key={index}>
                 {line}

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ProjectType } from '@/types/landing-page'
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
 
@@ -58,7 +59,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
             return (
               <article
                 key={index}
-                className={`group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:scale-105 hover:-translate-y-2 dark:bg-slate-900/70 dark:border-slate-800/70 dark:focus-within:ring-offset-slate-950 ${
+                className={`group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:scale-105 hover:-translate-y-2 text-center dark:bg-slate-900/70 dark:border-slate-800/70 dark:focus-within:ring-offset-slate-950 ${
                   visibleItems.has(index) 
                     ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-8'
@@ -82,20 +83,41 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-4 sm:p-6">
+                <div className="p-4 sm:p-6 text-center">
                   <h3 
                     id={`project-${index}-title`}
                     className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-200"
                   >
                     {project.title}
                   </h3>
-                  <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed text-sm sm:text-base">
+                  <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed text-sm sm:text-base text-center">
                     {project.description}
                   </p>
 
+                  {project.ctaHref && (
+                    <div className="mb-4">
+                      <Link
+                        href={project.ctaHref}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-sm sm:text-base font-semibold transition-colors duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:bg-sky-500 dark:hover:bg-sky-400 dark:focus:ring-offset-slate-950"
+                        aria-label={`${project.ctaLabel ?? 'קראו עוד'} עבור ${project.title}`}
+                      >
+                        {project.ctaLabel ?? 'למידע נוסף'}
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12l-7.5 7.5M21 12H3" />
+                        </svg>
+                      </Link>
+                    </div>
+                  )}
+
                   {/* Examples Preview */}
                   <div className="mb-4">
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap justify-center gap-2">
                       {project.examples.slice(0, 2).map((example, exampleIndex) => (
                         <span
                           key={exampleIndex}
@@ -128,22 +150,22 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
                   {isExpanded && (
                     <div 
                       id={`project-${index}-details`}
-                      className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 animate-in slide-in-from-top-2 duration-300"
+                      className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 animate-in slide-in-from-top-2 duration-300 text-center"
                       role="region"
                       aria-label={`פרטים נוספים עבור ${project.title}`}
                     >
                       {/* Features */}
                       <div className="mb-4">
-                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 text-sm sm:text-base">תכונות עיקריות:</h4>
-                        <ul className="space-y-1" role="list">
+                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 text-sm sm:text-base text-center">תכונות עיקריות:</h4>
+                        <ul className="space-y-2 flex flex-col items-center" role="list">
                           {project.features.map((feature, featureIndex) => (
                             <li 
                               key={featureIndex} 
-                              className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300"
+                              className="flex items-center justify-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 text-center"
                               role="listitem"
                             >
-                              <span className="text-sky-500 dark:text-sky-400 mt-1" aria-hidden="true">✓</span>
-                              {feature}
+                              <span className="text-sky-500 dark:text-sky-400" aria-hidden="true">✓</span>
+                              <span>{feature}</span>
                             </li>
                           ))}
                         </ul>
@@ -151,8 +173,8 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
 
                       {/* All Examples */}
                       <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 text-sm sm:text-base">דוגמאות:</h4>
-                        <div className="flex flex-wrap gap-2">
+                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 text-sm sm:text-base text-center">דוגמאות:</h4>
+                        <div className="flex flex-wrap justify-center gap-2">
                           {project.examples.map((example, exampleIndex) => (
                             <span
                               key={exampleIndex}

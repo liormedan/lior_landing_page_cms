@@ -29,6 +29,8 @@ export interface ProjectType {
   image: string // path to example image
   features: string[]
   examples: string[]
+  ctaLabel?: string
+  ctaHref?: string
 }
 
 export interface Service {

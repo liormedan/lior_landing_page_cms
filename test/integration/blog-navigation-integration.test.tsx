@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+﻿import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import RecentPosts from '@/components/recent-posts'
@@ -56,9 +56,9 @@ vi.mock('@/lib/sanity.client', () => ({
 // Mock landing page content
 vi.mock('@/lib/landing-page-content', () => ({
   getHeroContent: () => ({
-    title: 'פתרונות דיגיטליים מתקדמים',
+    title: 'בניית מערכת ניהול + תוכן עם אתר מעוצב',
     subtitle: 'מערכת ניהול תוכן + אתר מעוצב',
-    description: 'קבלו פלטפורמה טכנולוगית מלאה',
+    description: 'בניית פלטפורמה מלאה עם מערכת CMS ואתר מותאם לפי הצורך',
     ctaText: 'בואו נתחיל'
   }),
   getTechnologies: () => [],

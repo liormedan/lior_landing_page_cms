@@ -2,6 +2,7 @@
 
 import { HeroContent } from '@/types/landing-page'
 import { useState, useEffect } from 'react'
+import AnimatedText from './animated-text'
 
 interface HeroSectionProps {
   hero: HeroContent
@@ -15,11 +16,21 @@ export function HeroSection({ hero, onContactClick }: HeroSectionProps) {
     setIsVisible(true)
   }, [])
 
+  const normalizedTitle = hero.title.trim()
+  const [titlePrimaryRaw, ...titleSecondaryParts] = normalizedTitle.split('+')
+  const titlePrimary = titlePrimaryRaw?.trim() ?? ''
+  const titleSecondary = titleSecondaryParts.join('+').trim()
+  const showSplitTitle = titlePrimary.length > 0 && titleSecondary.length > 0
+  const descriptionLines = hero.description
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean)
+
   return (
     <section 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       role="banner"
-      aria-label="דף נחיתה ראשי"
+      aria-label={normalizedTitle || hero.subtitle}
     >
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900" />
@@ -34,24 +45,64 @@ export function HeroSection({ hero, onContactClick }: HeroSectionProps) {
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Subtitle */}
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-sky-700 bg-sky-100/80 rounded-full backdrop-blur-sm dark:text-sky-300 dark:bg-sky-900/50">
-            <span className="w-2 h-2 bg-sky-500 rounded-full animate-pulse" aria-hidden="true" />
-            {hero.subtitle}
-          </div>
 
           {/* Main Title */}
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-slate-100 mb-4 sm:mb-6 leading-tight px-2">
-            <span className="bg-gradient-to-r from-slate-900 via-sky-800 to-slate-900 bg-clip-text text-transparent dark:from-slate-100 dark:via-sky-300 dark:to-slate-100">
-              {hero.title}
-            </span>
+                    <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 sm:mb-8 leading-[1.05] tracking-tight px-2">
+            {showSplitTitle ? (
+              <span className="inline-flex flex-col items-center gap-5 sm:gap-6">
+                <span className="relative inline-flex">
+                  <span
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-sky-400/40 via-blue-500/30 to-cyan-400/40 blur-3xl opacity-70 dark:from-sky-500/30 dark:via-indigo-500/20 dark:to-cyan-400/30"
+                    aria-hidden="true"
+                  />
+                  <AnimatedText
+                    variant="gradient"
+                    className="relative px-4 sm:px-6 py-1 sm:py-2 drop-shadow-[0_12px_30px_rgba(14,165,233,0.35)]"
+                  >
+                    {titlePrimary}
+                  </AnimatedText>
+                </span>
+                <span className="flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 rounded-3xl border border-sky-200/60 dark:border-sky-500/40 bg-white/80 dark:bg-slate-900/70 shadow-[0_20px_45px_rgba(14,165,233,0.25)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-sky-600 dark:text-sky-300 backdrop-blur">
+                  +
+                </span>
+                <span className="relative inline-flex">
+                  <span
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/40 via-blue-500/30 to-sky-400/40 blur-3xl opacity-70 dark:from-cyan-500/25 dark:via-indigo-500/20 dark:to-sky-400/25"
+                    aria-hidden="true"
+                  />
+                  <AnimatedText
+                    variant="wave"
+                    className="relative px-4 sm:px-6 py-1 sm:py-2 drop-shadow-[0_12px_30px_rgba(14,165,233,0.35)]"
+                  >
+                    {titleSecondary}
+                  </AnimatedText>
+                </span>
+              </span>
+            ) : (
+              <span className="relative inline-flex">
+                <span
+                  className="absolute inset-0 rounded-full bg-gradient-to-r from-sky-400/40 via-blue-500/30 to-cyan-400/40 blur-3xl opacity-70 dark:from-sky-500/25 dark:via-indigo-500/20 dark:to-cyan-400/25"
+                  aria-hidden="true"
+                />
+                <AnimatedText
+                  variant="gradient"
+                  className="relative px-4 sm:px-6 py-1 sm:py-2 drop-shadow-[0_12px_30px_rgba(14,165,233,0.35)]"
+                >
+                  {hero.title}
+                </AnimatedText>
+              </span>
+            )}
           </h1>
 
           {/* Description */}
           <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4">
-            {hero.description}
+            {descriptionLines.map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < descriptionLines.length - 1 && <br />}
+              </span>
+            ))}
           </p>
-
         </div>
       </div>
 
@@ -64,4 +115,3 @@ export function HeroSection({ hero, onContactClick }: HeroSectionProps) {
     </section>
   )
 }
-

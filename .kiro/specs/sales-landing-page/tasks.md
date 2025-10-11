@@ -94,25 +94,16 @@
   - _דרישות: כל הדרישות_
 
 - [ ] 16. כתיבת בדיקות יחידה לרכיבים עיקריים
-
-
-
-
-
-
   - בדיקות עבור Contact Form validation
   - בדיקות עבור FAQ accordion functionality
   - בדיקות עבור Pricing Section interactions
   - בדיקות עבור Recent Posts component
   - בדיקות עבור responsive behavior
   - _דרישות: 4.4, 5.2, 7.1, 9.1, 10.1_
+
 -
 
 - [x] 17. בדיקות אינטגרציה לטופס יצירת קשר ונתיבי בלוג
-
-
-
-
   - בדיקת flow מלא של שליחת הודעה
   - בדיקת error handling ו-success states
   - בדיקת email delivery functionality

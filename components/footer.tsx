@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-white">ליאור מדן</h3>
             <p className="text-sm leading-relaxed">
-              פתרונות דיגיטליים מתקדמים עם טכנולוגיות חדישות. 
+              בניית מערכת ניהול תוכן עם אתר מעוצב על בסיס טכנולוגיות חדישות. 
               מתמחה בפיתוח אתרים מהירים ומערכות ניהול תוכן מתקדמות.
             </p>
             <div className="flex items-center space-x-2 space-x-reverse">

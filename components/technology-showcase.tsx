@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { Technology } from '@/types/landing-page'
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
+import AnimatedText from './animated-text'
 
 interface TechnologyShowcaseProps {
   technologies: Technology[]
@@ -23,9 +24,11 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
         }`}>
           <h2 
             id="technology-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
           >
-            הטכנולוגיות שמניעות את הפתרון
+            <AnimatedText variant="gradient">
+              הטכנולוגיות שמניעות את הפתרון
+            </AnimatedText>
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4">
             אנחנו משתמשים בטכנולוגיות המתקדמות ביותר כדי לספק לכם פתרון מהיר, אמין ומתקדם
@@ -39,7 +42,7 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
           {technologies.map((tech, index) => (
             <article
               key={tech.name}
-              className={`group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 p-6 sm:p-8 border border-slate-100 hover:border-sky-200 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:scale-105 hover:-translate-y-2 dark:bg-slate-900/70 dark:border-slate-800/70 dark:focus-within:ring-offset-slate-950 ${
+              className={`group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 p-6 sm:p-8 border border-slate-100 hover:border-sky-200 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:scale-105 hover:-translate-y-2 text-center dark:bg-slate-900/70 dark:border-slate-800/70 dark:focus-within:ring-offset-slate-950 ${
                 visibleItems.has(index) 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-8'
@@ -77,15 +80,15 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
                 <h4 className="font-semibold text-slate-800 dark:text-slate-200 text-sm uppercase tracking-wide">
                   מה זה נותן לכם:
                 </h4>
-                <ul className="space-y-2" role="list">
+                <ul className="space-y-3" role="list">
                   {tech.benefits.map((benefit, benefitIndex) => (
                     <li
                       key={benefitIndex}
-                      className="flex items-start gap-3 text-slate-700 dark:text-slate-300"
+                      className="flex flex-col items-center gap-2 text-center text-slate-700 dark:text-slate-300"
                       role="listitem"
                     >
                       <div 
-                        className="w-2 h-2 bg-sky-500 rounded-full mt-2 flex-shrink-0 dark:bg-sky-400" 
+                        className="w-2.5 h-2.5 bg-sky-500 rounded-full dark:bg-sky-400" 
                         aria-hidden="true"
                       />
                       <span className="text-sm sm:text-base leading-relaxed">{benefit}</span>

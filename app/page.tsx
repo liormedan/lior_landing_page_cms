@@ -15,11 +15,11 @@ import type { PostListItem } from "@/types/sanity"
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'פתרונות דיגיטליים מתקדמים | מערכת ניהול תוכן + אתר מעוצב',
-  description: 'קבלו פלטפורמה טכנולוגית מלאה עם Vercel + Sanity - לא רק בלוגים, אלא כל רעיון דיגיטלי שתרצו ליצור',
+  title: 'בניית מערכת ניהול + תוכן עם אתר מעוצב | מערכת ניהול תוכן + אתר מעוצב',
+  description: 'בניית פלטפורמה מלאה עם מערכת CMS ואתר מותאם לפי הצורך',
   keywords: ['פיתוח אתרים', 'Next.js', 'Sanity CMS', 'Vercel', 'מערכת ניהול תוכן', 'אתרים מותאמים'],
   openGraph: {
-    title: 'פתרונות דיגיטליים מתקדמים',
+    title: 'בניית מערכת ניהול + תוכן עם אתר מעוצב',
     description: 'מערכת ניהול תוכן + אתר מעוצב ומהיר',
     type: 'website',
   },

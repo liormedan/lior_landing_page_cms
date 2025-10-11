@@ -15,9 +15,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "בלוג הבנייה של ליאור מדן",
-  description: "תיעוד מלא של בניית הבלוג עם Codex, VS Code, Sanity ו-Vercel.",
-  metadataBase: new URL("https://liormedan-blog.vercel.app"),
+  title: "בניית מערכת ניהול + תוכן עם אתר מעוצב",
+  description: "בניית פלטפורמה מלאה עם מערכת CMS ואתר מותאם לפי הצורך",
 }
 
 export default function RootLayout({children}: Readonly<{children: ReactNode}>) {

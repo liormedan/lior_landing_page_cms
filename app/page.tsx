@@ -34,11 +34,17 @@ export default async function HomePage() {
   const faqItems = getFAQItems()
   const pricingPackages = getPricingPackages()
   
-  // Fetch recent posts from Sanity
-  const recentPosts = await sanityFetch<PostListItem[]>(RECENT_POSTS_QUERY, {
-    revalidate: 3600, // Cache for 1 hour
-    tags: ['post']
-  })
+  // Fetch recent posts from Sanity with fallback
+  let recentPosts: PostListItem[] = []
+  try {
+    recentPosts = await sanityFetch<PostListItem[]>(RECENT_POSTS_QUERY, {
+      revalidate: 3600, // Cache for 1 hour
+      tags: ['post']
+    })
+  } catch (error) {
+    console.log('Failed to fetch posts from Sanity, using empty array:', error)
+    recentPosts = []
+  }
 
   return (
     <main className="min-h-screen" role="main">

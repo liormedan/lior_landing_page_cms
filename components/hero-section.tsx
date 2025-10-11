@@ -7,10 +7,9 @@ import SimplePlus from './spinning-plus-3d'
 
 interface HeroSectionProps {
   hero: HeroContent
-  onContactClick?: () => void
 }
 
-export function HeroSection({ hero, onContactClick }: HeroSectionProps) {
+export function HeroSection({ hero }: HeroSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {

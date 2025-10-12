@@ -1,12 +1,12 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --background: #020617;
-  --foreground: #e2e8f0;
-  --background-alt: #0b1120;
+  --background: #ffffff;
+  --foreground: #1f2937;
+  --background-alt: #f1f5f9;
   --section-light: #ffffff;
-  --section-border: rgba(148, 163, 184, 0.15);
-  --section-shadow: 0 40px 80px rgba(15, 23, 42, 0.35);
+  --section-border: rgba(148, 163, 184, 0.12);
+  --section-shadow: 0 25px 60px rgba(15, 23, 42, 0.08);
 }
 
 @theme inline {
@@ -16,18 +16,26 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   direction: rtl;
+  text-align: right;
+}
+
+.lp-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  text-align: right;
+}
+
+@media (min-width: 1024px) {
+  .lp-container {
+    padding-inline: 2rem;
+  }
 }
 
 .section-divider {

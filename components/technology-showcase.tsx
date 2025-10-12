@@ -3,143 +3,130 @@
 import Image from 'next/image'
 import { Technology } from '@/types/landing-page'
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
-import AnimatedText from './animated-text'
 
 interface TechnologyShowcaseProps {
   technologies: Technology[]
 }
 
+const CATEGORY_STYLES: Record<string, string> = {
+  frontend: 'bg-sky-100 text-sky-800',
+  cms: 'bg-emerald-100 text-emerald-800',
+  deployment: 'bg-indigo-100 text-indigo-800',
+}
+
+const CATEGORY_LABELS: Record<string, string> = {
+  frontend: 'פרונטאנד מודרני',
+  cms: 'ניהול תוכן',
+  deployment: 'תשתיות ופריסה',
+}
+
 export default function TechnologyShowcase({ technologies }: TechnologyShowcaseProps) {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.1 })
   const { containerRef, visibleItems } = useStaggeredAnimation(technologies.length, 150)
+
   return (
-    <section 
+    <section
+      id="technologies"
       ref={sectionRef}
-      className="py-12 sm:py-16 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 border-y border-slate-200/60 dark:border-slate-800/60"
+      className="bg-white py-24"
       aria-labelledby="technology-heading"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-8 sm:mb-12 transition-all duration-1000 ${
-          sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <h2 
+      <div className="lp-container">
+        <div
+          className={`mx-auto max-w-3xl text-right transition-all duration-700 ${
+            sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <span className="inline-flex items-center justify-center rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-700">
+            הטכנולוגיות שמחזיקות את האתר שלכם
+          </span>
+          <h2
             id="technology-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
           >
-            <AnimatedText variant="gradient">
-              הטכנולוגיות שמניעות את הפתרון
-            </AnimatedText>
+            Stack מודרני שמחבר בין עיצוב, תוכן ופריסה
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4">
-            אנחנו משתמשים בטכנולוגיות המתקדמות ביותר כדי לספק לכם פתרון מהיר, אמין ומתקדם
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            כל שכבה נבחרת כדי לאפשר לצוותי התוכן לשחרר חוויות חדשות במהירות, תוך שמירה על קוד
+            נקי ומדיד שמאפשר לגדול בלי עיכובים מיותרים.
           </p>
         </div>
 
-        <div 
-          ref={containerRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto"
-        >
-          {technologies.map((tech, index) => (
-            <article
-              key={tech.name}
-              className={`group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 p-6 sm:p-8 border border-slate-100 hover:border-sky-200 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:scale-105 hover:-translate-y-2 text-center dark:bg-slate-900/70 dark:border-slate-800/70 dark:focus-within:ring-offset-slate-950 ${
-                visibleItems.has(index) 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
-              role="article"
-              aria-labelledby={`tech-${index}-title`}
-              style={{ 
-                transitionDelay: visibleItems.has(index) ? '0ms' : `${index * 150}ms` 
-              }}
-            >
-              {/* Logo and Name */}
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 relative">
-                  <Image
-                    src={tech.logo}
-                    alt={`${tech.name} לוגו`}
-                    fill
-                    className="object-contain group-hover:scale-110 transition-transform duration-300"
-                    sizes="(max-width: 640px) 64px, 80px"
-                  />
-                </div>
-                <h3 
-                  id={`tech-${index}-title`}
-                  className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2"
-                >
-                  {tech.name}
-                </h3>
-                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
-                  {tech.description}
-                </p>
-              </div>
+        <div ref={containerRef} className="mt-16 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
+          {technologies.map((tech, index) => {
+            const style = CATEGORY_STYLES[tech.category] ?? 'bg-slate-100 text-slate-700'
+            const label = CATEGORY_LABELS[tech.category] ?? tech.category
 
-              {/* Benefits */}
-              <div className="space-y-3">
-                <h4 className="font-semibold text-slate-800 dark:text-slate-200 text-sm uppercase tracking-wide">
-                  מה זה נותן לכם:
-                </h4>
-                <ul className="space-y-3" role="list">
+            return (
+              <article
+                key={tech.name}
+                className={`group flex h-full flex-col gap-6 rounded-3xl border border-slate-200 bg-sky-100/80 p-8 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
+                  visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
+                role="article"
+                aria-labelledby={`tech-${index}-title`}
+                style={{ transitionDelay: visibleItems.has(index) ? '0ms' : `${index * 150}ms` }}
+              >
+                <div className="ms-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-slate-50">
+                  <div className="relative h-12 w-12">
+                    <Image
+                      src={tech.logo}
+                      alt={tech.name}
+                      fill
+                      className="object-contain transition-transform duration-300 group-hover:scale-110"
+                      sizes="64px"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <span className={`inline-flex items-center justify-center rounded-full px-4 py-1 text-xs font-semibold ${style}`}>
+                    {label}
+                  </span>
+                  <h3
+                    id={`tech-${index}-title`}
+                    className="text-xl font-semibold text-slate-900"
+                  >
+                    {tech.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-600">{tech.description}</p>
+                </div>
+
+                <ul className="space-y-3 text-right text-sm text-slate-600" role="list">
                   {tech.benefits.map((benefit, benefitIndex) => (
-                    <li
-                      key={benefitIndex}
-                      className="flex flex-col items-center gap-2 text-center text-slate-700 dark:text-slate-300"
-                      role="listitem"
-                    >
-                      <div 
-                        className="w-2.5 h-2.5 bg-sky-500 rounded-full dark:bg-sky-400" 
-                        aria-hidden="true"
-                      />
-                      <span className="text-sm sm:text-base leading-relaxed">{benefit}</span>
+                    <li key={benefitIndex} className="flex items-start gap-2 text-right" role="listitem">
+                      <span className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sky-500" aria-hidden="true" />
+                      <span className="leading-relaxed">{benefit}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              {/* Category Badge */}
-              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <span 
-                  className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                    tech.category === 'frontend' 
-                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-200'
-                      : tech.category === 'cms'
-                      ? 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-200'
-                      : 'bg-purple-100 text-purple-800 dark:bg-purple-500/20 dark:text-purple-200'
-                  }`}
-                  role="status"
-                  aria-label={`קטגוריה: ${
-                    tech.category === 'frontend' ? 'ממשק משתמש' :
-                    tech.category === 'cms' ? 'ניהול תוכן' : 'אחסון ופריסה'
-                  }`}
-                >
-                  {tech.category === 'frontend' && 'ממשק משתמש'}
-                  {tech.category === 'cms' && 'ניהול תוכן'}
-                  {tech.category === 'deployment' && 'אחסון ופריסה'}
-                </span>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-8 sm:mt-12">
-          <p className="text-slate-600 dark:text-slate-300 mb-4 sm:mb-6 px-4">
-            השילוב של שלוש הטכנולוגיות האלה יוצר פתרון מושלם עבור הפרויקט שלכם
+        <div className="mt-16 rounded-3xl border border-slate-200 bg-sky-100/60 p-8 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+            איך הכל מתחבר לפרויקט שלכם
           </p>
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-sm text-slate-500 dark:text-slate-400 px-4">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-sky-500 rounded-full dark:bg-sky-400" aria-hidden="true" />
-              <span>ביצועים מעולים</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-sky-500 rounded-full dark:bg-sky-400" aria-hidden="true" />
-              <span>קלות שימוש</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-sky-500 rounded-full dark:bg-sky-400" aria-hidden="true" />
-              <span>אמינות גבוהה</span>
-            </div>
+          <p className="mt-3 text-base leading-relaxed text-slate-600">
+            השילוב של Next.js, Sanity ו-Vercel יוצר בסיס יציב שמאפשר עריכה בזמן אמת, פריסה
+            מהירה ומדידה עקבית. כך תוכלו לנהל תוכן, קמפיינים וקצב פיתוח אחיד – ממערכת אחת
+            שמרגישה טבעית לצוות.
+          </p>
+          <div className="mt-5 flex flex-wrap items-center justify-end gap-4 text-sm font-medium text-slate-500">
+            <span className="inline-flex items-center gap-2 rounded-full bg-sky-100/80 px-4 py-2 shadow-sm">
+              <span className="inline-block h-2 w-2 rounded-full bg-sky-500" aria-hidden="true" />
+              Edge Ready
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-sky-100/80 px-4 py-2 shadow-sm">
+              <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+              Content-first
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-sky-100/80 px-4 py-2 shadow-sm">
+              <span className="inline-block h-2 w-2 rounded-full bg-indigo-500" aria-hidden="true" />
+              Fully automated deploys
+            </span>
           </div>
         </div>
       </div>

@@ -1,168 +1,132 @@
 import Link from 'next/link'
-import { 
-  EnvelopeIcon, 
-  PhoneIcon, 
+import {
+  EnvelopeIcon,
+  PhoneIcon,
   MapPinIcon,
-  HeartIcon
+  HeartIcon,
 } from '@heroicons/react/24/outline'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-slate-900 text-slate-300 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Footer Content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
-          {/* Company Info */}
+    <footer className="border-t border-slate-800 bg-slate-900 text-slate-300">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">ליאור מדן</h3>
+            <h3 className="text-xl font-bold text-white">הסטודיו של ליאור</h3>
             <p className="text-sm leading-relaxed">
-              בניית מערכת ניהול תוכן עם אתר מעוצב על בסיס טכנולוגיות חדישות. 
-              מתמחה בפיתוח אתרים מהירים ומערכות ניהול תוכן מתקדמות.
+              סטודיו בוטיק לפיתוח אתרי תוכן ומוצר על בסיס Next.js ו-Sanity. אנחנו מייצרים פתרונות Tailor-made שמשרתים צוותי שיווק, מוצר ותוכן – עם דגש על ביצועים, נגישות והרחבה עתידית.
             </p>
-            <div className="flex items-center space-x-2 space-x-reverse">
+            <div className="flex items-center space-x-2 space-x-reverse text-xs">
               <HeartIcon className="h-4 w-4 text-red-500" />
-              <span className="text-xs">נבנה בישראל</span>
+              <span>עושים זאת באהבה ובפוקוס על התוצאה</span>
             </div>
           </div>
 
-          {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">שירותים</h4>
+            <h4 className="text-lg font-semibold text-white">מה אנחנו עושים</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#services" className="hover:text-sky-400 transition-colors">
-                  פיתוח אתרים
+                <Link href="#services" className="transition-colors hover:text-sky-400">
+                  אסטרטגיית UX ותוכן
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-sky-400 transition-colors">
-                  מערכות ניהול תוכן
+                <Link href="#services" className="transition-colors hover:text-sky-400">
+                  פיתוח Next.js + Sanity
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-sky-400 transition-colors">
-                  אתרי מסחר אלקטרוני
+                <Link href="#services" className="transition-colors hover:text-sky-400">
+                  DevOps, פריסה ואוטומציות
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-sky-400 transition-colors">
-                  אפליקציות ווב
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-sky-400 transition-colors">
-                  ייעוץ טכנולוגי
+                <Link href="#services" className="transition-colors hover:text-sky-400">
+                  תחזוקה וליווי שוטף
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">קישורים מהירים</h4>
+            <h4 className="text-lg font-semibold text-white">קיצורי דרך</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/" className="hover:text-sky-400 transition-colors">
+                <Link href="/" className="transition-colors hover:text-sky-400">
                   דף הבית
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-sky-400 transition-colors">
-                  בלוג
+                <Link href="/blog" className="transition-colors hover:text-sky-400">
+                  הבלוג
                 </Link>
               </li>
               <li>
-                <Link href="#pricing" className="hover:text-sky-400 transition-colors">
-                  מחירים
+                <Link href="#pricing" className="transition-colors hover:text-sky-400">
+                  חבילות ותמחור
                 </Link>
               </li>
               <li>
-                <Link href="#faq" className="hover:text-sky-400 transition-colors">
+                <Link href="#faq" className="transition-colors hover:text-sky-400">
                   שאלות נפוצות
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-sky-400 transition-colors">
+                <Link href="#contact" className="transition-colors hover:text-sky-400">
                   צור קשר
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">צור קשר</h4>
+            <h4 className="text-lg font-semibold text-white">פרטי יצירת קשר</h4>
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-3 space-x-reverse">
-                <EnvelopeIcon className="h-5 w-5 text-sky-400 flex-shrink-0" />
-                <a 
-                  href="mailto:lior@example.com" 
-                  className="hover:text-sky-400 transition-colors"
-                >
+                <EnvelopeIcon className="h-5 w-5 text-sky-400" />
+                <a href="mailto:lior@example.com" className="transition-colors hover:text-sky-400">
                   lior@example.com
                 </a>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
-                <PhoneIcon className="h-5 w-5 text-sky-400 flex-shrink-0" />
-                <a 
-                  href="tel:+972501234567" 
-                  className="hover:text-sky-400 transition-colors"
-                >
+                <PhoneIcon className="h-5 w-5 text-sky-400" />
+                <a href="tel:+972501234567" className="transition-colors hover:text-sky-400">
                   050-123-4567
                 </a>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
-                <MapPinIcon className="h-5 w-5 text-sky-400 flex-shrink-0" />
-                <span>ישראל</span>
+                <MapPinIcon className="h-5 w-5 text-sky-400" />
+                <span>עובדים מרחוק – נפגשים בזום או אצלכם במשרד</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Technologies Bar */}
-        <div className="py-6 border-t border-slate-800">
-          <div className="text-center">
-            <p className="text-xs text-slate-400 mb-3">בנוי עם טכנולוגיות מתקדמות</p>
-            <div className="flex justify-center items-center space-x-6 space-x-reverse flex-wrap gap-4">
-              <div className="flex items-center space-x-2 space-x-reverse">
-                <span className="text-xs font-medium">Next.js</span>
-              </div>
-              <div className="flex items-center space-x-2 space-x-reverse">
-                <span className="text-xs font-medium">Sanity CMS</span>
-              </div>
-              <div className="flex items-center space-x-2 space-x-reverse">
-                <span className="text-xs font-medium">Vercel</span>
-              </div>
-              <div className="flex items-center space-x-2 space-x-reverse">
-                <span className="text-xs font-medium">Tailwind CSS</span>
-              </div>
-              <div className="flex items-center space-x-2 space-x-reverse">
-                <span className="text-xs font-medium">TypeScript</span>
-              </div>
+        <div className="border-t border-slate-800 py-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-center text-xs text-slate-400 sm:justify-between">
+            <p className="order-last w-full text-xs text-slate-400 sm:order-first sm:w-auto">
+              © {currentYear} הסטודיו של ליאור. כל הזכויות שמורות.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <span>Next.js</span>
+              <span>Sanity</span>
+              <span>Vercel</span>
+              <span>Tailwind CSS</span>
+              <span>TypeScript</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="py-6 border-t border-slate-800">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-slate-400">
-              © {currentYear} ליאור מדן. כל הזכויות שמורות.
-            </div>
-            <div className="flex space-x-6 space-x-reverse text-sm">
-              <Link 
-                href="/privacy" 
-                className="text-slate-400 hover:text-sky-400 transition-colors"
-              >
+        <div className="border-t border-slate-800 py-6">
+          <div className="flex flex-col items-center justify-between gap-4 text-sm text-slate-400 sm:flex-row">
+            <span>אנחנו מקפידים על נגישות, אבטחת מידע ואחריות מקצועית מלאה.</span>
+            <div className="flex gap-6">
+              <Link href="/privacy" className="transition-colors hover:text-sky-400">
                 מדיניות פרטיות
               </Link>
-              <Link 
-                href="/terms" 
-                className="text-slate-400 hover:text-sky-400 transition-colors"
-              >
+              <Link href="/terms" className="transition-colors hover:text-sky-400">
                 תנאי שימוש
               </Link>
             </div>

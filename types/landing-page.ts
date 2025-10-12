@@ -3,7 +3,13 @@ export interface HeroContent {
   title: string
   subtitle: string
   description: string
-  ctaText: string
+  ctaText?: string
+  primaryCtaText?: string
+  primaryCtaHref?: string
+  secondaryCtaText?: string
+  secondaryCtaHref?: string
+  ctaSupportText?: string
+  badge?: string
 }
 
 // Technology Types
@@ -44,6 +50,22 @@ export interface DemoContent {
   screenshots: string[]
   videoUrl?: string
   imageUrl?: string
+}
+
+export interface TestimonialItem {
+  name: string
+  role: string
+  quote: string
+  avatar?: string
+  company?: string
+  highlight?: string
+}
+
+export interface TestimonialsContent {
+  title: string
+  subtitle: string
+  items: TestimonialItem[]
+  supportingText?: string
 }
 
 // FAQ Types
@@ -94,6 +116,7 @@ export interface LandingPageContent {
   technologies: Technology[]
   projectTypes: ProjectType[]
   services: Service[]
+  testimonials: TestimonialsContent
   demo: DemoContent
   faq: FAQItem[]
   pricing: PricingPackage[]

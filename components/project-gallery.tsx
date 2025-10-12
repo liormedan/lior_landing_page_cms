@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { KeyboardEvent, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ProjectType } from '@/types/landing-page'
@@ -13,13 +13,13 @@ interface ProjectGalleryProps {
 export default function ProjectGallery({ projects }: ProjectGalleryProps) {
   const [expandedProject, setExpandedProject] = useState<number | null>(null)
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.1 })
-  const { containerRef, visibleItems } = useStaggeredAnimation(projects.length, 100)
+  const { containerRef, visibleItems } = useStaggeredAnimation(projects.length, 120)
 
   const toggleExpanded = (index: number) => {
     setExpandedProject(expandedProject === index ? null : index)
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       toggleExpanded(index)
@@ -27,195 +27,177 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
   }
 
   return (
-    <section 
+    <section
+      id="projects"
       ref={sectionRef}
-      className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 border-y border-slate-200/60 dark:border-slate-800/60"
+      className="bg-slate-50 py-24"
       aria-labelledby="projects-heading"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className={`text-center mb-8 sm:mb-12 transition-all duration-1000 ${
-          sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <h2 
+      <div className="lp-container">
+        <div
+          className={`mx-auto max-w-3xl text-right transition-all duration-700 ${
+            sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <span className="inline-flex items-center justify-center rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">
+            סוגי פרויקטים שאנחנו מלווים
+          </span>
+          <h2
             id="projects-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
           >
-            מגוון פתרונות דיגיטליים
+            אתרים שמחברים בין תוכן, מוצר ומכירות
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4">
-            לא רק בלוגים - אנחנו יוצרים כל סוג של פלטפורמה דיגיטלית שתרצו. 
-            כל פרויקט מותאם אישית לצרכים שלכם עם מערכת ניהול פשוטה וחזקה.
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            לכל פרויקט אנחנו מרכיבים ספריית קומפוננטים, חיבורי תוכן ואוטומציה מותאמים. כך תוכלו
+            להתרחב במהירות, לשמר את ה-DNA של המותג ולהוסיף דפי נחיתה ללא צורך בקוד חדש.
           </p>
         </div>
 
-        {/* Projects Grid */}
-        <div 
+        <div
           ref={containerRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className="mt-16 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           {projects.map((project, index) => {
             const isExpanded = expandedProject === index
+
             return (
               <article
-                key={index}
-                className={`group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:scale-105 hover:-translate-y-2 text-center dark:bg-slate-900/70 dark:border-slate-800/70 dark:focus-within:ring-offset-slate-950 ${
-                  visibleItems.has(index) 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-8'
+                key={project.title}
+                className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-sky-100/80 shadow-[0_25px_60px_rgba(15,23,42,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
+                  visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
                 role="article"
                 aria-labelledby={`project-${index}-title`}
-                style={{ 
-                  transitionDelay: visibleItems.has(index) ? '0ms' : `${index * 100}ms` 
-                }}
+                style={{ transitionDelay: visibleItems.has(index) ? '0ms' : `${index * 120}ms` }}
               >
-                {/* Project Image */}
-                <div className="relative h-40 sm:h-48 overflow-hidden">
+                <div className="relative h-48 bg-sky-100/70">
                   <Image
                     src={project.image}
-                    alt={`תמונה המדגימה ${project.title}`}
+                    alt={`איור שמדגים את ${project.title}`}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 320px, 100vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
-                {/* Project Content */}
-                <div className="p-4 sm:p-6 text-center">
-                  <h3 
+                <div className="flex flex-1 flex-col p-6 text-right">
+                  <h3
                     id={`project-${index}-title`}
-                    className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-200"
+                    className="text-xl font-semibold text-slate-900"
                   >
                     {project.title}
                   </h3>
-                  <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed text-sm sm:text-base text-center">
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
                     {project.description}
                   </p>
 
                   {project.ctaHref && (
-                    <div className="mb-4">
+                    <div className="mt-4">
                       <Link
                         href={project.ctaHref}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-sm sm:text-base font-semibold transition-colors duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:bg-sky-500 dark:hover:bg-sky-400 dark:focus:ring-offset-slate-950"
-                        aria-label={`${project.ctaLabel ?? 'קראו עוד'} עבור ${project.title}`}
+                        className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
                       >
-                        {project.ctaLabel ?? 'למידע נוסף'}
+                        {project.ctaLabel ?? 'לקריאת עוד'}
                         <svg
-                          className="w-4 h-4"
+                          className="h-4 w-4"
                           fill="none"
                           stroke="currentColor"
+                          strokeWidth={1.8}
                           viewBox="0 0 24 24"
                           aria-hidden="true"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12l-7.5 7.5M21 12H3" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8 5l8 7-8 7" />
                         </svg>
                       </Link>
                     </div>
                   )}
 
-                  {/* Examples Preview */}
-                  <div className="mb-4">
-                    <div className="flex flex-wrap justify-center gap-2">
-                      {project.examples.slice(0, 2).map((example, exampleIndex) => (
-                        <span
-                          key={exampleIndex}
-                          className="inline-block px-2 sm:px-3 py-1 bg-sky-100 text-sky-700 dark:bg-sky-500/20 dark:text-sky-200 text-xs sm:text-sm rounded-full"
-                        >
-                          {example}
-                        </span>
-                      ))}
-                      {project.examples.length > 2 && (
-                        <span className="inline-block px-2 sm:px-3 py-1 bg-slate-100 text-slate-600 dark:bg-slate-800/70 dark:text-slate-300 text-xs sm:text-sm rounded-full">
-                          +{project.examples.length - 2} נוספים
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Expand Button */}
                   <button
                     onClick={() => toggleExpanded(index)}
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    className="w-full py-2 px-4 bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-700 rounded-lg transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:bg-sky-500/20 dark:hover:text-sky-200 dark:focus:ring-offset-slate-950 text-sm sm:text-base"
+                    onKeyDown={(event) => handleKeyDown(event, index)}
+                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-sky-400 hover:text-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
                     aria-expanded={isExpanded}
                     aria-controls={`project-${index}-details`}
-                    aria-label={`${isExpanded ? 'הסתר' : 'הצג'} פרטים נוספים עבור ${project.title}`}
+                    aria-label={`${isExpanded ? 'סגירת' : 'פתיחת'} פרטי הפרויקט ${project.title}`}
+                    type="button"
                   >
-                    {isExpanded ? 'הסתר פרטים' : 'הצג פרטים נוספים'}
-                  </button>
-
-                  {/* Expanded Content */}
-                  {isExpanded && (
-                    <div 
-                      id={`project-${index}-details`}
-                      className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 animate-in slide-in-from-top-2 duration-300 text-center"
-                      role="region"
-                      aria-label={`פרטים נוספים עבור ${project.title}`}
+                    {isExpanded ? 'סגירת פרטי הפרויקט' : 'לפרטים נוספים'}
+                    <svg
+                      className={`h-4 w-4 transition-transform duration-300 ${
+                        isExpanded ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={1.6}
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
-                      {/* Features */}
-                      <div className="mb-4">
-                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 text-sm sm:text-base text-center">תכונות עיקריות:</h4>
-                        <ul className="space-y-2 flex flex-col items-center" role="list">
-                          {project.features.map((feature, featureIndex) => (
-                            <li 
-                              key={featureIndex} 
-                              className="flex items-center justify-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 text-center"
-                              role="listitem"
-                            >
-                              <span className="text-sky-500 dark:text-sky-400" aria-hidden="true">✓</span>
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* All Examples */}
-                      <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 text-sm sm:text-base text-center">דוגמאות:</h4>
-                        <div className="flex flex-wrap justify-center gap-2">
-                          {project.examples.map((example, exampleIndex) => (
-                            <span
-                              key={exampleIndex}
-                              className="inline-block px-2 sm:px-3 py-1 bg-sky-50 text-sky-700 dark:bg-sky-500/20 dark:text-sky-200 text-xs sm:text-sm rounded-full border border-sky-200 dark:border-sky-500/40"
-                            >
-                              {example}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
                 </div>
 
-                {/* Hover Overlay Effect */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-sky-200 rounded-xl transition-colors duration-300 pointer-events-none" />
+                {isExpanded && (
+                  <div
+                    id={`project-${index}-details`}
+                    className="space-y-6 border-t border-slate-200 bg-slate-50 p-6 text-right text-sm leading-relaxed text-slate-600"
+                    role="region"
+                    aria-label={`מידע נוסף על ${project.title}`}
+                  >
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-900">מה מקבלים:</h4>
+                      <ul className="mt-3 space-y-2" role="list">
+                        {project.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-start gap-2" role="listitem">
+                            <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-sky-500" aria-hidden="true" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-900">דוגמאות מפרויקטים דומים:</h4>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {project.examples.map((example, exampleIndex) => (
+                          <span
+                            key={exampleIndex}
+                            className="inline-flex items-center rounded-full bg-sky-100/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+                          >
+                            {example}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </article>
             )
           })}
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-8 sm:mt-12">
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mb-4 sm:mb-6 px-4">
-            יש לכם רעיון אחר? בואו נדבר על איך נוכל להגשים אותו
+        <div className="mt-16 flex flex-col items-center gap-4 rounded-3xl border border-slate-200 bg-sky-100/80 p-10 text-right shadow-[0_25px_60px_rgba(15,23,42,0.05)]">
+          <p className="w-full text-lg leading-relaxed text-slate-600">
+            רוצים לראות איך זה ייראה אצלכם? נבנה יחד מפת דרכים קצרה המשלבת עיצוב, תוכן ותשתיות,
+            ונראה איך ניתן להרחיב את האתר בצורה מודולרית ומהירה.
           </p>
-          <button 
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-400 text-white font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950"
-            aria-label="פתח טופס יצירת קשר לתכנון פרויקט חדש"
+          <Link
+            href="#contact"
+            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
-            בואו נתחיל לתכנן
-            <svg 
-              className="w-4 h-4 sm:w-5 sm:h-5" 
-              fill="none" 
-              stroke="currentColor" 
+            נתחיל לתכנן את הפרויקט
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 5l8 7-8 7" />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
-﻿import type {Metadata} from "next"
-import type {ReactNode} from "react"
-import {Geist, Geist_Mono} from "next/font/google"
+import type { Metadata } from "next"
+import type { ReactNode } from "react"
+import { Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
 
@@ -15,17 +15,18 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "בניית מערכת ניהול + תוכן עם אתר מעוצב",
-  description: "בניית פלטפורמה מלאה עם מערכת CMS ואתר מותאם לפי הצורך",
+  title: "הסטודיו של ליאור | אתרי תוכן ופתרונות Sanity מותאמים",
+  description:
+    "בניית אתרי תוכן, מוצר וקהילה בעזרת Next.js, Sanity ו-Vercel – עם דגש על מסע משתמש, RTL, נגישות ופריסה מהירה.",
 }
 
-export default function RootLayout({children}: Readonly<{children: ReactNode}>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="he" dir="rtl" className="h-full dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-slate-950 text-slate-100 antialiased`}>
-        <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100">
-          {children}
-        </div>
+    <html lang="he" dir="rtl" className="h-full">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-slate-50 text-slate-900 antialiased`}
+      >
+        <div className="flex min-h-screen flex-col bg-white text-slate-900">{children}</div>
       </body>
     </html>
   )

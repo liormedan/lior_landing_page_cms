@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { KeyboardEvent, useState } from 'react'
 import Image from 'next/image'
 import { DemoContent } from '@/types/landing-page'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
@@ -12,10 +12,10 @@ interface DemoSectionProps {
 export default function DemoSection({ demo }: DemoSectionProps) {
   const [selectedImage, setSelectedImage] = useState(0)
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.1 })
-  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2, delay: 200 })
-  const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation({ threshold: 0.2, delay: 400 })
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2, delay: 120 })
+  const { ref: galleryRef, isVisible: galleryVisible } = useScrollAnimation({ threshold: 0.2, delay: 240 })
 
-  const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
+  const handleThumbnailKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       setSelectedImage(index)
@@ -23,159 +23,133 @@ export default function DemoSection({ demo }: DemoSectionProps) {
   }
 
   return (
-    <section 
-      ref={sectionRef}
-      className="py-16 sm:py-24 bg-gradient-to-br from-slate-50 to-sky-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 border-y border-slate-200/60 dark:border-slate-800/60"
-      aria-labelledby="demo-heading"
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
-            sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            <h2 
-              id="demo-heading"
-              className="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-4 sm:mb-6"
-            >
-              {demo.title}
-            </h2>
-            <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed px-4">
-              {demo.description}
-            </p>
+    <section id="demo" ref={sectionRef} className="bg-white py-24" aria-labelledby="demo-heading">
+      <div className="lp-container">
+        <div
+          className={`mx-auto max-w-3xl text-right transition-all	duration-700 ${
+            sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <span className="inline-flex items-center justify-center rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">
+            הצצה לאולפן Sanity שלנו
+          </span>
+          <h2
+            id="demo-heading"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
+          >
+            {demo.title}
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">{demo.description}</p>
+        </div>
+
+        <div className="mt-16 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr),minmax(0,1fr)]">
+          <div
+            ref={contentRef}
+            className={`space-y-8 transition-all	duration-700 ${
+              contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
+            }`}
+          >
+            <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 text-right">
+              <h3 className="text-xl font-semibold text-slate-900">מה תראו בהדגמה?</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                נעבור על מבני התוכן שחיברנו ללקוחות אמיתיים, נציג איך עובדת תצוגת ה-Preview, ונראה כיצד מזרימים את השינויים לאתר ה-Next.js בלחיצת כפתור.
+              </p>
+            </div>
+
+            <ul className="space-y-4 text-right text-sm leading-relaxed text-slate-600" role="list">
+              {demo.features.map((feature, index) => (
+                <li key={index} className="flex items-start gap-3" role="listitem">
+                  <span
+                    className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sky-500"
+                    aria-hidden="true"
+                  />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="rounded-3xl border border-slate-200 bg-sky-100/80 p-6 backdrop-blur-sm shadow-[0_25px_60px_rgba(15,23,42,0.06)]">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+                למה זה חשוב
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-slate-600">
+                הדגמה מעשית מאפשרת לצוות שלכם להבין כיצד כל שינוי משפיע על האתר, לראות את ה-Preview בזמן אמת, ולבדוק תהליכים כמו אישורים, Workflow ואינטגרציות לפני שמתחייבים.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-            {/* Features List */}
-            <div 
-              ref={contentRef}
-              className={`space-y-6 sm:space-y-8 order-2 lg:order-1 transition-all duration-1000 ${
-                contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-              }`}
-            >
-              <div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-4 sm:mb-6">
-                  מה תוכלו לעשות במערכת:
-                </h3>
-                <ul className="space-y-3 sm:space-y-4" role="list">
-                  {demo.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3 sm:gap-4" role="listitem">
-                      <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-sky-500 rounded-full flex items-center justify-center mt-1">
-                        <svg 
-                          className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" 
-                          fill="currentColor" 
-                          viewBox="0 0 20 20"
-                          aria-hidden="true"
-                        >
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">{feature}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div
+            ref={galleryRef}
+            className={`space-y-4 transition-all	duration-700 ${
+              galleryVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
+            }`}
+          >
+            <div className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-sky-100/70 backdrop-blur-sm shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+              <Image
+                src={demo.screenshots[selectedImage]}
+                alt={`צילום מסך מהדגמה – שקופית ${selectedImage + 1}`}
+                width={960}
+                height={720}
+                className="w-full rounded-[32px] object-cover"
+                sizes="(min-width: 1024px) 520px, 100vw"
+                priority
+              />
 
-              {/* Benefits Highlight */}
-              <div className="bg-white dark:bg-slate-900/70 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-800">
-                <h4 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100 mb-3 sm:mb-4">
-                  💡 למה זה חשוב עבורכם?
-                </h4>
-                <div className="space-y-2 sm:space-y-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
-                  <p><span aria-hidden="true">✨</span> <strong>חסכון בזמן:</strong> עדכון תוכן תוך דקות במקום שעות</p>
-                  <p><span aria-hidden="true">🚀</span> <strong>עצמאות מלאה:</strong> אין צורך בתכנת לכל שינוי קטן</p>
-                  <p><span aria-hidden="true">⚡</span> <strong>שינויים מיידיים:</strong> התוכן מתעדכן באתר בזמן אמת</p>
-                  <p><span aria-hidden="true">🔒</span> <strong>בטיחות מלאה:</strong> גיבויים אוטומטיים של כל שינוי</p>
-                </div>
+              <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl bg-sky-100/80 px-4 py-3 text-sm font-medium text-slate-600 shadow-sm backdrop-blur">
+                <span>שקופית {selectedImage + 1} מתוך {demo.screenshots.length}</span>
+                <span className="flex items-center gap-2 text-xs">
+                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+                  Live sync
+                </span>
               </div>
             </div>
 
-            {/* Screenshots Gallery */}
-            <div 
-              ref={imageRef}
-              className={`space-y-4 sm:space-y-6 order-1 lg:order-2 transition-all duration-1000 ${
-                imageVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-              }`}
-            >
-              {/* Main Image */}
-              <div className="relative">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
-                  <Image
-                    src={demo.screenshots[selectedImage]}
-                    alt={`הדגמת מערכת הניהול - תמונה ${selectedImage + 1}`}
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                
-                {/* Image Navigation */}
-                <div className="absolute inset-x-3 sm:inset-x-4 bottom-3 sm:bottom-4 flex justify-center gap-1.5 sm:gap-2">
-                  {demo.screenshots.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedImage(index)}
-                      onKeyDown={(e) => handleKeyDown(e, index)}
-                      className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800 dark:focus:ring-offset-slate-900 ${
-                        selectedImage === index
-                          ? 'bg-white shadow-lg'
-                          : 'bg-white/60 hover:bg-white/80'
-                      }`}
-                      aria-label={`הצג תמונה ${index + 1} מתוך ${demo.screenshots.length}`}
-                      aria-pressed={selectedImage === index}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Thumbnail Navigation */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                {demo.screenshots.map((screenshot, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    className={`relative aspect-[4/3] rounded-lg overflow-hidden transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950 ${
-                      selectedImage === index
-                        ? 'ring-2 ring-sky-500 ring-offset-2 dark:ring-offset-slate-950'
-                        : 'hover:opacity-80'
-                    }`}
-                    aria-label={`בחר תמונה ${index + 1} להצגה`}
-                    aria-pressed={selectedImage === index}
-                  >
-                    <Image
-                      src={screenshot}
-                      alt={`תמונה ממוזערת ${index + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 33vw, 16vw"
-                    />
-                  </button>
-                ))}
-              </div>
-
-              {/* Call to Action */}
-              <div className="text-center pt-3 sm:pt-4">
-                <p className="text-slate-600 dark:text-slate-300 mb-3 sm:mb-4 text-sm sm:text-base">
-                  רוצים לראות איך זה עובד בפועל?
-                </p>
-                <button 
-                  className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-400 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950 text-sm sm:text-base"
-                  aria-label="פתח טופס יצירת קשר לדיון על הפרויקט"
+            <div className="grid grid-cols-3 gap-3">
+              {demo.screenshots.map((screenshot, index) => (
+                <button
+                  key={screenshot}
+                  onClick={() => setSelectedImage(index)}
+                  onKeyDown={(event) => handleThumbnailKeyDown(event, index)}
+                  className={`relative overflow-hidden rounded-2xl border border-slate-200 bg-sky-100/80 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 ${
+                    selectedImage === index ? 'ring-2 ring-sky-500' : 'hover:-translate-y-1'
+                  }`}
+                  aria-label={`בחירת תצוגה מספר ${index + 1} מתוך ${demo.screenshots.length}`}
+                  aria-pressed={selectedImage === index}
+                  type="button"
                 >
-                  <span>בואו נדבר על הפרויקט שלכם</span>
-                  <svg 
-                    className="w-3.5 h-3.5 sm:w-4 sm:h-4" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
+                  <Image
+                    src={screenshot}
+                    alt={`תצוגה ממוזערת מספר ${index + 1}`}
+                    width={320}
+                    height={240}
+                    className="w-full object-cover"
+                    sizes="(min-width: 1024px) 160px, 33vw"
+                  />
                 </button>
-              </div>
+              ))}
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 text-right shadow-[0_25px_60px_rgba(15,23,42,0.05)] backdrop-blur-sm flex flex-col items-center gap-4">
+              <p className="w-full text-base leading-relaxed text-slate-600">
+                רוצים לראות את Sanity עם הנתונים שלכם? נבנה סביבת דמו מותאמת, נחבר אותנטיקציה
+                בסיסית ונעבור על התהליכים בלייב.
+              </p>
+              <a
+                href="#contact"
+                className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+              >
+                לקביעת הדגמה אישית
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.8}
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 5l8 7-8 7" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>

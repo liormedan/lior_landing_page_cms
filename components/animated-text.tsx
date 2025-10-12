@@ -5,7 +5,7 @@ import React from 'react';
 interface AnimatedTextProps {
   children: React.ReactNode;
   className?: string;
-  variant?: 'gradient' | 'wave' | 'pulse' | 'rainbow';
+  variant?: 'gradient' | 'wave' | 'pulse' | 'rainbow' | 'light';
 }
 
 export default function AnimatedText({ 
@@ -15,6 +15,8 @@ export default function AnimatedText({
 }: AnimatedTextProps) {
   const getVariantClasses = () => {
     switch (variant) {
+      case 'light':
+        return 'text-white drop-shadow-[0_12px_30px_rgba(15,23,42,0.55)]';
       case 'gradient':
         return 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient-x';
       case 'wave':
@@ -44,7 +46,7 @@ export function TypingAnimatedText({
 }: {
   text: string;
   className?: string;
-  variant?: 'gradient' | 'wave' | 'pulse' | 'rainbow';
+  variant?: 'gradient' | 'wave' | 'pulse' | 'rainbow' | 'light';
   speed?: number;
 }) {
   const [displayText, setDisplayText] = React.useState('');

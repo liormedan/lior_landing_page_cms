@@ -9,54 +9,43 @@ interface FAQSectionProps {
   faqItems: FAQItem[]
 }
 
-interface FAQAccordionItemProps {
+interface AccordionItemProps {
   item: FAQItem
   isOpen: boolean
   onToggle: () => void
-  alignment?: 'right' | 'center'
 }
 
-function FAQAccordionItem({ item, isOpen, onToggle, alignment = 'right' }: FAQAccordionItemProps) {
-  const itemId = `faq-${item.question.replace(/\s+/g, '-').toLowerCase()}`
-  const isCentered = alignment === 'center'
-  const buttonLayoutClasses = isCentered
-    ? 'flex flex-col items-center gap-2 sm:gap-3 text-center'
-    : 'flex items-center justify-between'
-  const titleAlignment = isCentered ? 'text-center' : 'text-right'
-  const answerAlignment = isCentered ? 'text-center' : 'text-right'
-  
+function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
+  const itemId = item.question.replace(/\s+/g, '-').toLowerCase()
+
   return (
-    <div className="border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden bg-white dark:bg-slate-900/70">
+    <div className="rounded-2xl border border-slate-200 bg-sky-100/80 shadow-sm backdrop-blur-sm">
       <button
+        type="button"
         onClick={onToggle}
-        className={`w-full px-4 sm:px-6 py-3 sm:py-4 bg-white hover:bg-slate-50 dark:bg-slate-900/80 dark:hover:bg-slate-800/70 transition-colors duration-200 group focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900 ${buttonLayoutClasses}`}
+        className="flex w-full flex-row-reverse items-center justify-between gap-4 rounded-2xl px-4 py-4 text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
         aria-expanded={isOpen}
         aria-controls={`${itemId}-content`}
-        id={`${itemId}-button`}
+        id={`${itemId}-trigger`}
       >
-        <ChevronDownIcon 
-          className={`w-4 h-4 sm:w-5 sm:h-5 text-slate-500 dark:text-slate-300 transition-transform duration-300 ${
+        <span className="text-base font-semibold text-slate-900">{item.question}</span>
+        <ChevronDownIcon
+          className={`h-5 w-5 text-slate-500 transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
-          } ${isCentered ? '' : 'flex-shrink-0'}`}
+          }`}
           aria-hidden="true"
         />
-        <h3 className={`text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors ${titleAlignment}`}>
-          {item.question}
-        </h3>
       </button>
-      
-      <div 
+      <div
         id={`${itemId}-content`}
         role="region"
-        aria-labelledby={`${itemId}-button`}
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        aria-labelledby={`${itemId}-trigger`}
+        className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
+          isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-4 sm:px-6 pb-3 sm:pb-4 pt-2 bg-slate-50 dark:bg-slate-900/60 border-t border-slate-100 dark:border-slate-800">
-          <p className={`text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base ${answerAlignment}`}>
-            {item.answer}
-          </p>
+        <div className="border-t border-slate-200 px-4 pb-4 pt-3 text-sm leading-relaxed text-slate-600">
+          {item.answer}
         </div>
       </div>
     </div>
@@ -64,108 +53,84 @@ function FAQAccordionItem({ item, isOpen, onToggle, alignment = 'right' }: FAQAc
 }
 
 export default function FAQSection({ faqItems }: FAQSectionProps) {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set())
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set([0]))
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.1 })
 
   const toggleItem = (index: number) => {
-    const newOpenItems = new Set(openItems)
-    if (newOpenItems.has(index)) {
-      newOpenItems.delete(index)
-    } else {
-      newOpenItems.add(index)
-    }
-    setOpenItems(newOpenItems)
-  }
-
-  // Group FAQ items by category for better organization
-  const groupedFAQ = faqItems.reduce((acc, item, index) => {
-    if (!acc[item.category]) {
-      acc[item.category] = []
-    }
-    acc[item.category].push({ ...item, originalIndex: index })
-    return acc
-  }, {} as Record<string, (FAQItem & { originalIndex: number })[]>)
-
-  const categoryConfig: Record<FAQItem['category'], { title: string; alignment: 'right' | 'center' }> = {
-    technical: { title: 'שאלות טכניות', alignment: 'right' },
-    pricing: { title: 'מחירים ותשלום', alignment: 'center' },
-    process: { title: 'תהליך העבודה', alignment: 'right' }
+    setOpenItems((current) => {
+      const updated = new Set(current)
+      if (updated.has(index)) {
+        updated.delete(index)
+      } else {
+        updated.add(index)
+      }
+      return updated
+    })
   }
 
   return (
-    <section 
+    <section
+      id="faq"
       ref={sectionRef}
-      className="py-12 sm:py-16 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 border-y border-slate-200/60 dark:border-slate-800/60"
+      className="bg-white py-24"
       aria-labelledby="faq-heading"
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className={`text-center mb-8 sm:mb-12 transition-all duration-1000 ${
-          sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <h2 
+      <div className="lp-container">
+        <div
+          className={`mx-auto max-w-3xl text-right transition-all	duration-700 ${
+            sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <span className="inline-flex items-center justify-center rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">
+            שאלות תשובות
+          </span>
+          <h2
             id="faq-heading"
-            className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
           >
-            שאלות נפוצות
+            כל מה שרציתם לדעת לפני שמתחילים
           </h2>
-          <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto px-4">
-            מצאו תשובות לשאלות הנפוצות ביותר על השירותים והטכנולוגיות שלנו
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            ריכזנו את השאלות שחוזרות בכל פגישה – על הזמנים, הטכנולוגיה, התמחור והליווי שאחרי
+            ההשקה. אם משהו חסר, אנחנו זמינים לשיחה קצרה.
           </p>
         </div>
 
-        {/* FAQ Categories */}
-        <div className="space-y-6 sm:space-y-8">
-          {Object.entries(groupedFAQ).map(([category, items]) => {
-            const typedCategory = category as FAQItem['category']
-            const { title, alignment } = categoryConfig[typedCategory] ?? {
-              title: category,
-              alignment: 'right' as const
-            }
-
-            return (
-              <div key={category} className="space-y-3 sm:space-y-4">
-                <h3
-                  id={`category-${category}`}
-                  className={`text-lg sm:text-xl font-semibold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-slate-800 pb-2 ${
-                    alignment === 'center' ? 'text-center' : 'text-right'
-                  }`}
-                >
-                  {title}
-                </h3>
-                
-                <div className="space-y-2 sm:space-y-3" role="group" aria-labelledby={`category-${category}`}>
-                  {items.map((item) => (
-                    <FAQAccordionItem
-                      key={item.originalIndex}
-                      item={item}
-                      isOpen={openItems.has(item.originalIndex)}
-                      onToggle={() => toggleItem(item.originalIndex)}
-                      alignment={alignment}
-                    />
-                  ))}
-                </div>
-              </div>
-            )
-          })}
+        <div className="mx-auto mt-16 grid max-w-4xl gap-4">
+          {faqItems.map((item, index) => (
+            <AccordionItem
+              key={`${item.question}-${index}`}
+              item={item}
+              isOpen={openItems.has(index)}
+              onToggle={() => toggleItem(index)}
+            />
+          ))}
         </div>
 
-        {/* Contact CTA */}
-        <div className="mt-8 sm:mt-12 text-center">
-          <div className="bg-gradient-to-r from-sky-50 to-slate-50 dark:from-slate-900/80 dark:to-slate-900 rounded-xl p-6 sm:p-8 border border-slate-200/70 dark:border-slate-800/70">
-            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mb-3">
-              יש לכם עוד שאלות בדרך?
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300 mb-4 sm:mb-6 text-sm sm:text-base">
-              נשמח לשבת לשיחה קצרה, לענות על כל שאלה ולהכווין אתכם לפתרון המתאים.
-            </p>
-            <button 
-              className="bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-400 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950"
-              aria-label="דברו איתנו - פתחו שיחה עם הצוות ונענה על כל שאלה נוספת"
+        <div className="mt-12 mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-slate-50/70 p-8 text-right shadow-[0_25px_60px_rgba(15,23,42,0.05)] backdrop-blur-sm flex flex-col items-center gap-4">
+          <h3 className="w-full text-lg font-semibold text-slate-900">
+            יש לכם שאלה נוספת או צורך מיוחד?
+          </h3>
+          <p className="mt-3 w-full text-base text-right leading-relaxed text-slate-600">
+            נשמח לבנות איתכם מסמך דרישות קצר ולהציע פתרון שמתאים למבנה הצוות, הטכנולוגיה
+            והתקציב שלכם. שיחת ייעוץ קצרה בדרך כלל מספיקה כדי להבין את התמונה.
+          </p>
+          <a
+            href="#contact"
+            className="mt-4 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+          >
+            לקבוע שיחה עם הצוות
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
+              viewBox="0 0 24 24"
+              aria-hidden="true"
             >
-              דברו איתנו
-            </button>
-          </div>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 5l8 7-8 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>

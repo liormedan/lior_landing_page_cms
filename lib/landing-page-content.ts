@@ -21,6 +21,10 @@ export function getServices() {
   return landingPageData.services
 }
 
+export function getTestimonials() {
+  return landingPageData.testimonials
+}
+
 export function getFAQItems() {
   return landingPageData.faq as LandingPageContent['faq']
 }

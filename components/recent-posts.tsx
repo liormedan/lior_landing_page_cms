@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { PostCard } from "./post-card"
-import type { PostListItem } from "@/types/sanity"
+import Link from 'next/link'
+import { PostCard } from './post-card'
+import type { PostListItem } from '@/types/sanity'
 
 interface RecentPostsProps {
   posts: PostListItem[]
@@ -12,46 +12,45 @@ export default function RecentPosts({ posts }: RecentPostsProps) {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 border-y border-slate-200/60 dark:border-slate-800/60" aria-labelledby="recent-posts-title">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 
+    <section id="posts" className="bg-white py-24" aria-labelledby="recent-posts-title">
+      <div className="lp-container">
+        <div className="ml-auto max-w-3xl text-right">
+          <span className="inline-flex items-center justify-center rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">
+            תובנות וחדשות מהסטודיו
+          </span>
+          <h2
             id="recent-posts-title"
-            className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
           >
-            העדכונים שלנו
+            פוסטים אחרונים שכדאי להכיר
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            הישארו מעודכנים עם הטיפים, הטכנולוגיות והפתרונות החדשים ביותר שלנו
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            מדריכים, Case Studies ועדכונים על פרויקטים שעבדנו עליהם לאחרונה – כולל טיפים פרקטיים,
+            מדידות ביצועים והמלצות לעבודה עם צוותי תוכן ומוצר.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+        <div className="mt-16 grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <PostCard key={post._id} post={post} />
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="mt-12 flex justify-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-400 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950"
-            aria-label="עבור לכל הפוסטים בבלוג"
+            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
-            לכל הפוסטים
-            <svg 
-              className="w-5 h-5" 
-              fill="none" 
-              stroke="currentColor" 
+            לכל הבלוג
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M15 19l-7-7 7-7" 
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 5l8 7-8 7" />
             </svg>
           </Link>
         </div>

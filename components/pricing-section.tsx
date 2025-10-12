@@ -18,217 +18,127 @@ export default function PricingSection({ packages }: PricingSectionProps) {
   }
 
   const handleCloseContactForm = () => {
-    setShowContactForm(false)
     setSelectedPackage(null)
+    setShowContactForm(false)
   }
 
   return (
-    <section className="relative py-20 sm:py-24 section-divider">
-      <div className="container mx-auto px-4">
-        <div className="section-light max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-16">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-slide-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            חבילות מחיר שקופות
+    <section id="pricing" className="bg-slate-50 py-24" aria-labelledby="pricing-heading">
+      <div className="lp-container">
+        <div className="mx-auto max-w-3xl text-right">
+          <span className="inline-flex items-center justify-center rounded-full bg-sky-100/80 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+            מסלולים גמישים שמתאימים לגודל הצוות שלכם
+          </span>
+          <h2
+            id="pricing-heading"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
+          >
+            בחרו את ההיקף שמתאים לפרויקט וליעדים שלכם
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            בחרו את החבילה המתאימה לכם - ללא עלויות נסתרות, עם תמיכה מלאה ואחריות מוחלטת
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            כל חבילה כוללת אפיון, פיתוח, חיבורי תוכן ופריסה ל-Vercel. נוסיף עליה שכבות של
+            אוטומציה, DevOps וליווי שוטף לפי הצורך של הצוות ושל לוחות הזמנים שלכם.
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {packages.map((pkg, index) => (
-            <div
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {packages.map((pkg) => (
+            <article
               key={pkg.name}
-              className={`relative bg-white rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 animate-slide-in-up ${
-                pkg.highlighted 
-                  ? 'ring-4 ring-blue-500 ring-opacity-50 scale-105 bg-gradient-to-br from-white to-blue-50' 
-                  : 'hover:scale-105'
+              className={`flex h-full flex-col rounded-3xl border border-slate-200 bg-sky-100/80 p-6 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
+                pkg.highlighted ? 'ring-2 ring-sky-500' : ''
               }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Popular Badge */}
-              {pkg.highlighted && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
-                    המומלץ ביותר
-                  </div>
-                </div>
-              )}
-
-              <div className="p-8">
-                {/* Package Name */}
-                <div className="text-center mb-8">
-                  <h3 className={`text-2xl font-bold mb-4 ${
-                    pkg.highlighted ? 'text-blue-600' : 'text-gray-900'
-                  }`}>
-                    {pkg.name}
-                  </h3>
-                  
-                  {/* Price */}
-                  <div className="mb-6">
-                    {pkg.price === 'יצירת קשר' ? (
-                      <div className={`text-3xl font-bold ${
-                        pkg.highlighted ? 'text-blue-600' : 'text-gray-900'
-                      }`}>
-                        יצירת קשר
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center">
-                        <span className={`text-4xl font-bold ${
-                          pkg.highlighted ? 'text-blue-600' : 'text-gray-900'
-                        }`}>
-                          {pkg.price}
-                        </span>
-                        <span className="text-gray-500 mr-2">חד פעמי</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Features List */}
-                <ul className="space-y-4 mb-8">
-                  {pkg.features.map((feature, featureIndex) => (
-                    <li 
-                      key={featureIndex} 
-                      className="flex items-start animate-slide-in-right"
-                      style={{ animationDelay: `${(index * 0.1) + (featureIndex * 0.05)}s` }}
-                    >
-                      <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ml-3 ${
-                        pkg.highlighted 
-                          ? 'bg-blue-100' 
-                          : 'bg-green-100'
-                      }`}>
-                        <svg 
-                          className={`w-3 h-3 ${
-                            pkg.highlighted ? 'text-blue-600' : 'text-green-600'
-                          }`} 
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={3} 
-                            d="M5 13l4 4L19 7" 
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-gray-700 leading-relaxed">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA Button */}
-                <button
-                  onClick={() => handlePackageSelect(pkg.name)}
-                  className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
-                    pkg.highlighted
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 animate-glow'
-                      : 'bg-gray-900 text-white hover:bg-gray-800'
-                  }`}
-                >
-                  {pkg.ctaText}
-                </button>
-
-                {/* Additional Info for Premium */}
-                {pkg.name === 'פרימיום' && (
-                  <p className="text-center text-sm text-gray-500 mt-4 animate-slide-in-up" style={{ animationDelay: '0.5s' }}>
-                    מחיר מותאם לפי דרישות הפרויקט
-                  </p>
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-semibold text-slate-900">{pkg.name}</h3>
+                {pkg.highlighted && (
+                  <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700">
+                    החבילה הפופולרית ביותר
+                  </span>
                 )}
               </div>
-            </div>
+
+              <div className="mt-4">
+                <p className="text-3xl font-bold text-slate-900">{pkg.price}</p>
+              </div>
+
+              <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-600" role="list">
+                {pkg.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-start gap-2" role="listitem">
+                    <span
+                      className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sky-500"
+                      aria-hidden="true"
+                    />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                onClick={() => handlePackageSelect(pkg.name)}
+                className="mt-8 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                type="button"
+              >
+                {pkg.ctaText}
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.8}
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 5l8 7-8 7" />
+                </svg>
+              </button>
+            </article>
           ))}
         </div>
 
-        {/* Additional Info Section */}
-        <div className="mt-16 text-center animate-slide-in-up" style={{ animationDelay: '0.6s' }}>
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              מה כלול בכל החבילות?
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6 text-right">
-              <div className="space-y-3">
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-600 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">אחריות מלאה לשנה</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-600 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">הדרכה מלאה על המערכת</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-600 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">עדכונים אוטומטיים</span>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-600 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">גיבויים אוטומטיים</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-600 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">אבטחה ברמה גבוהה</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-600 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">תעודת SSL חינם</span>
-                </div>
-              </div>
-            </div>
+        <div className="mt-16 grid gap-6 rounded-3xl border border-slate-200 bg-sky-100/70 p-8 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm md:grid-cols-2">
+          <div className="space-y-3 text-sm leading-relaxed text-slate-600">
+            <h3 className="text-lg font-semibold text-slate-900">מה תמיד כלול?</h3>
+            <p>תכנון UX, ספריית קומפוננטים מעוצבת ותשתית Next.js מבוססת TypeScript.</p>
+            <p>סטודיו Sanity מותאם אישית, תהליכי אישור, הרשאות ו-Preview מלא.</p>
+            <p>פריסה ל-Vercel עם CI/CD, אנליטיקה, נגישות ו-SEO טכני.</p>
+          </div>
+          <div className="space-y-3 text-sm leading-relaxed text-slate-600">
+            <h3 className="text-lg font-semibold text-slate-900">מה ניתן להוסיף?</h3>
+            <p>אינטגרציות ל-CRM, Marketing Automation, BI וכלי נתונים פנימיים.</p>
+            <p>פיתוח מודולים ייעודיים, אזורי חברים והרחבות Headless נוספות.</p>
+            <p>ליווי growth, בדיקות A/B, אנליטיקה מתקדמת ותמיכה נרחבת ב-DevOps.</p>
           </div>
         </div>
 
-        {/* Money Back Guarantee */}
-        <div className="mt-12 text-center animate-slide-in-up" style={{ animationDelay: '0.7s' }}>
-          <div className="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-6 py-3">
-            <svg className="w-6 h-6 text-green-600 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="text-green-800 font-medium">
-              אחריות החזר כספי מלא תוך 30 יום
-            </span>
+        <div className="mt-12 flex flex-col items-center gap-4 text-right">
+          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+            <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+            ניתן לעצור או לשנות מסלול אחרי הספרינט הראשון – בלי קנס ובלי מחויבות
           </div>
-        </div>
+          <p className="max-w-2xl text-right text-base leading-relaxed text-slate-600">
+            בואו נקבע שיחת היכרות, נעבור על הצרכים, נבין את האינטגרציות הדרושות ונבנה הצעה
+            מסודרת הכוללת לוחות זמנים ואבני דרך.
+          </p>
         </div>
       </div>
 
-      {/* Contact Form Modal */}
       {showContactForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 animate-fade-in">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center rounded-t-2xl">
-              <h3 className="text-lg font-bold text-gray-900">יצירת קשר</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">
+          <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+              <h3 className="text-lg font-semibold text-slate-900">תיאום פגישה</h3>
               <button
                 onClick={handleCloseContactForm}
-                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                className="rounded-full p-1 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+                type="button"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="p-4">
-              <ContactForm 
-                selectedPackage={selectedPackage || undefined}
-                onClose={handleCloseContactForm}
-              />
+            <div className="px-6 py-4">
+              <ContactForm selectedPackage={selectedPackage || undefined} onClose={handleCloseContactForm} />
             </div>
           </div>
         </div>

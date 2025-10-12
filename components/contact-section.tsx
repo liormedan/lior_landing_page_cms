@@ -15,115 +15,102 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
 
   return (
     <>
-      <section 
-        id="contact"
-        className="relative py-16 sm:py-20 section-divider"
-        aria-labelledby="contact-heading"
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="section-light px-6 sm:px-10 py-12 sm:py-14 text-center shadow-2xl shadow-slate-900/15">
-            <div className="mb-8 sm:mb-12">
-            <h2 
-              id="contact-heading"
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-            >
-              מוכנים להתחיל?
-            </h2>
-            <p className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-              בואו נפגש ונבנה יחד את הפתרון הדיגיטלי המושלם עבורכם
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
-            <div className="text-center">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <svg 
-                  className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+      <section id="contact" className="py-24" aria-labelledby="contact-heading">
+        <div className="lp-container">
+          <div className="overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-10 text-white shadow-[0_40px_80px_rgba(15,23,42,0.4)]">
+            <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
+              <div className="space-y-6 text-right">
+                <span className="inline-flex items-center justify-center rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-sky-200">
+                  שיחת התאמה ראשונית – ללא עלות וללא התחייבות
+                </span>
+                <h2
+                  id="contact-heading"
+                  className="text-3xl font-bold leading-tight sm:text-4xl"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
-              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">ייעוץ חינם</h3>
-              <p className="text-gray-600 text-sm sm:text-base">
-                שיחת ייעוץ ללא התחייבות לבחירת הפתרון המתאים
-              </p>
-            </div>
+                  בואו נשרטט יחד את הצעד הבא של האתר שלכם
+                </h2>
+                <p className="text-base leading-relaxed text-slate-200">
+                  השיחה הראשונה נמשכת כ-30 דקות. נבין את היעדים, נבדוק אילו תכנים קיימים, אילו חיבורים נדרשים ונראה אם אנחנו הצוות הנכון למשימה. לאחר מכן נקבל מכם
+                  חומרי רקע לבניית הצעה מפורטת.
+                </p>
 
-            <div className="text-center">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-                <svg 
-                  className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">מענה מהיר</h3>
-              <p className="text-gray-600 text-sm sm:text-base">
-                נחזור אליכם תוך 24 שעות עם הצעת מחיר מפורטת
-              </p>
-            </div>
+                <ul className="space-y-3 text-sm leading-relaxed text-slate-200" role="list">
+                  <li className="flex items-start gap-2 justify-end" role="listitem">
+                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                    <span>סקירה קצרה של המצב הנוכחי, מערכות קיימות ולוחות זמנים.</span>
+                  </li>
+                  <li className="flex items-start gap-2 justify-end" role="listitem">
+                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                    <span>הדגמת Sanity ו-Next.js עם מקרי בוחן דומים לפרויקט שלכם.</span>
+                  </li>
+                  <li className="flex items-start gap-2 justify-end" role="listitem">
+                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                    <span>התאמה למסלול העבודה והחבילה שהכי מתאימים לצוות שלכם.</span>
+                  </li>
+                </ul>
 
-            <div className="text-center">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
-                <svg 
-                  className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                {selectedPackage && (
+                  <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white">
+                    <span className="inline-block h-2 w-2 rounded-full bg-emerald-400" aria-hidden="true" />
+                    החבילה שנבחרה: {selectedPackage}
+                  </div>
+                )}
+
+                <div className="flex flex-col gap-3 pt-4 sm:flex-row-reverse sm:justify-center sm:items-center">
+                  <button
+                    type="button"
+                    onClick={openModal}
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-slate-900/30 transition hover:-translate-y-0.5 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+                  >
+                    קביעת שיחת היכרות
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={1.8}
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 5l8 7-8 7" />
+                    </svg>
+                  </button>
+                  <a
+                    href="tel:+972501234567"
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl border border-white/30 px-6 py-3 text-base font-semibold text-white transition hover:border-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+                  >
+                    050-123-4567
+                  </a>
+                </div>
               </div>
-              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">ללא התחייבות</h3>
-              <p className="text-gray-600 text-sm sm:text-base">
-                אין עלויות נסתרות - מה שמוצע זה מה שתקבלו
-              </p>
+
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+                <h3 className="text-lg font-semibold text-white">מה אתם מקבלים אחרי השיחה?</h3>
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-200" role="list">
+                  <li className="flex justify-end gap-2" role="listitem">
+                    <span>סיכום מפורט עם לו״ז מוצע, בעלי תפקידים ואבני דרך.</span>
+                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  </li>
+                  <li className="flex justify-end gap-2" role="listitem">
+                    <span>הצעת מחיר שקופה הכוללת חלוקה לספרינטים ורמת מעורבות.</span>
+                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  </li>
+                  <li className="flex justify-end gap-2" role="listitem">
+                    <span>המלצות על חיבורים טכנולוגיים וכלים משלימים לפי הצורך.</span>
+                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  </li>
+                </ul>
+
+                <div className="mt-6 rounded-2xl bg-white/10 p-4 text-sm leading-relaxed text-slate-200">
+                  זמינים לשיחות טלפון בימים א׳–ה׳ בין 09:00 ל-18:00. אפשר גם לשלוח ווטסאפ ונחזור
+                  אליכם בהקדם עם קישור ללוח זמנים.
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button
-              onClick={openModal}
-              className="w-full sm:w-auto bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-blue-700 transform hover:-translate-y-1 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              aria-label="פתח טופס יצירת קשר"
-            >
-              בואו נתחיל לעבוד
-            </button>
-            
-            <a
-              href="tel:+972-50-123-4567"
-              className="w-full sm:w-auto inline-block text-center border-2 border-blue-600 text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              aria-label="התקשר למספר 050-123-4567"
-            >
-              התקשרו עכשיו
-            </a>
-          </div>
-
-          {selectedPackage && (
-            <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-blue-50 rounded-lg inline-block">
-              <p className="text-blue-800 text-sm sm:text-base">
-                <span className="font-medium">חבילה נבחרת:</span> {selectedPackage}
-              </p>
-            </div>
-          )}
         </div>
-      </div>
       </section>
 
-      <ContactModal 
-        isOpen={isModalOpen} 
-        onClose={closeModal}
-        selectedPackage={selectedPackage}
-      />
+      <ContactModal isOpen={isModalOpen} onClose={closeModal} selectedPackage={selectedPackage} />
     </>
   )
 }

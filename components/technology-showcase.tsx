@@ -9,7 +9,7 @@ interface TechnologyShowcaseProps {
 }
 
 const CATEGORY_STYLES: Record<string, string> = {
-  frontend: 'bg-sky-100 text-sky-800',
+  frontend: 'bg-sky-200 text-sky-800',
   cms: 'bg-emerald-100 text-emerald-800',
   deployment: 'bg-indigo-100 text-indigo-800',
 }
@@ -37,7 +37,7 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <span className="inline-flex items-center justify-center rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-700">
+          <span className="inline-flex items-center justify-center rounded-full bg-sky-200 px-4 py-2 text-sm font-semibold text-sky-700">
             הטכנולוגיות שמחזיקות את האתר שלכם
           </span>
           <h2
@@ -60,7 +60,7 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
             return (
               <article
                 key={tech.name}
-                className={`group flex h-full flex-col gap-6 rounded-3xl border border-slate-200 bg-sky-100/80 p-8 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
+                className={`sky-card group flex h-full flex-col gap-6 rounded-3xl p-8 text-right transition-all duration-500 hover:-translate-y-1 ${
                   visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
                 role="article"
@@ -105,7 +105,7 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
           })}
         </div>
 
-        <div className="mt-16 rounded-3xl border border-slate-200 bg-sky-100/60 p-8 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm">
+        <div className="sky-card mt-16 rounded-3xl p-8 text-right">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
             איך הכל מתחבר לפרויקט שלכם
           </p>
@@ -115,15 +115,15 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
             שמרגישה טבעית לצוות.
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-end gap-4 text-sm font-medium text-slate-500">
-            <span className="inline-flex items-center gap-2 rounded-full bg-sky-100/80 px-4 py-2 shadow-sm">
+            <span className="sky-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
               <span className="inline-block h-2 w-2 rounded-full bg-sky-500" aria-hidden="true" />
               Edge Ready
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-sky-100/80 px-4 py-2 shadow-sm">
+            <span className="sky-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
               <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
               Content-first
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-sky-100/80 px-4 py-2 shadow-sm">
+            <span className="sky-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
               <span className="inline-block h-2 w-2 rounded-full bg-indigo-500" aria-hidden="true" />
               Fully automated deploys
             </span>

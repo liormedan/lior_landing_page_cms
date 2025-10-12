@@ -26,7 +26,7 @@ export default function PricingSection({ packages }: PricingSectionProps) {
     <section id="pricing" className="bg-slate-50 py-24" aria-labelledby="pricing-heading">
       <div className="lp-container">
         <div className="mx-auto max-w-3xl text-right">
-          <span className="inline-flex items-center justify-center rounded-full bg-sky-100/80 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+          <span className="sky-chip inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-700">
             מסלולים גמישים שמתאימים לגודל הצוות שלכם
           </span>
           <h2
@@ -45,14 +45,14 @@ export default function PricingSection({ packages }: PricingSectionProps) {
           {packages.map((pkg) => (
             <article
               key={pkg.name}
-              className={`flex h-full flex-col rounded-3xl border border-slate-200 bg-sky-100/80 p-6 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
+              className={`sky-card flex h-full flex-col rounded-3xl p-6 text-right transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
                 pkg.highlighted ? 'ring-2 ring-sky-500' : ''
               }`}
             >
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold text-slate-900">{pkg.name}</h3>
                 {pkg.highlighted && (
-                  <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700">
+                  <span className="rounded-full bg-sky-300/40 px-3 py-1 text-xs font-semibold text-sky-700">
                     החבילה הפופולרית ביותר
                   </span>
                 )}
@@ -95,7 +95,7 @@ export default function PricingSection({ packages }: PricingSectionProps) {
           ))}
         </div>
 
-        <div className="mt-16 grid gap-6 rounded-3xl border border-slate-200 bg-sky-100/70 p-8 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm md:grid-cols-2">
+        <div className="mt-16 grid gap-6 rounded-3xl p-8 text-right md:grid-cols-2 sky-card">
           <div className="space-y-3 text-sm leading-relaxed text-slate-600">
             <h3 className="text-lg font-semibold text-slate-900">מה תמיד כלול?</h3>
             <p>תכנון UX, ספריית קומפוננטים מעוצבת ותשתית Next.js מבוססת TypeScript.</p>

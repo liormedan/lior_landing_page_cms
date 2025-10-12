@@ -64,14 +64,14 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
             return (
               <article
                 key={project.title}
-                className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-sky-100/80 shadow-[0_25px_60px_rgba(15,23,42,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
+                className={`sky-card group flex h-full flex-col overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1 ${
                   visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
                 role="article"
                 aria-labelledby={`project-${index}-title`}
                 style={{ transitionDelay: visibleItems.has(index) ? '0ms' : `${index * 120}ms` }}
               >
-                <div className="relative h-48 bg-sky-100/70">
+                <div className="relative h-48 sky-card">
                   <Image
                     src={project.image}
                     alt={`איור שמדגים את ${project.title}`}
@@ -163,7 +163,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
                         {project.examples.map((example, exampleIndex) => (
                           <span
                             key={exampleIndex}
-                            className="inline-flex items-center rounded-full bg-sky-100/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+                            className="inline-flex items-center rounded-full bg-sky-200/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
                           >
                             {example}
                           </span>
@@ -177,7 +177,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
           })}
         </div>
 
-        <div className="mt-16 flex flex-col items-center gap-4 rounded-3xl border border-slate-200 bg-sky-100/80 p-10 text-right shadow-[0_25px_60px_rgba(15,23,42,0.05)]">
+        <div className="mt-16 flex flex-col items-center gap-4 sky-card rounded-3xl p-10 text-right">
           <p className="w-full text-lg leading-relaxed text-slate-600">
             רוצים לראות איך זה ייראה אצלכם? נבנה יחד מפת דרכים קצרה המשלבת עיצוב, תוכן ותשתיות,
             ונראה איך ניתן להרחיב את האתר בצורה מודולרית ומהירה.

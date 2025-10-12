@@ -68,7 +68,7 @@ export default function DemoSection({ demo }: DemoSectionProps) {
               ))}
             </ul>
 
-            <div className="rounded-3xl border border-slate-200 bg-sky-100/80 p-6 backdrop-blur-sm shadow-[0_25px_60px_rgba(15,23,42,0.06)]">
+            <div className="sky-card rounded-3xl p-6">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
                 למה זה חשוב
               </p>
@@ -84,7 +84,7 @@ export default function DemoSection({ demo }: DemoSectionProps) {
               galleryVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
             }`}
           >
-            <div className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-sky-100/70 backdrop-blur-sm shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+            <div className="sky-card rounded-[32px]">
               <Image
                 src={demo.screenshots[selectedImage]}
                 alt={`צילום מסך מהדגמה – שקופית ${selectedImage + 1}`}
@@ -95,7 +95,7 @@ export default function DemoSection({ demo }: DemoSectionProps) {
                 priority
               />
 
-              <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl bg-sky-100/80 px-4 py-3 text-sm font-medium text-slate-600 shadow-sm backdrop-blur">
+              <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl bg-sky-200/80 px-4 py-3 text-sm font-medium text-slate-600 shadow-sm backdrop-blur">
                 <span>שקופית {selectedImage + 1} מתוך {demo.screenshots.length}</span>
                 <span className="flex items-center gap-2 text-xs">
                   <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
@@ -110,7 +110,7 @@ export default function DemoSection({ demo }: DemoSectionProps) {
                   key={screenshot}
                   onClick={() => setSelectedImage(index)}
                   onKeyDown={(event) => handleThumbnailKeyDown(event, index)}
-                  className={`relative overflow-hidden rounded-2xl border border-slate-200 bg-sky-100/80 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 ${
+                  className={`relative overflow-hidden sky-card rounded-2xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 ${
                     selectedImage === index ? 'ring-2 ring-sky-500' : 'hover:-translate-y-1'
                   }`}
                   aria-label={`בחירת תצוגה מספר ${index + 1} מתוך ${demo.screenshots.length}`}

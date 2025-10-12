@@ -19,7 +19,7 @@ function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
   const itemId = item.question.replace(/\s+/g, '-').toLowerCase()
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-sky-100/80 shadow-sm backdrop-blur-sm">
+    <div className="sky-card rounded-2xl">
       <button
         type="button"
         onClick={onToggle}
@@ -28,7 +28,7 @@ function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
         aria-controls={`${itemId}-content`}
         id={`${itemId}-trigger`}
       >
-        <span className="text-base font-semibold text-slate-900">{item.question}</span>
+        <span className="flex-1 text-right text-base font-semibold text-slate-900">{item.question}</span>
         <ChevronDownIcon
           className={`h-5 w-5 text-slate-500 transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
@@ -44,7 +44,7 @@ function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
           isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="border-t border-slate-200 px-4 pb-4 pt-3 text-sm leading-relaxed text-slate-600">
+        <div className="border-t border-slate-200 px-4 pb-4 pt-3 text-right text-sm leading-relaxed text-slate-600">
           {item.answer}
         </div>
       </div>

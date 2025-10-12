@@ -56,7 +56,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
         >
           <div className="space-y-6 text-right">
             {hero.badge && (
-              <span className="inline-flex items-center justify-center rounded-full bg-sky-100 px-4 py-2 text-sm font-medium text-sky-700">
+              <span className="sky-chip inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium text-sky-800">
                 {hero.badge}
               </span>
             )}
@@ -134,10 +134,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
             <dl className="grid gap-4 pt-8 sm:grid-cols-3">
               {HERO_STATS.map((stat) => (
-                <div
-                  key={stat.value}
-                  className="rounded-2xl border border-slate-200 bg-sky-100/80 p-5 backdrop-blur-sm text-right shadow-sm"
-                >
+                <div key={stat.value} className="sky-card rounded-2xl p-5 text-right">
                   <dt className="text-sm font-medium text-slate-500">{stat.label}</dt>
                   <dd className="mt-2 text-2xl font-bold text-slate-900">{stat.value}</dd>
                 </div>
@@ -147,7 +144,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
           <div className="relative">
             <div
-              className="absolute -top-24 -end-20 h-64 w-64 rounded-full bg-sky-100 blur-3xl"
+              className="absolute -top-24 -end-20 h-64 w-64 rounded-full bg-sky-200 blur-3xl"
               aria-hidden="true"
             />
             <div
@@ -155,8 +152,8 @@ export function HeroSection({ hero }: HeroSectionProps) {
               aria-hidden="true"
             />
 
-            <div className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-sky-100/70 shadow-[0_40px_80px_rgba(15,23,42,0.08)] backdrop-blur-sm">
-              <div className="absolute top-6 end-6 flex items-center gap-2 rounded-full border border-white/60 bg-sky-100/80 px-4 py-2 text-xs font-medium text-slate-600 shadow-sm backdrop-blur">
+            <div className="sky-card rounded-[32px]">
+              <div className="absolute top-6 end-6 flex items-center gap-2 rounded-full border border-white/60 bg-white/30 px-4 py-2 text-xs font-medium text-slate-600 shadow-sm backdrop-blur">
                 <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
                 Live preview
               </div>
@@ -184,7 +181,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                     />
                   </div>
 
-                  <div className="rounded-3xl border border-slate-100 bg-sky-100/80 p-6 shadow-inner">
+                  <div className="sky-card rounded-3xl p-6">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                       Workflow
                     </p>
@@ -199,7 +196,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   </div>
                 </div>
 
-                <div className="rounded-3xl border border-slate-100 bg-gradient-to-br from-sky-50 to-white p-6">
+                <div className="sky-card rounded-3xl p-6">
                   <div className="flex items-center justify-between text-sm text-slate-500">
                     <span>Deploy preview</span>
                     <span className="font-medium text-slate-700">Vercel Edge</span>
@@ -222,10 +219,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm font-semibold text-slate-600">
             {TRUST_LOGOS.map((logo) => (
-              <span
-                key={logo}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-sky-100/80 px-4 py-2 shadow-sm backdrop-blur-sm"
-              >
+              <span key={logo} className="sky-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
                 <span className="inline-block h-2 w-2 rounded-full bg-sky-500" aria-hidden="true" />
                 {logo}
               </span>

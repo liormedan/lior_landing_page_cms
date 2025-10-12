@@ -55,7 +55,7 @@ export default function SectionNav({ sections }: SectionNavProps) {
               <a
                 href={`#${id}`}
                 className={`group relative flex h-4 w-4 items-center justify-center rounded-full border border-sky-400 transition ${
-                  isActive ? 'bg-sky-500' : 'bg-white hover:bg-sky-100'
+                  isActive ? 'bg-sky-500' : 'bg-white hover:bg-sky-200'
                 }`}
                 aria-label={label}
                 aria-current={isActive ? 'true' : undefined}

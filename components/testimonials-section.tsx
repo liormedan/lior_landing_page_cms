@@ -26,7 +26,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <span className="inline-flex items-center justify-center rounded-full bg-sky-100/80 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+          <span className="inline-flex items-center justify-center rounded-full sky-chip px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
             מה הלקוחות שלנו אומרים
           </span>
           <h2
@@ -48,7 +48,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           {testimonials.items.map((item, index) => (
             <article
               key={`${item.name}-${index}`}
-              className={`flex h-full flex-col rounded-3xl border border-slate-200 bg-sky-100/80 p-6 text-right shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
+              className={`sky-card flex h-full flex-col rounded-3xl p-6 text-right transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
                 visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
               style={{ transitionDelay: `${index * 160}ms` }}
@@ -80,7 +80,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   </div>
                 </div>
                 {item.highlight && (
-                  <span className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-sky-200/40 px-3 py-1 text-xs font-semibold text-sky-700">
                     <span className="inline-block h-2 w-2 rounded-full bg-sky-500" aria-hidden="true" />
                     {item.highlight}
                   </span>

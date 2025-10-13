@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 interface SectionNavProps {
-  sections: { id: string; label: string }[]
+  sections: ReadonlyArray<{ id: string; label: string }>
 }
 
 export default function SectionNav({ sections }: SectionNavProps) {

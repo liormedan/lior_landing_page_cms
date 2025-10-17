@@ -60,7 +60,7 @@ export default function Offerings() {
                 {item.features.map((f) => (
                   <li key={f} className="flex items-start justify-start gap-2" role="listitem">
                     <span className="mt-1 h-2 w-2 rounded-full bg-blue-700/70" aria-hidden="true" />
-                    <span className="text-slate-700">{f}</span>
+                    <span className="text-white">{f}</span>
                   </li>
                 ))}
               </ul>

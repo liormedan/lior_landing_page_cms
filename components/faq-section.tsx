@@ -106,11 +106,11 @@ export default function FAQSection({ faqItems }: FAQSectionProps) {
           ))}
         </div>
 
-        <div className="mt-12 mx-auto max-w-4xl rounded-3xl border border-slate-700 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-right text-white shadow-[0_25px_60px_rgba(15,23,42,0.35)] flex flex-col items-center gap-4">
+        <div className="mt-12 mx-auto max-w-4xl rounded-3xl border border-slate-700 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-center text-white shadow-[0_25px_60px_rgba(15,23,42,0.35)] flex flex-col items-center gap-4">
           <h3 className="w-full text-lg font-semibold text-white">
             יש לכם שאלה נוספת?
           </h3>
-          <p className="mt-3 w-full text-base text-right leading-relaxed text-white/90">
+          <p className="mt-3 w-full text-base text-center leading-relaxed text-white/90">
             יש לכם שאלה נוספת או צורך מיוחד?
             <br />
             נשמח לבנות איתכם מסמך דרישות קצר ולהציע פתרון שמתאים למבנה הצוות, הטכנולוגיה והתקציב שלכם. שיחת ייעוץ קצרה בדרך כלל מספיקה כדי להבין את התמונה.

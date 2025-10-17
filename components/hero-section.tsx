@@ -140,77 +140,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             </dl>
           </div>
 
-          <div className="relative">
-            <div
-              className="absolute -top-24 -end-20 h-64 w-64 rounded-full bg-sky-200 blur-3xl"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute -bottom-20 -start-16 h-72 w-72 rounded-full bg-indigo-100 blur-[110px]"
-              aria-hidden="true"
-            />
-
-            <div className="sky-card rounded-[32px]">
-              <div className="absolute top-6 end-6 flex items-center gap-2 rounded-full border border-white/60 bg-white/30 px-4 py-2 text-xs font-medium text-white shadow-sm backdrop-blur">
-                <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
-                Live preview
-              </div>
-
-              <div className="grid gap-6 p-8">
-                <div className="relative h-64 rounded-3xl border border-slate-100 bg-slate-50">
-                  <Image
-                    src="/images/sanity-demo-1.svg"
-                    alt="Sanity Studio"
-                    fill
-                    className="object-contain p-4"
-                    sizes="(min-width: 1024px) 480px, 90vw"
-                    priority
-                  />
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="relative h-36 rounded-3xl border border-slate-100 bg-slate-50">
-                    <Image
-                      src="/images/sanity-demo-2.svg"
-                      alt="Sanity editing"
-                      fill
-                      className="object-contain p-4"
-                      sizes="(min-width: 1024px) 220px, 40vw"
-                    />
-                  </div>
-
-                  <div className="sky-card rounded-3xl p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                      Workflow
-                    </p>
-                    <p className="mt-3 text-2xl font-bold text-white">Sanity &amp; Next.js</p>
-                    <p className="mt-2 text-sm leading-relaxed text-white">
-                      תהליכי עבודה מאורגנים, עריכה משותפת ושחרור גרסאות מהיר דרך Vercel.
-                    </p>
-                    <div className="mt-4 flex items-center justify-between text-sm font-medium text-white">
-                      <span>צוותי תוכן</span>
-                      <span className="text-white">עובדים בזמן אמת</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="sky-card rounded-3xl p-6">
-                  <div className="flex items-center justify-between text-base sm:text-lg text-white">
-                    <span className="font-semibold">Deploy preview</span>
-                    <span className="font-semibold">Vercel Edge</span>
-                  </div>
-                  <div className="mt-3 h-2 rounded-full bg-slate-200">
-                    <div className="h-2 w-4/5 rounded-full bg-blue-700/90" />
-                  </div>
-                  <p className="mt-3 text-base sm:text-lg leading-relaxed text-white">
-                    עבודה ישירה עם GitHub, תצוגות מקדימות ושחרורים מהירים בסביבות מבודדות.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+          {/* Demo column removed per request */}
       </div>
     </section>
   )

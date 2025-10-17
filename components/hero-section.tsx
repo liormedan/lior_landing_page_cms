@@ -139,27 +139,113 @@ export function HeroSection({ hero }: HeroSectionProps) {
               <p className="text-sm text-slate-500 sm:text-base">{hero.ctaSupportText}</p>
             )}
 
-            <dl className="grid gap-6 pt-8 sm:grid-cols-3">
-              {DISPLAY_STATS.map((stat) => (
-                <div
-                  key={stat.value}
-                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800/80 via-slate-800/40 to-blue-900/20 p-8 text-center text-white shadow-[0_20px_60px_rgba(15,23,42,0.35)]"
-                >
-                  <div
-                    className="pointer-events-none absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/10 blur-3xl"
-                    aria-hidden="true"
-                  />
-                  <dt className="text-sm font-semibold tracking-wide text-white/80">{stat.label}</dt>
-                  <dd className="mt-4 text-4xl md:text-5xl font-extrabold">{stat.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <TechAccordion />
           </div>
 
           {/* Demo column removed per request */}
         </div>
         </div>
     </section>
+  )
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  )
+}
+
+function TechAccordion() {
+  const [openId, setOpenId] = useState<string | null>(null)
+  const cards = [
+    {
+      id: 'next',
+      title: 'Next.js',
+      summary:
+        'פריימוורק מודרני מעל React: SSR/SSG, ניתוב חכם וביצועים גבוהים כברירת מחדל.',
+      points: [
+        'ביצועים ו‑SEO מצוינים (SSR/SSG, Image Optimization)',
+        'שילוב טבעי עם Vercel ו‑Edge',
+        'App Router מודולרי וטעינה מדורגת',
+      ],
+    },
+    {
+      id: 'sanity',
+      title: 'Sanity',
+      summary:
+        'CMS גמיש לעריכה בזמן אמת: סכמות דינמיות, טיוטות ו‑Preview, ו‑Portable Text עשיר.',
+      points: [
+        'עריכה בזמן אמת לצוותי תוכן (Drafts/Preview)',
+        'מודל תוכן גמיש שגדל עם המוצר',
+        'API מהיר + אינטגרציות CRM/BI וכלי שיווק',
+      ],
+    },
+    {
+      id: 'vercel',
+      title: 'Vercel',
+      summary: 'פריסות מהירות, Preview לכל שינוי ותשתית Edge גלובלית.',
+      points: [
+        'Preview אוטומטי לכל שינוי, שחרורים בטוחים',
+        'ביצועים גלובליים עם Edge Network',
+        'Analytics ומעקב ביצועים מובנים',
+      ],
+    },
+  ] as const
+
+  return (
+    <div className="grid gap-4 pt-8 sm:grid-cols-3">
+      {cards.map((card) => {
+        const open = openId === card.id
+        return (
+          <article
+            key={card.id}
+            className="rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800/80 via-slate-800/40 to-blue-900/20 text-white shadow-[0_20px_60px_rgba(15,23,42,0.35)]"
+          >
+            <button
+              type="button"
+              onClick={() => setOpenId(open ? null : card.id)}
+              className="flex w-full items-center justify-between gap-3 px-6 py-4 text-right"
+              aria-expanded={open}
+              aria-controls={`tech-${card.id}`}
+            >
+              <div className="text-right">
+                <h3 className="text-base font-semibold">{card.title}</h3>
+                <p className="mt-1 text-sm text-white/80">{card.summary}</p>
+              </div>
+              <Chevron open={open} />
+            </button>
+            <div
+              id={`tech-${card.id}`}
+              className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ${
+                open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+              }`}
+              role="region"
+              aria-label={`מידע על ${card.title}`}
+            >
+              <div className="min-h-0 px-6 pb-6">
+                <ul className="space-y-2 text-sm text-white/90" role="list">
+                  {card.points.map((p) => (
+                    <li key={p} className="flex items-start justify-end gap-2" role="listitem">
+                      <span>{p}</span>
+                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-blue-400" aria-hidden="true" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        )
+      })}
+    </div>
   )
 }
 

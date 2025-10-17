@@ -141,7 +141,8 @@ export function HeroSection({ hero }: HeroSectionProps) {
           </div>
 
           {/* Demo column removed per request */}
-      </div>
+        </div>
+        </div>
     </section>
   )
 }

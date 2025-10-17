@@ -30,7 +30,8 @@ export function HeroSection({ hero }: HeroSectionProps) {
     setIsVisible(true)
   }, [])
 
-  const normalizedTitle = hero.title.trim()
+  const fallbackTitle = '\u05D3\u05E3 \u05E0\u05D7\u05D9\u05EA\u05D4 \u05E9\u05DE\u05DE\u05D9\u05E8 \u05D9\u05D5\u05EA\u05E8 \u2014 \u05E2\u05E8\u05D9\u05DB\u05D4 \u05D1\u05E2\u05D1\u05E8\u05D9\u05EA \u05D1\u05DE\u05D4\u05D9\u05E8\u05D5\u05EA \u05E9\u05D9\u05D0'
+  const normalizedTitle = (hero.title || fallbackTitle).trim()
   const [titlePrimaryRaw, ...titleSecondaryParts] = normalizedTitle.split('+')
   const titlePrimary = titlePrimaryRaw?.trim() ?? ''
   const titleSecondary = titleSecondaryParts.join('+').trim()
@@ -80,9 +81,13 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 )}
               </h1>
 
-              {hero.subtitle && (
+              {(
+                hero.subtitle ||
+                '\\u05E4\\u05EA\\u05E8\\u05D5\\u05DF \\u05E9\\u05DC\\u05DD \\u05DC\\u05D9\\u05E6\\u05D9\\u05D0\\u05D4 \\u05DE\\u05D4\\u05D9\\u05E8\\u05D4 \\u05DC\\u05D0\\u05D5\\u05D5\\u05D9\\u05E8: \\u05E2\\u05D9\\u05E6\\u05D5\\u05D1 \\u05DE\\u05DE\\u05D5\\u05E7\\u05D3 \\u05D4\\u05DE\\u05E8\\u05D4, \\u05E0\\u05D9\\u05D4\\u05D5\\u05DC \\u05EA\\u05D5\\u05DB\\u05DF \\u05D1\\u05D6\\u05DE\\u05DF \\u05D0\\u05DE\\u05EA \\u05D5-SEO \\u05DE\\u05E6\\u05D5\\u05D9\\u05DF.'
+              ) && (
                 <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">
-                  {hero.subtitle}
+                  {hero.subtitle ||
+                    '\u05E4\u05EA\u05E8\u05D5\u05DF \u05E9\u05DC\u05DD \u05DC\u05D9\u05E6\u05D9\u05D0\u05D4 \u05DE\u05D4\u05D9\u05E8\u05D4 \u05DC\u05D0\u05D5\u05D5\u05D9\u05E8: \u05E2\u05D9\u05E6\u05D5\u05D1 \u05DE\u05DE\u05D5\u05E7\u05D3 \u05D4\u05DE\u05E8\u05D4, \u05E0\u05D9\u05D4\u05D5\u05DC \u05EA\u05D5\u05DB\u05DF \u05D1\u05D6\u05DE\u05DF \u05D0\u05DE\u05EA \u05D5-SEO \u05DE\u05E6\u05D5\u05D9\u05DF.'}
                 </p>
               )}
             </div>

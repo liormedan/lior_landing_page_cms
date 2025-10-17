@@ -53,7 +53,8 @@ function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
 }
 
 export default function FAQSection({ faqItems }: FAQSectionProps) {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set([0]))
+  // Start with all items closed by default
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set())
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.1 })
 
   const toggleItem = (index: number) => {

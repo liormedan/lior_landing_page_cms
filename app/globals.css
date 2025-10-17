@@ -24,8 +24,8 @@
   --dark: class;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  /* Prefer Hebrew-capable font, fallback to Geist */
-  --font-sans: var(--font-hebrew), var(--font-geist-sans);
+  /* Site-wide sans font: Heebo */
+  --font-sans: var(--font-hebrew);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -36,7 +36,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-hebrew), var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-hebrew), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   direction: rtl;
   text-align: right;
 }

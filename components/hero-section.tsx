@@ -87,12 +87,6 @@ export function HeroSection({ hero }: HeroSectionProps) {
               )}
             </div>
 
-            <div className="space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
-              {descriptionParagraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-
             {(hero.primaryCtaText || hero.secondaryCtaText) && (
               <div className="flex flex-col gap-3 pt-2 sm:flex-row-reverse sm:items-center sm:justify-end sm:gap-4">
                 {hero.primaryCtaText && hero.primaryCtaHref && (
@@ -134,6 +128,12 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 )}
               </div>
             )}
+
+            <div className="space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
+              {descriptionParagraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
 
             {hero.ctaSupportText && (
               <p className="text-sm text-slate-500 sm:text-base">{hero.ctaSupportText}</p>

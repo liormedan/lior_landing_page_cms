@@ -8,9 +8,7 @@ interface HeroSectionProps {
   hero: HeroContent
 }
 
-const TRUST_LOGOS = ['Next.js', 'Sanity', 'Vercel', 'Tailwind CSS', 'TypeScript'] as const
-
-const HERO_STATS = [
+const DISPLAY_STATS = [
   { value: '25+', label: 'השקות של אתרי תוכן מחוברים ל-Sanity' },
   { value: '100%', label: 'תמיכה מלאה בעברית, RTL ונגישות ברמה AA' },
   { value: '< 4 שבועות', label: 'זמן ממוצע עד עלייה לאוויר בפרויקטים חוזרים' },
@@ -39,7 +37,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-white"
+      className="relative overflow-hidden bg-white dark:bg-slate-900"
       role="banner"
       aria-label={normalizedTitle || hero.subtitle}
     >
@@ -56,17 +54,17 @@ export function HeroSection({ hero }: HeroSectionProps) {
         >
           <div className="space-y-6 text-right">
             {hero.badge && (
-              <span className="sky-chip inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium text-sky-800">
+              <span className="sky-chip inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium text-white">
                 {hero.badge}
               </span>
             )}
 
             <div className="space-y-4">
-              <h1 className="text-4xl font-extrabold leading-tight text-slate-900 sm:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-extrabold leading-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-6xl">
                 {showSplitTitle ? (
                   <>
-                    <span className="block text-sky-600">{titlePrimary}</span>
-                    <span className="block text-slate-900">{titleSecondary}</span>
+                    <span className="block text-blue-700">{titlePrimary}</span>
+                    <span className="block text-slate-900 dark:text-slate-100">{titleSecondary}</span>
                   </>
                 ) : (
                   normalizedTitle
@@ -74,13 +72,13 @@ export function HeroSection({ hero }: HeroSectionProps) {
               </h1>
 
               {hero.subtitle && (
-                <p className="text-lg leading-relaxed text-slate-600 sm:text-xl">
+                <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">
                   {hero.subtitle}
                 </p>
               )}
             </div>
 
-            <div className="space-y-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+            <div className="space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
               {descriptionParagraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
@@ -91,7 +89,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 {hero.primaryCtaText && hero.primaryCtaHref && (
                   <a
                     href={hero.primaryCtaHref}
-                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-7 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-7 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
                   >
                     {hero.primaryCtaText}
                     <svg
@@ -110,7 +108,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 {hero.secondaryCtaText && hero.secondaryCtaHref && (
                   <a
                     href={hero.secondaryCtaHref}
-                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl border border-slate-200 px-7 py-3 text-base font-semibold text-slate-700 transition hover:border-sky-400 hover:text-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl border border-slate-200 px-7 py-3 text-base font-semibold text-slate-700 transition hover:border-blue-700/50 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
                   >
                     {hero.secondaryCtaText}
                     <svg
@@ -133,10 +131,10 @@ export function HeroSection({ hero }: HeroSectionProps) {
             )}
 
             <dl className="grid gap-4 pt-8 sm:grid-cols-3">
-              {HERO_STATS.map((stat) => (
+              {DISPLAY_STATS.map((stat) => (
                 <div key={stat.value} className="sky-card rounded-2xl p-5 text-right">
-                  <dt className="text-sm font-medium text-slate-500">{stat.label}</dt>
-                  <dd className="mt-2 text-2xl font-bold text-slate-900">{stat.value}</dd>
+                  <dt className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-200">{stat.label}</dt>
+                  <dd className="mt-1 text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-100">{stat.value}</dd>
                 </div>
               ))}
             </dl>
@@ -153,7 +151,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             />
 
             <div className="sky-card rounded-[32px]">
-              <div className="absolute top-6 end-6 flex items-center gap-2 rounded-full border border-white/60 bg-white/30 px-4 py-2 text-xs font-medium text-slate-600 shadow-sm backdrop-blur">
+              <div className="absolute top-6 end-6 flex items-center gap-2 rounded-full border border-white/60 bg-white/30 px-4 py-2 text-xs font-medium text-white shadow-sm backdrop-blur">
                 <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
                 Live preview
               </div>
@@ -162,7 +160,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 <div className="relative h-64 rounded-3xl border border-slate-100 bg-slate-50">
                   <Image
                     src="/images/sanity-demo-1.svg"
-                    alt="תצוגה מקדימה של Sanity Studio"
+                    alt="Sanity Studio"
                     fill
                     className="object-contain p-4"
                     sizes="(min-width: 1024px) 480px, 90vw"
@@ -174,7 +172,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   <div className="relative h-36 rounded-3xl border border-slate-100 bg-slate-50">
                     <Image
                       src="/images/sanity-demo-2.svg"
-                      alt="מסכי עבודה מותאמים לצוות התוכן"
+                      alt="Sanity editing"
                       fill
                       className="object-contain p-4"
                       sizes="(min-width: 1024px) 220px, 40vw"
@@ -182,30 +180,30 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   </div>
 
                   <div className="sky-card rounded-3xl p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white">
                       Workflow
                     </p>
-                    <p className="mt-3 text-2xl font-bold text-slate-900">Sanity &amp; Next.js</p>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    <p className="mt-3 text-2xl font-bold text-white">Sanity &amp; Next.js</p>
+                    <p className="mt-2 text-sm leading-relaxed text-white">
                       תהליכי עבודה מאורגנים, עריכה משותפת ושחרור גרסאות מהיר דרך Vercel.
                     </p>
-                    <div className="mt-4 flex items-center justify-between text-sm font-medium text-slate-500">
+                    <div className="mt-4 flex items-center justify-between text-sm font-medium text-white">
                       <span>צוותי תוכן</span>
-                      <span className="text-sky-600">עובדים בזמן אמת</span>
+                      <span className="text-white">עובדים בזמן אמת</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="sky-card rounded-3xl p-6">
-                  <div className="flex items-center justify-between text-sm text-slate-500">
-                    <span>Deploy preview</span>
-                    <span className="font-medium text-slate-700">Vercel Edge</span>
+                  <div className="flex items-center justify-between text-base sm:text-lg text-white">
+                    <span className="font-semibold">Deploy preview</span>
+                    <span className="font-semibold">Vercel Edge</span>
                   </div>
                   <div className="mt-3 h-2 rounded-full bg-slate-200">
-                    <div className="h-2 w-4/5 rounded-full bg-sky-500" />
+                    <div className="h-2 w-4/5 rounded-full bg-blue-700/90" />
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                    סנכרון עם GitHub, בדיקות אוטומטיות ופריסה מאובטחת לכל סביבה.
+                  <p className="mt-3 text-base sm:text-lg leading-relaxed text-white">
+                    עבודה ישירה עם GitHub, תצוגות מקדימות ושחרורים מהירים בסביבות מבודדות.
                   </p>
                 </div>
               </div>
@@ -213,20 +211,8 @@ export function HeroSection({ hero }: HeroSectionProps) {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-slate-200 pt-10 text-right">
-          <p className="text-sm font-medium text-slate-500 sm:text-base">
-            טכנולוגיות מובילות שאנחנו משלבים בכל פרויקט
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm font-semibold text-slate-600">
-            {TRUST_LOGOS.map((logo) => (
-              <span key={logo} className="sky-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
-                <span className="inline-block h-2 w-2 rounded-full bg-sky-500" aria-hidden="true" />
-                {logo}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )
 }
+

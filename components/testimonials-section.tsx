@@ -81,7 +81,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 </div>
                 {item.highlight && (
                   <span className="inline-flex items-center gap-2 rounded-full bg-sky-200/40 px-3 py-1 text-xs font-semibold text-sky-700">
-                    <span className="inline-block h-2 w-2 rounded-full bg-sky-500" aria-hidden="true" />
+                    <span className="inline-block h-2 w-2 rounded-full bg-blue-700/90" aria-hidden="true" />
                     {item.highlight}
                   </span>
                 )}
@@ -101,7 +101,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           </p>
           <Link
             href="#contact"
-            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
             לתאם שיחת היכרות
             <svg
@@ -120,3 +120,4 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
     </section>
   )
 }
+

@@ -55,9 +55,9 @@ function validateContactForm(data: unknown): { isValid: boolean; errors: string[
 
 // Email sending function using fetch to a service like Resend, SendGrid, or similar
 async function sendEmail(formData: ContactFormData): Promise<void> {
-  const emailService = process.env.EMAIL_SERVICE || 'console'
+  const provider = (process.env.EMAIL_PROVIDER || process.env.EMAIL_SERVICE || 'console').toLowerCase()
   
-  if (emailService === 'console') {
+  if (provider === 'console') {
     // For development - log to console
     console.log('📧 New Contact Form Submission:')
     console.log('Name:', formData.name)
@@ -66,6 +66,108 @@ async function sendEmail(formData: ContactFormData): Promise<void> {
     console.log('Selected Package:', formData.selectedPackage || 'None')
     console.log('Message:', formData.message)
     console.log('---')
+    return
+  }
+
+  // Build common RTL HTML content
+  const html = `
+    <div dir="rtl" style="font-family: Arial, sans-serif; color:#0f172a;">
+      <h2 style="margin:0 0 12px;">פרטי פנייה חדשה</h2>
+      <p style="margin:4px 0;"><strong>שם:</strong> ${formData.name}</p>
+      <p style="margin:4px 0;"><strong>אימייל:</strong> ${formData.email}</p>
+      <p style="margin:4px 0;"><strong>סוג פרויקט:</strong> ${formData.projectType}</p>
+      ${formData.selectedPackage ? `<p style=\"margin:4px 0;\"><strong>חבילה נבחרת:</strong> ${formData.selectedPackage}</p>` : ''}
+      <div style="margin-top:12px;">
+        <p style="margin:0 0 6px;"><strong>הודעה:</strong></p>
+        <div style="background:#f1f5f9; padding:12px; border-radius:8px; line-height:1.6;">${formData.message}</div>
+      </div>
+    </div>
+  `
+
+  // SendGrid provider
+  if (provider === 'sendgrid') {
+    const apiKey = process.env.SENDGRID_API_KEY
+    const toEmail = process.env.TO_EMAIL
+    const fromEmail = process.env.FROM_EMAIL
+    const fromName = process.env.FROM_NAME || 'Website Contact'
+    const sendConfirmation = String(process.env.SEND_CONFIRMATION || '').toLowerCase() === 'true'
+
+    if (!apiKey || !toEmail || !fromEmail) {
+      throw new Error('Missing SENDGRID_API_KEY, TO_EMAIL or FROM_EMAIL environment variables')
+    }
+
+    const resp = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        personalizations: [
+          { to: [{ email: toEmail }], subject: `פנייה חדשה - ${formData.name} - ${formData.projectType}` },
+        ],
+        from: { email: fromEmail, name: fromName },
+        content: [{ type: 'text/html', value: html }],
+      }),
+    })
+
+    if (!resp.ok) {
+      const t = await resp.text().catch(() => '')
+      throw new Error(`SendGrid error: ${resp.status} ${t}`)
+    }
+
+    if (sendConfirmation && formData.email && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(formData.email)) {
+      const confirmHtml = `
+        <div dir=\"rtl\" style=\"font-family: Arial, sans-serif; color:#0f172a;\">
+          <h2 style=\"margin:0 0 12px;\">תודה, הפנייה התקבלה</h2>
+          <p>קיבלנו את הפרטים שלך ונחזור אליך בהקדם.</p>
+        </div>
+      `
+      await fetch('https://api.sendgrid.com/v3/mail/send', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          personalizations: [
+            { to: [{ email: formData.email }], subject: 'הפנייה שלך התקבלה' },
+          ],
+          from: { email: fromEmail, name: fromName },
+          content: [{ type: 'text/html', value: confirmHtml }],
+        }),
+      })
+    }
+
+    return
+  }
+
+  // Resend provider (optional)
+  if (provider === 'resend') {
+    const apiKey = process.env.RESEND_API_KEY
+    const toEmail = process.env.TO_EMAIL
+    const fromEmail = process.env.FROM_EMAIL || 'noreply@yourdomain.com'
+    if (!apiKey || !toEmail) throw new Error('Missing RESEND_API_KEY or TO_EMAIL')
+
+    const resp = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: toEmail,
+        subject: `פנייה חדשה - ${formData.name} - ${formData.projectType}`,
+        html,
+      }),
+    })
+
+    if (!resp.ok) {
+      const t = await resp.text().catch(() => '')
+      throw new Error(`Resend error: ${resp.status} ${t}`)
+    }
+
     return
   }
 

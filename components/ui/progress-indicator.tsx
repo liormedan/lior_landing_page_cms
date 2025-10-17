@@ -27,7 +27,7 @@ export function ProgressIndicator({ duration = 3000, className = '' }: ProgressI
   return (
     <div className={`w-full bg-slate-200 rounded-full h-2 overflow-hidden ${className}`}>
       <div 
-        className="h-full bg-gradient-to-r from-sky-500 to-blue-600 rounded-full transition-all duration-300 ease-out"
+        className="h-full bg-gradient-to-r from-blue-700/90 to-blue-600 rounded-full transition-all duration-300 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>
@@ -60,9 +60,9 @@ interface PulsingDotsProps {
 export function PulsingDots({ className = '' }: PulsingDotsProps) {
   return (
     <div className={`flex space-x-1 ${className}`}>
-      <div className="w-2 h-2 bg-sky-500 rounded-full animate-pulse" style={{ animationDelay: '0s' }} />
-      <div className="w-2 h-2 bg-sky-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-      <div className="w-2 h-2 bg-sky-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+      <div className="w-2 h-2 bg-blue-700/90 rounded-full animate-pulse" style={{ animationDelay: '0s' }} />
+      <div className="w-2 h-2 bg-blue-700/90 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+      <div className="w-2 h-2 bg-blue-700/90 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
     </div>
   )
 }

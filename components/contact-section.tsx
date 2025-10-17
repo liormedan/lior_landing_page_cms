@@ -20,7 +20,7 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
           <div className="overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-10 text-white shadow-[0_40px_80px_rgba(15,23,42,0.4)]">
             <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
               <div className="space-y-6 text-right">
-                <span className="inline-flex items-center justify-center rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-sky-200">
+                <span className="inline-flex items-center justify-center rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-blue-200">
                   שיחת התאמה ראשונית – ללא עלות וללא התחייבות
                 </span>
                 <h2
@@ -35,16 +35,16 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
                 </p>
 
                 <ul className="space-y-3 text-sm leading-relaxed text-slate-200" role="list">
-                  <li className="flex items-start gap-2 justify-end" role="listitem">
-                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  <li className="flex items-start gap-2 justify-start" role="listitem">
+                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-blue-700/70" aria-hidden="true" />
                     <span>סקירה קצרה של המצב הנוכחי, מערכות קיימות ולוחות זמנים.</span>
                   </li>
-                  <li className="flex items-start gap-2 justify-end" role="listitem">
-                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  <li className="flex items-start gap-2 justify-start" role="listitem">
+                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-blue-700/70" aria-hidden="true" />
                     <span>הדגמת Sanity ו-Next.js עם מקרי בוחן דומים לפרויקט שלכם.</span>
                   </li>
-                  <li className="flex items-start gap-2 justify-end" role="listitem">
-                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  <li className="flex items-start gap-2 justify-start" role="listitem">
+                    <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-blue-700/70" aria-hidden="true" />
                     <span>התאמה למסלול העבודה והחבילה שהכי מתאימים לצוות שלכם.</span>
                   </li>
                 </ul>
@@ -60,7 +60,7 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
                   <button
                     type="button"
                     onClick={openModal}
-                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-slate-900/30 transition hover:-translate-y-0.5 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-slate-900/30 transition hover:-translate-y-0.5 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-700/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                   >
                     קביעת שיחת היכרות
                     <svg
@@ -86,15 +86,15 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
                 <h3 className="text-lg font-semibold text-white">מה אתם מקבלים אחרי השיחה?</h3>
                 <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-200" role="list">
-                  <li className="flex justify-end gap-2" role="listitem">
+                  <li className="flex justify-start gap-2" role="listitem">
                     <span>סיכום מפורט עם לו״ז מוצע, בעלי תפקידים ואבני דרך.</span>
                     <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
                   </li>
-                  <li className="flex justify-end gap-2" role="listitem">
+                  <li className="flex justify-start gap-2" role="listitem">
                     <span>הצעת מחיר שקופה הכוללת חלוקה לספרינטים ורמת מעורבות.</span>
                     <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
                   </li>
-                  <li className="flex justify-end gap-2" role="listitem">
+                  <li className="flex justify-start gap-2" role="listitem">
                     <span>המלצות על חיבורים טכנולוגיים וכלים משלימים לפי הצורך.</span>
                     <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
                   </li>
@@ -114,3 +114,4 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
     </>
   )
 }
+

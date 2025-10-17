@@ -21,7 +21,7 @@ export function PostCard({ post }: PostCardProps) {
   const published = post.publishedAt ? formatter.format(new Date(post.publishedAt)) : undefined
 
   return (
-    <article className="sky-card flex h-full flex-col overflow-hidden rounded-2xl transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+    <article className="sky-card flex h-full flex-col overflow-hidden rounded-2xl transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 text-right">
       {image ? (
         <Link href={`/posts/${post.slug}`} className="group relative aspect-[16/9] overflow-hidden">
           <Image
@@ -36,7 +36,7 @@ export function PostCard({ post }: PostCardProps) {
       ) : null}
 
       <div className="flex flex-1 flex-col gap-4 p-6">
-        <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-slate-500">
+        <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-slate-500 justify-start">
           {post.featured ? (
             <span className="rounded-full bg-amber-100 px-3 py-1 font-semibold text-amber-700">פוסט מומלץ</span>
           ) : null}
@@ -50,14 +50,14 @@ export function PostCard({ post }: PostCardProps) {
 
         <div className="flex flex-1 flex-col gap-3">
           <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
-            <Link href={`/posts/${post.slug}`} className="hover:text-sky-600 dark:hover:text-sky-400">
+            <Link href={`/posts/${post.slug}`} className="hover:text-blue-700 dark:hover:text-sky-400">
               {post.title}
             </Link>
           </h3>
           {post.excerpt ? <p className="text-slate-600 dark:text-slate-300">{post.excerpt}</p> : null}
         </div>
 
-        <div className="flex items-center gap-3 text-sm text-slate-500">
+        <div className="flex items-center gap-3 text-sm text-slate-500 justify-start">
           {post.author?.avatar?.asset ? (
             <Image
               src={urlFor(post.author.avatar).width(64).height(64).fit("crop").url()}
@@ -68,7 +68,7 @@ export function PostCard({ post }: PostCardProps) {
             />
           ) : null}
           {post.author ? (
-            <div className="flex flex-col">
+            <div className="flex flex-col text-right">
               <span className="font-medium text-slate-800 dark:text-slate-200">{post.author.name}</span>
               {post.author.role ? <span>{post.author.role}</span> : null}
             </div>
@@ -78,3 +78,4 @@ export function PostCard({ post }: PostCardProps) {
     </article>
   )
 }
+

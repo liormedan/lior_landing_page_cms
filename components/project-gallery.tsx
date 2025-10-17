@@ -96,7 +96,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
                     <div className="mt-4">
                       <Link
                         href={project.ctaHref}
-                        className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                        className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
                       >
                         {project.ctaLabel ?? 'לקריאת עוד'}
                         <svg
@@ -116,7 +116,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
                   <button
                     onClick={() => toggleExpanded(index)}
                     onKeyDown={(event) => handleKeyDown(event, index)}
-                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-sky-400 hover:text-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-700/50 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
                     aria-expanded={isExpanded}
                     aria-controls={`project-${index}-details`}
                     aria-label={`${isExpanded ? 'סגירת' : 'פתיחת'} פרטי הפרויקט ${project.title}`}
@@ -147,10 +147,10 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
                   >
                     <div>
                       <h4 className="text-sm font-semibold text-slate-900">מה מקבלים:</h4>
-                      <ul className="mt-3 space-y-2" role="list">
+                      <ul className="mt-3 space-y-2 text-right" role="list">
                         {project.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-start gap-2" role="listitem">
-                            <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-sky-500" aria-hidden="true" />
+                          <li key={featureIndex} className="flex items-start justify-start gap-2" role="listitem">
+                            <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-blue-700/90" aria-hidden="true" />
                             <span>{feature}</span>
                           </li>
                         ))}
@@ -184,7 +184,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
           </p>
           <Link
             href="#contact"
-            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
             נתחיל לתכנן את הפרויקט
             <svg
@@ -203,3 +203,4 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
     </section>
   )
 }
+

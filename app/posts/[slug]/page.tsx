@@ -104,7 +104,7 @@ export default async function PostPage({params}: {params: RouteParams}) {
                     className="rounded-full border border-slate-200"
                   />
                 ) : null}
-                <div className="text-left">
+                <div className="text-right">
                   <p className="font-semibold text-slate-800 dark:text-slate-100">{post.author.name}</p>
                   {post.author.role ? <p>{post.author.role}</p> : null}
                 </div>

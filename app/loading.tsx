@@ -13,7 +13,7 @@ export default function Loading() {
     <main className="min-h-screen animate-fade-in" role="main" aria-label="טוען תוכן...">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-sky-400/20 rounded-full animate-float" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-700/70/20 rounded-full animate-float" style={{ animationDelay: '0s' }} />
         <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-slate-400/20 rounded-full animate-float" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-sky-300/30 rounded-full animate-float" style={{ animationDelay: '2s' }} />
         <div className="absolute top-1/3 left-1/2 w-5 h-5 bg-sky-200/25 rounded-full animate-float" style={{ animationDelay: '0.5s' }} />

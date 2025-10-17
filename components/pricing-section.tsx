@@ -23,7 +23,7 @@ export default function PricingSection({ packages }: PricingSectionProps) {
   }
 
   return (
-    <section id="pricing" className="bg-slate-50 py-24" aria-labelledby="pricing-heading">
+    <section id="pricing" className="bg-slate-50 dark:bg-slate-900 py-24" aria-labelledby="pricing-heading">
       <div className="lp-container">
         <div className="mx-auto max-w-3xl text-right">
           <span className="sky-chip inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-700">
@@ -31,11 +31,11 @@ export default function PricingSection({ packages }: PricingSectionProps) {
           </span>
           <h2
             id="pricing-heading"
-            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 dark:text-slate-100 sm:text-4xl"
           >
             בחרו את ההיקף שמתאים לפרויקט וליעדים שלכם
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
             כל חבילה כוללת אפיון, פיתוח, חיבורי תוכן ופריסה ל-Vercel. נוסיף עליה שכבות של
             אוטומציה, DevOps וליווי שוטף לפי הצורך של הצוות ושל לוחות הזמנים שלכם.
           </p>
@@ -62,11 +62,11 @@ export default function PricingSection({ packages }: PricingSectionProps) {
                 <p className="text-3xl font-bold text-slate-900">{pkg.price}</p>
               </div>
 
-              <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-600" role="list">
+              <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-600 text-right" role="list">
                 {pkg.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-2" role="listitem">
+                  <li key={featureIndex} className="flex items-start justify-start gap-2" role="listitem">
                     <span
-                      className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sky-500"
+                      className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-blue-700/90"
                       aria-hidden="true"
                     />
                     <span>{feature}</span>
@@ -76,7 +76,7 @@ export default function PricingSection({ packages }: PricingSectionProps) {
 
               <button
                 onClick={() => handlePackageSelect(pkg.name)}
-                className="mt-8 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                className="mt-8 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
                 type="button"
               >
                 {pkg.ctaText}
@@ -146,3 +146,4 @@ export default function PricingSection({ packages }: PricingSectionProps) {
     </section>
   )
 }
+

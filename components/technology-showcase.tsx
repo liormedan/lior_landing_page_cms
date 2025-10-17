@@ -28,7 +28,7 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
     <section
       id="technologies"
       ref={sectionRef}
-      className="bg-white py-24"
+      className="bg-white dark:bg-slate-900 py-24"
       aria-labelledby="technology-heading"
     >
       <div className="lp-container">
@@ -42,11 +42,11 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
           </span>
           <h2
             id="technology-heading"
-            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 dark:text-slate-100 sm:text-4xl"
           >
             Stack מודרני שמחבר בין עיצוב, תוכן ופריסה
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
             כל שכבה נבחרת כדי לאפשר לצוותי התוכן לשחרר חוויות חדשות במהירות, תוך שמירה על קוד
             נקי ומדיד שמאפשר לגדול בלי עיכובים מיותרים.
           </p>
@@ -85,17 +85,17 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
                   </span>
                   <h3
                     id={`tech-${index}-title`}
-                    className="text-xl font-semibold text-slate-900"
+                    className="text-xl font-semibold text-slate-900 dark:text-slate-100"
                   >
                     {tech.name}
                   </h3>
-                  <p className="text-sm leading-relaxed text-slate-600">{tech.description}</p>
+                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{tech.description}</p>
                 </div>
 
-                <ul className="space-y-3 text-right text-sm text-slate-600" role="list">
+                <ul className="space-y-3 text-right text-sm text-slate-600 dark:text-slate-300" role="list">
                   {tech.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-start gap-2 text-right" role="listitem">
-                      <span className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sky-500" aria-hidden="true" />
+                    <li key={benefitIndex} className="flex items-start justify-start gap-2 text-right" role="listitem">
+                      <span className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-blue-700/90" aria-hidden="true" />
                       <span className="leading-relaxed">{benefit}</span>
                     </li>
                   ))}
@@ -116,7 +116,7 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-end gap-4 text-sm font-medium text-slate-500">
             <span className="sky-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
-              <span className="inline-block h-2 w-2 rounded-full bg-sky-500" aria-hidden="true" />
+              <span className="inline-block h-2 w-2 rounded-full bg-blue-700/90" aria-hidden="true" />
               Edge Ready
             </span>
             <span className="sky-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
@@ -133,3 +133,4 @@ export default function TechnologyShowcase({ technologies }: TechnologyShowcaseP
     </section>
   )
 }
+

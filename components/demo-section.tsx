@@ -23,7 +23,7 @@ export default function DemoSection({ demo }: DemoSectionProps) {
   }
 
   return (
-    <section id="demo" ref={sectionRef} className="bg-white py-24" aria-labelledby="demo-heading">
+    <section id="demo" ref={sectionRef} className="bg-white dark:bg-slate-900 py-24" aria-labelledby="demo-heading">
       <div className="lp-container">
         <div
           className={`mx-auto max-w-3xl text-right transition-all	duration-700 ${
@@ -35,11 +35,11 @@ export default function DemoSection({ demo }: DemoSectionProps) {
           </span>
           <h2
             id="demo-heading"
-            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 dark:text-slate-100 sm:text-4xl"
           >
             {demo.title}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">{demo.description}</p>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-300">{demo.description}</p>
         </div>
 
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr),minmax(0,1fr)]">
@@ -50,15 +50,15 @@ export default function DemoSection({ demo }: DemoSectionProps) {
             }`}
           >
             <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 text-right">
-              <h3 className="text-xl font-semibold text-slate-900">מה תראו בהדגמה?</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">מה תראו בהדגמה?</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 נעבור על מבני התוכן שחיברנו ללקוחות אמיתיים, נציג איך עובדת תצוגת ה-Preview, ונראה כיצד מזרימים את השינויים לאתר ה-Next.js בלחיצת כפתור.
               </p>
             </div>
 
-            <ul className="space-y-4 text-right text-sm leading-relaxed text-slate-600" role="list">
+            <ul className="space-y-4 text-right text-sm leading-relaxed text-slate-600 dark:text-slate-300" role="list">
               {demo.features.map((feature, index) => (
-                <li key={index} className="flex items-start gap-3" role="listitem">
+                <li key={index} className="flex items-start justify-start gap-3" role="listitem">
                   <span
                     className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sky-500"
                     aria-hidden="true"
@@ -69,10 +69,10 @@ export default function DemoSection({ demo }: DemoSectionProps) {
             </ul>
 
             <div className="sky-card rounded-3xl p-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                 למה זה חשוב
               </p>
-              <p className="mt-3 text-base leading-relaxed text-slate-600">
+              <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
                 הדגמה מעשית מאפשרת לצוות שלכם להבין כיצד כל שינוי משפיע על האתר, לראות את ה-Preview בזמן אמת, ולבדוק תהליכים כמו אישורים, Workflow ואינטגרציות לפני שמתחייבים.
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function DemoSection({ demo }: DemoSectionProps) {
                 priority
               />
 
-              <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl bg-sky-200/80 px-4 py-3 text-sm font-medium text-slate-600 shadow-sm backdrop-blur">
+              <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl bg-sky-200/80 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-900 shadow-sm backdrop-blur">
                 <span>שקופית {selectedImage + 1} מתוך {demo.screenshots.length}</span>
                 <span className="flex items-center gap-2 text-xs">
                   <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />

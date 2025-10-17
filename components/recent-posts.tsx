@@ -12,7 +12,7 @@ export default function RecentPosts({ posts }: RecentPostsProps) {
   }
 
   return (
-    <section id="posts" className="bg-white py-24" aria-labelledby="recent-posts-title">
+    <section id="posts" className="bg-white dark:bg-slate-900 py-24" aria-labelledby="recent-posts-title">
       <div className="lp-container">
         <div className="ml-auto max-w-3xl text-right">
           <span className="inline-flex items-center justify-center rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">
@@ -20,11 +20,11 @@ export default function RecentPosts({ posts }: RecentPostsProps) {
           </span>
           <h2
             id="recent-posts-title"
-            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 dark:text-slate-100 sm:text-4xl"
           >
             פוסטים אחרונים שכדאי להכיר
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
             מדריכים, Case Studies ועדכונים על פרויקטים שעבדנו עליהם לאחרונה – כולל טיפים פרקטיים,
             מדידות ביצועים והמלצות לעבודה עם צוותי תוכן ומוצר.
           </p>
@@ -39,7 +39,7 @@ export default function RecentPosts({ posts }: RecentPostsProps) {
         <div className="mt-12 flex justify-center">
           <Link
             href="/blog"
-            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
             לכל הבלוג
             <svg
@@ -58,3 +58,4 @@ export default function RecentPosts({ posts }: RecentPostsProps) {
     </section>
   )
 }
+

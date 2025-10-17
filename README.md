@@ -5,13 +5,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -34,3 +29,51 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Email Setup (SendGrid)
+
+To enable sending emails from the contact form, set these env vars:
+
+- `EMAIL_PROVIDER=sendgrid`
+- `SENDGRID_API_KEY=...`
+- `FROM_EMAIL=you@domain.com`
+- `FROM_NAME=Your Name` (optional)
+- `TO_EMAIL=dest@domain.com` (where to receive leads)
+- `SEND_CONFIRMATION=true` (optional, also emails the sender)
+
+Without these, the API logs submissions to the console in development.
+
+## Sanity CMS Setup
+
+This project reads blog content from Sanity using `next-sanity`.
+
+- Create a Sanity project at https://www.sanity.io and obtain:
+  - `NEXT_PUBLIC_SANITY_PROJECT_ID`
+  - `NEXT_PUBLIC_SANITY_DATASET`
+- Optionally create a read token for draft/preview support and set `SANITY_READ_TOKEN`.
+- Set the variables in `.env.local` (see `.env.example`).
+
+Environment variables:
+
+- `NEXT_PUBLIC_SANITY_PROJECT_ID=...`
+- `NEXT_PUBLIC_SANITY_DATASET=production`
+- `SANITY_API_VERSION=2025-10-05`
+- `SANITY_READ_TOKEN=` (optional)
+- `SANITY_PREVIEW_SECRET=blog-preview-secret` (optional)
+
+Blog content model expected:
+
+- `post` with fields: `title`, `slug`, `excerpt`, `publishedAt`, `featured`, `mainImage`, `body`, `seo` (optional)
+- `author` with fields: `name`, `slug`, `role`, `avatar`, `bio`
+- `category` with fields: `title`, `slug`
+
+You can manage drafts/published states and categories directly in your Sanity Studio. If you don’t have a Studio embedded here, host one separately or add one under `/studio` (requires adding `sanity` package and config).
+
+## SEO & RTL
+
+- RTL is globally enabled (`lang="he" dir="rtl"`) in `app/layout.tsx:20`.
+- `app/robots.ts` and `app/sitemap.ts` are included. Set `NEXT_PUBLIC_SITE_URL` in your env so these generate correct absolute URLs.
+
+## Quote/Leads CTA
+
+The primary CTA in the hero is set to "קבל/י הצעה" and the contact form posts to `/api/contact`. Configure email provider (SendGrid or Resend) to receive leads by email.

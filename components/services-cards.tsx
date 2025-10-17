@@ -28,7 +28,7 @@ export default function ServicesCards({ services }: ServicesCardsProps) {
     <section
       id="services"
       ref={sectionRef}
-      className="bg-white py-24"
+      className="bg-white dark:bg-slate-900 py-24"
       aria-labelledby="services-heading"
     >
       <div className="lp-container">
@@ -42,11 +42,11 @@ export default function ServicesCards({ services }: ServicesCardsProps) {
           </span>
           <h2
             id="services-heading"
-            className="mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl"
+            className="mt-6 text-3xl font-bold leading-tight text-slate-900 dark:text-slate-100 sm:text-4xl"
           >
             שירותים שמרכזים עבורכם אסטרטגיה, פיתוח ותמיכה
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
             אנחנו מלווים אתכם משלב האפיון ועד לתחזוקה השוטפת: UX, פיתוח Next.js + Sanity,
             אינטגרציות, DevOps וליווי מתמשך של צוות התוכן. כל שלב מתועד ומדיד.
           </p>
@@ -84,18 +84,18 @@ export default function ServicesCards({ services }: ServicesCardsProps) {
                       <div>
                         <h3
                           id={`service-${index}-title`}
-                          className="text-lg font-semibold text-slate-900"
+                          className="text-lg font-semibold text-slate-900 dark:text-slate-100"
                         >
                           {service.title}
                         </h3>
                         {service.price && (
-                          <p className="mt-1 text-sm font-medium text-sky-600">{service.price}</p>
+                          <p className="mt-1 text-sm font-medium text-blue-700">{service.price}</p>
                         )}
                       </div>
                     </div>
                     <span
                       className={`flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition-transform duration-300 ${
-                        isExpanded ? 'rotate-180 border-sky-400 text-sky-600' : ''
+                        isExpanded ? 'rotate-180 border-blue-700/50 text-blue-700' : ''
                       }`}
                     >
                       <svg
@@ -113,7 +113,7 @@ export default function ServicesCards({ services }: ServicesCardsProps) {
 
                   <p
                     id={`service-${index}-description`}
-                    className="text-sm leading-relaxed text-slate-600"
+                    className="text-sm leading-relaxed text-slate-600 dark:text-slate-300"
                   >
                     {service.description}
                   </p>
@@ -127,11 +127,11 @@ export default function ServicesCards({ services }: ServicesCardsProps) {
                   role="region"
                   aria-label={`מידע נוסף על השירות ${service.title}`}
                 >
-                  <ul className="mt-4 space-y-3 border-t border-slate-200 pt-4 text-sm leading-relaxed text-slate-600" role="list">
+                  <ul className="mt-4 space-y-3 border-t border-slate-200 pt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300 text-right" role="list">
                     {service.benefits.map((benefit, benefitIndex) => (
-                      <li key={benefitIndex} className="flex items-start gap-2" role="listitem">
+                      <li key={benefitIndex} className="flex items-start justify-start gap-2" role="listitem">
                         <span
-                          className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-sky-500"
+                          className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-blue-700/90"
                           aria-hidden="true"
                         />
                         <span>{benefit}</span>
@@ -151,7 +151,7 @@ export default function ServicesCards({ services }: ServicesCardsProps) {
           </p>
           <a
             href="#pricing"
-            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
             להשוות בין החבילות
             <svg
@@ -230,3 +230,4 @@ function getServiceIcon(title: string) {
     </svg>
   )
 }
+

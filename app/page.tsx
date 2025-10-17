@@ -6,6 +6,7 @@ import RecentPosts from "@/components/recent-posts"
 import Footer from "@/components/footer"
 import SectionNav from "@/components/section-nav"
 import Offerings from "@/components/offerings"
+import ExplainerTabs from "@/components/explainer-tabs"
 import { AnimatedWrapper } from "@/components/ui/animated-wrapper"
 import {
   getHeroContent,
@@ -83,6 +84,9 @@ export default async function HomePage() {
         <HeroSection hero={heroContent} />
         <Offerings />
         <AnimatedWrapper animation="slideUp" threshold={0.15}>
+          <ExplainerTabs />
+        </AnimatedWrapper>
+        <AnimatedWrapper animation="slideUp" threshold={0.15}>
           <TestimonialsSection testimonials={testimonials} />
         </AnimatedWrapper>
         <AnimatedWrapper animation="slideUp" threshold={0.15}>
@@ -99,4 +103,3 @@ export default async function HomePage() {
     </main>
   )
 }
-

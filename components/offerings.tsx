@@ -47,7 +47,7 @@ export default function Offerings() {
                 visibleItems.has(i) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               } hover:shadow-md hover:-translate-y-0.5`}
             >
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-center gap-4 w-full">
                 <div>
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-white text-center">{item.title}</h3>
                   <p className="mt-2 text-slate-600 dark:text-white/90 text-center">{item.summary}</p>

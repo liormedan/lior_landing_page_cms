@@ -8,6 +8,7 @@ import SectionNav from "@/components/section-nav"
 import Offerings from "@/components/offerings"
 import ExplainerTabs from "@/components/explainer-tabs"
 import LogoClouds from "@/components/logo-clouds"
+import PackageCompare from "@/components/package-compare"
 import { AnimatedWrapper } from "@/components/ui/animated-wrapper"
 import {
   getHeroContent,
@@ -84,6 +85,9 @@ export default async function HomePage() {
       <div id="main-content">
         <HeroSection hero={heroContent} />
         <Offerings />
+        <AnimatedWrapper animation="fadeIn" threshold={0.15}>
+          <PackageCompare />
+        </AnimatedWrapper>
         <AnimatedWrapper animation="slideUp" threshold={0.15}>
           <ExplainerTabs />
         </AnimatedWrapper>

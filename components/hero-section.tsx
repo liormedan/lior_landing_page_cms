@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Image from 'next/image'
 import { HeroContent } from '@/types/landing-page'
@@ -9,9 +9,18 @@ interface HeroSectionProps {
 }
 
 const DISPLAY_STATS = [
-  { value: '25+', label: 'השקות של אתרי תוכן מחוברים ל-Sanity' },
-  { value: '100%', label: 'תמיכה מלאה בעברית, RTL ונגישות ברמה AA' },
-  { value: '< 4 שבועות', label: 'זמן ממוצע עד עלייה לאוויר בפרויקטים חוזרים' },
+  {
+    value: '< 4 שבועות',
+    label: 'זמן ממוצע עד עלייה לאוויר בפרויקטים חוזרים',
+  },
+  {
+    value: '100%',
+    label: 'תמיכה מלאה בעברית, RTL ונגישות ברמה AA',
+  },
+  {
+    value: '25+',
+    label: 'השקות של אתרי תוכן מחוברים ל‑Sanity',
+  },
 ] as const
 
 export function HeroSection({ hero }: HeroSectionProps) {
@@ -130,11 +139,18 @@ export function HeroSection({ hero }: HeroSectionProps) {
               <p className="text-sm text-slate-500 sm:text-base">{hero.ctaSupportText}</p>
             )}
 
-            <dl className="grid gap-4 pt-8 sm:grid-cols-3">
+            <dl className="grid gap-6 pt-8 sm:grid-cols-3">
               {DISPLAY_STATS.map((stat) => (
-                <div key={stat.value} className="sky-card rounded-2xl p-5 text-right">
-                  <dt className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-200">{stat.label}</dt>
-                  <dd className="mt-1 text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-100">{stat.value}</dd>
+                <div
+                  key={stat.value}
+                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800/80 via-slate-800/40 to-blue-900/20 p-8 text-center text-white shadow-[0_20px_60px_rgba(15,23,42,0.35)]"
+                >
+                  <div
+                    className="pointer-events-none absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/10 blur-3xl"
+                    aria-hidden="true"
+                  />
+                  <dt className="text-sm font-semibold tracking-wide text-white/80">{stat.label}</dt>
+                  <dd className="mt-4 text-4xl md:text-5xl font-extrabold">{stat.value}</dd>
                 </div>
               ))}
             </dl>

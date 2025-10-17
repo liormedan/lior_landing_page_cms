@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import SectionNav from "@/components/section-nav"
 import Offerings from "@/components/offerings"
 import ExplainerTabs from "@/components/explainer-tabs"
+import LogoClouds from "@/components/logo-clouds"
 import { AnimatedWrapper } from "@/components/ui/animated-wrapper"
 import {
   getHeroContent,
@@ -85,6 +86,9 @@ export default async function HomePage() {
         <Offerings />
         <AnimatedWrapper animation="slideUp" threshold={0.15}>
           <ExplainerTabs />
+        </AnimatedWrapper>
+        <AnimatedWrapper animation="fadeIn" threshold={0.15}>
+          <LogoClouds />
         </AnimatedWrapper>
         <AnimatedWrapper animation="slideUp" threshold={0.15}>
           <TestimonialsSection testimonials={testimonials} />

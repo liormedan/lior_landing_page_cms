@@ -218,6 +218,19 @@ function TechAccordion() {
               aria-controls={`tech-${card.id}`}
             >
               <div className="flex-1 text-center">
+                <div className="mx-auto mb-1 flex h-6 w-6 items-center justify-center">
+                  {card.id === 'next' && (
+                    <span className="text-[10px] font-black tracking-widest">NEXT</span>
+                  )}
+                  {card.id === 'sanity' && (
+                    <span className="text-[12px] font-extrabold">Sanity</span>
+                  )}
+                  {card.id === 'vercel' && (
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
+                      <polygon points="12,3 22,20 2,20" className="fill-current" />
+                    </svg>
+                  )}
+                </div>
                 <h3 className="text-base font-semibold">{card.title}</h3>
                 <p className="mt-1 text-sm text-white/80">{card.summary}</p>
               </div>

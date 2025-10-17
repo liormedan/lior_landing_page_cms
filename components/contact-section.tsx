@@ -84,19 +84,16 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
               </div>
 
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-                <h3 className="text-lg font-semibold text-white">ΧΧ” ΧΧªΧ ΧΧ§Χ‘ΧΧ™Χ ΧΧ—Χ¨Χ™ Χ”Χ©Χ™Χ—Χ”?</h3>
-                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-200" role="list">
-                  <li className="flex justify-start gap-2" role="listitem">
-                    <span>Χ΅Χ™Χ›Χ•Χ ΧΧ¤Χ•Χ¨Χ ΧΆΧ ΧΧ•Χ΄Χ– ΧΧ•Χ¦ΧΆ, Χ‘ΧΆΧΧ™ ΧªΧ¤Χ§Χ™Χ“Χ™Χ Χ•ΧΧ‘Χ Χ™ Χ“Χ¨Χ.</span>
-                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                <h3 className="text-lg font-semibold text-white text-center">ξδ ΰϊν ξχαμιν ΰηψι δωιηδ?</h3>
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-200 text-center" role="list">
+                  <li className="text-center" role="listitem">
+                    <span>ριλεν ξτεψθ ςν μεΨζ ξεφς, αςμι ϊτχιγιν εΰαπι γψκ.</span>
                   </li>
-                  <li className="flex justify-start gap-2" role="listitem">
-                    <span>Χ”Χ¦ΧΆΧª ΧΧ—Χ™Χ¨ Χ©Χ§Χ•Χ¤Χ” Χ”Χ›Χ•ΧΧΧª Χ—ΧΧ•Χ§Χ” ΧΧ΅Χ¤Χ¨Χ™Χ ΧΧ™Χ Χ•Χ¨ΧΧª ΧΧΆΧ•Χ¨Χ‘Χ•Χª.</span>
-                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  <li className="text-center" role="listitem">
+                    <span>δφςϊ ξηιψ ωχετδ δλεμμϊ ημεχδ μρτψιπθιν εψξϊ ξςεψαεϊ.</span>
                   </li>
-                  <li className="flex justify-start gap-2" role="listitem">
-                    <span>Χ”ΧΧΧ¦Χ•Χª ΧΆΧ Χ—Χ™Χ‘Χ•Χ¨Χ™Χ ΧΧ›Χ Χ•ΧΧ•Χ’Χ™Χ™Χ Χ•Χ›ΧΧ™Χ ΧΧ©ΧΧ™ΧΧ™Χ ΧΧ¤Χ™ Χ”Χ¦Χ•Χ¨Χ.</span>
-                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-sky-400" aria-hidden="true" />
+                  <li className="text-center" role="listitem">
+                    <span>δξμφεϊ ςμ ηιαεψιν θλπεμεβιιν ελμιν ξωμιξιν μτι δφεψκ.</span>
                   </li>
                 </ul>
 

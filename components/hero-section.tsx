@@ -213,11 +213,11 @@ function TechAccordion() {
             <button
               type="button"
               onClick={() => setOpenId(open ? null : card.id)}
-              className="flex w-full items-center justify-between gap-3 px-6 py-4 text-right"
+              className="flex w-full items-center justify-between gap-3 px-6 py-4"
               aria-expanded={open}
               aria-controls={`tech-${card.id}`}
             >
-              <div className="text-right">
+              <div className="flex-1 text-center">
                 <h3 className="text-base font-semibold">{card.title}</h3>
                 <p className="mt-1 text-sm text-white/80">{card.summary}</p>
               </div>
@@ -232,9 +232,9 @@ function TechAccordion() {
               aria-label={`מידע על ${card.title}`}
             >
               <div className="min-h-0 px-6 pb-6">
-                <ul className="space-y-2 text-sm text-white/90" role="list">
+                <ul className="space-y-2 text-sm text-white/90 text-center" role="list">
                   {card.points.map((p) => (
-                    <li key={p} className="flex items-start justify-end gap-2" role="listitem">
+                    <li key={p} className="flex items-center justify-center gap-2" role="listitem">
                       <span>{p}</span>
                       <span className="mt-1 inline-block h-2 w-2 rounded-full bg-blue-400" aria-hidden="true" />
                     </li>

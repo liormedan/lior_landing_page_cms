@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  // const sections = [
+  /* sections removed
     { id: 'hero', label: 'ראשי' },
     { id: 'technologies', label: 'טכנולוגיות' },
     { id: 'projects', label: 'פרויקטים' },
@@ -49,7 +49,7 @@ export default async function HomePage() {
     { id: 'pricing', label: 'תמחור' },
     { id: 'posts', label: 'פוסטים' },
     { id: 'contact', label: 'צור קשר' },
-  // ] as const
+  */
 
   const heroContent = getHeroContent()
   const testimonials = getTestimonials()

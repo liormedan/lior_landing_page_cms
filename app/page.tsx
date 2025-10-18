@@ -4,7 +4,7 @@ import FAQSection from "@/components/faq-section"
 import ContactSection from "@/components/contact-section"
 // RecentPosts removed from landing page scope
 import Footer from "@/components/footer"
-import SectionNav from "@/components/section-nav"
+// import SectionNav from "@/components/section-nav"
 import Offerings from "@/components/offerings"
 import ExplainerTabs from "@/components/explainer-tabs"
 import PackageCompare from "@/components/package-compare"
@@ -22,7 +22,7 @@ import {
 import type { Metadata } from "next"
 
 // Hide the side navigation by replacing it with a no-op component
-const SectionNavHidden = (_props: any) => null
+const SectionNavHidden = (_props: Record<string, unknown>) => null
 
 export const metadata: Metadata = {
   title: "דפי נחיתה עם CMS | אתרים מותאמים לעברית (RTL)",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const sections = [
+  // const sections = [
     { id: 'hero', label: 'ראשי' },
     { id: 'technologies', label: 'טכנולוגיות' },
     { id: 'projects', label: 'פרויקטים' },
@@ -49,7 +49,7 @@ export default async function HomePage() {
     { id: 'pricing', label: 'תמחור' },
     { id: 'posts', label: 'פוסטים' },
     { id: 'contact', label: 'צור קשר' },
-  ] as const
+  // ] as const
 
   const heroContent = getHeroContent()
   const testimonials = getTestimonials()
@@ -104,4 +104,3 @@ export default async function HomePage() {
     </main>
   )
 }
-

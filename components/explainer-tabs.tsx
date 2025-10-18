@@ -5,90 +5,120 @@ import { useState } from "react"
 type Tab = {
   id: string
   label: string
-  summary: string
-  points: string[]
 }
 
-const TABS: Tab[] = [
-  {
-    id: "process",
-    label: "תהליך קצה‑לקצה",
-    summary: "אני מפתח מלווה תהליך מלא: אפיון, עיצוב, פיתוח ופריסה.",
-    points: [
-      "אפיון צרכים והגדרת מטרות ברורות",
-      "עיצוב UI/UX ממוקד המרה",
-      "פיתוח Next.js מודרני עם סטנדרטים גבוהים",
-      "פריסה מהירה לסביבות ענן (Vercel) ומסירה נקייה",
-    ],
-  },
-  {
-    id: "stack",
-    label: "Stack מודרני",
-    summary:
-      "Stack מודרני לגמישות: ניהול תוכן בזמן אמת ואינטגרציות ל‑CRM/BI.",
-    points: [
-      "Sanity CMS לעריכה בזמן אמת עם טיוטות ופרסום",
-      "אינטגרציות ל‑CRM/BI וכלי שיווק (Webhook/API)",
-      "סכמה וגידול תוכן גמישים לאורך זמן",
-      "תהליכי Preview ו‑Draft מיידיים לצוותי תוכן",
-    ],
-  },
-  {
-    id: "go‑to‑market",
-    label: "מוכן לשיווק",
-    summary: "נגיש, מהיר ומוכן לשיווק מהרגע הראשון.",
-    points: [
-      "ביצועים גבוהים (Lighthouse/ Core Web Vitals)",
-      "RTL ונגישות ברמת AA כברירת מחדל",
-      "SEO טכני: Sitemap, OpenGraph, מטא‑דאטה",
-      "אוטומציות לידים: טופס + שליחת מייל ללקוח",
-    ],
-  },
-]
-
 export default function ExplainerTabs() {
-  const [active, setActive] = useState<Tab["id"]>(TABS[0].id)
-  const current = TABS.find((t) => t.id === active) ?? TABS[0]
+  const tabs: Tab[] = [
+    { id: "why-cms", label: "למה CMS לעסק שלך?" },
+    { id: "platforms", label: "פלטפורמות מומלצות" },
+  ]
+
+  const [active, setActive] = useState<string>(tabs[0].id)
 
   return (
-    <section className="py-12" aria-labelledby="explainer-heading">
+    <section aria-labelledby="explainer-heading" className="py-16" lang="he" dir="rtl">
       <div className="lp-container">
-        <h2 id="explainer-heading" className="sr-only">
-          פירוט יכולות לפי נושאים
-        </h2>
-
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActive(tab.id)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition border focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${
-                active === tab.id
-                  ? "bg-blue-700/90 text-white border-blue-700/60"
-                  : "bg-transparent text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-100/70 dark:hover:bg-slate-800/60"
-              }`}
-              aria-pressed={active === tab.id}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-8 mx-auto max-w-3xl text-center">
-          <p className="text-lg leading-relaxed text-slate-700 dark:text-slate-200">
-            {current.summary}
+        <header className="mb-8 text-center">
+          <h2 id="explainer-heading" className="text-3xl font-bold">
+            כל מה שצריך לדעת על CMS לעסק
+          </h2>
+          <p className="mt-2 text-slate-600 dark:text-white/80">
+            סקירה קצרה על יתרונות ופלטפורמות נפוצות
           </p>
-          <ul className="mt-6 space-y-2 text-slate-700 dark:text-slate-200" role="list">
-            {current.points.map((p) => (
-              <li key={p} className="flex items-center justify-center gap-2">
-                <span className="inline-block h-2 w-2 rounded-full bg-blue-700/90" aria-hidden="true" />
-                <span>{p}</span>
-              </li>
-            ))}
-          </ul>
+        </header>
+
+        <div className="mx-auto max-w-4xl text-right">
+          <div
+            role="tablist"
+            aria-label="Explainer tabs"
+            className="flex flex-wrap gap-2 justify-center"
+          >
+            {tabs.map((tab) => {
+              const selected = tab.id === active
+              return (
+                <button
+                  key={tab.id}
+                  role="tab"
+                  aria-selected={selected}
+                  aria-controls={`panel-${tab.id}`}
+                  id={`tab-${tab.id}`}
+                  onClick={() => setActive(tab.id)}
+                  className={`px-4 py-2 rounded-lg border transition text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-slate-700/40 ${
+                    selected
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "bg-white dark:bg-slate-900 text-slate-800 dark:text-white border-slate-300 dark:border-white/30 hover:bg-slate-50 dark:hover:bg-white/10"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="mt-6 space-y-6">
+            {/* למה CMS לעסק שלך? */}
+            <div
+              role="tabpanel"
+              id="panel-why-cms"
+              aria-labelledby="tab-why-cms"
+              hidden={active !== "why-cms"}
+              className="rounded-2xl border bg-white dark:bg-slate-900 dark:border-slate-800 p-6 shadow-sm"
+            >
+              <h3 className="text-xl font-semibold mb-4">למה CMS לעסק שלך?</h3>
+              <ul className="list-disc pr-5 space-y-2 text-slate-700 dark:text-white/90">
+                <li>שליטה מלאה — עדכנו דפים, בלוג, מוצרים ונכסים דיגיטליים ללא קוד.</li>
+                <li>גמישות בזמן אמת — מבני תוכן מודולריים, קומפוננטות ניתנות לשילוב ושינוי מהיר.</li>
+                <li>התאמה אישית — UI/UX לפי המותג, קומפוננטות תוכן ותבניות לעורכים.</li>
+                <li>ניהול מכל מקום — ממשק ענן מאובטח, הרשאות צוות וזרימות אישור.</li>
+                <li>SEO מובנה — מטא-דאטה, סלאגים, סכמה ופרוויו חברתי — מוכנים לקידום.</li>
+              </ul>
+
+              <div className="mt-6 flex gap-3 justify-start">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2 text-white hover:bg-slate-800 transition"
+                >
+                  צור/י קשר לייעוץ חינם
+                </a>
+              </div>
+            </div>
+
+            {/* פלטפורמות מומלצות */}
+            <div
+              role="tabpanel"
+              id="panel-platforms"
+              aria-labelledby="tab-platforms"
+              hidden={active !== "platforms"}
+              className="rounded-2xl border bg-white dark:bg-slate-900 dark:border-slate-800 p-6 shadow-sm"
+            >
+              <h3 className="text-xl font-semibold mb-4">פלטפורמות מומלצות</h3>
+              <ul className="space-y-3 text-slate-700 dark:text-white/90">
+                <li>
+                  <span className="font-semibold">Sanity</span> — Headless גמיש במיוחד, תוכן כשירות, סכמות TypeScript ואינטגרציות עשירות.
+                </li>
+                <li>
+                  <span className="font-semibold">WordPress</span> — אקוסיסטם עצום, מאות תוספים, מתאים לבלוגים ואתרי תוכן קלאסיים.
+                </li>
+                <li>
+                  <span className="font-semibold">Wix</span> — הקמה מהירה, עורך ויזואלי נוח, פתרון כולל לעסקים קטנים.
+                </li>
+                <li>
+                  <span className="font-semibold">Drupal</span> — יציב ומאובטח לארגונים, מבני תוכן מורכבים והרשאות מתקדמות.
+                </li>
+              </ul>
+
+              <div className="mt-6 flex gap-3 justify-start">
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-5 py-2 text-slate-700 hover:bg-slate-50 transition dark:border-white/40 dark:text-white dark:hover:bg-white/10"
+                >
+                  קבל/י הצעה לפרויקט מותאם
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
-

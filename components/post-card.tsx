@@ -1,4 +1,4 @@
-import Image from "next/image"
+﻿import Image from "next/image"
 import Link from "next/link"
 
 import { urlFor } from "@/lib/sanity.image"
@@ -38,7 +38,7 @@ export function PostCard({ post }: PostCardProps) {
       <div className="flex flex-1 flex-col gap-4 p-6">
         <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-slate-500 justify-start">
           {post.featured ? (
-            <span className="rounded-full bg-amber-100 px-3 py-1 font-semibold text-amber-700">פוסט מומלץ</span>
+            <span className="rounded-full bg-amber-100 px-3 py-1 font-semibold text-amber-700">׳₪׳•׳¡׳˜ ׳׳•׳׳׳¥</span>
           ) : null}
           {published ? <time dateTime={post.publishedAt}>{published}</time> : null}
           {post.categories?.map((category) => (
@@ -50,7 +50,7 @@ export function PostCard({ post }: PostCardProps) {
 
         <div className="flex flex-1 flex-col gap-3">
           <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
-            <Link href={`/posts/${post.slug}`} className="hover:text-blue-700 dark:hover:text-sky-400">
+            <Link href={`/posts/${post.slug}`} className="hover:text-slate-900 underline dark:hover:text-sky-400">
               {post.title}
             </Link>
           </h3>
@@ -78,4 +78,5 @@ export function PostCard({ post }: PostCardProps) {
     </article>
   )
 }
+
 

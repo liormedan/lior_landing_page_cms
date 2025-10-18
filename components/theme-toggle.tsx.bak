@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useState } from 'react'
 
@@ -8,12 +8,12 @@ export default function ThemeToggle({ className = '' }: { className?: string }) 
   const [mounted, setMounted] = useState(false)
   const [theme, setTheme] = useState<Theme>('light')
 
-  // Initialize from localStorage (default: light ג€” ignore system preference)
+  // Initialize from localStorage (default: light — ignore system preference)
   useEffect(() => {
     setMounted(true)
     try {
-      applyTheme('dark')
-      setTheme('dark')
+      applyTheme('light')
+      setTheme('light')
     } catch {
       // no-op
     }
@@ -33,7 +33,11 @@ export default function ThemeToggle({ className = '' }: { className?: string }) 
     }
   }
 
-  const toggle = () => { /* light mode disabled */ }
+  const toggle = () => {
+    const next: Theme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    applyTheme(next)
+  }
 
   // Avoid mismatches before hydration
   if (!mounted) return null
@@ -42,8 +46,8 @@ export default function ThemeToggle({ className = '' }: { className?: string }) 
     <button
       type="button"
       onClick={toggle}
-      aria-label={theme === 'dark' ? '׳”׳—׳׳£ ׳׳׳¦׳‘ ׳‘׳”׳™׳¨' : '׳”׳—׳׳£ ׳׳׳¦׳‘ ׳›׳”׳”'}
-      title={theme === 'dark' ? '׳׳¦׳‘ ׳‘׳”׳™׳¨' : '׳׳¦׳‘ ׳›׳”׳”'}
+      aria-label={theme === 'dark' ? 'החלף למצב בהיר' : 'החלף למצב כהה'}
+      title={theme === 'dark' ? 'מצב בהיר' : 'מצב כהה'}
       className={`rounded-full border border-slate-200/70 bg-white/80 px-3 py-2 shadow-md backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800/80 ${className}`}
     >
       {theme === 'dark' ? (

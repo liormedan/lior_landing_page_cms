@@ -1,48 +1,21 @@
-﻿'use client'
+'use client'
 
-import Image from 'next/image'
-import { HeroContent } from '@/types/landing-page'
 import { useEffect, useMemo, useState } from 'react'
+import type { HeroContent } from '@/types/landing-page'
 
 interface HeroSectionProps {
   hero: HeroContent
 }
 
-const DISPLAY_STATS = [
-  {
-    value: '< 4 שבועות',
-    label: 'זמן ממוצע עד עלייה לאוויר בפרויקטים חוזרים',
-  },
-  {
-    value: '100%',
-    label: 'תמיכה מלאה בעברית, RTL ונגישות ברמה AA',
-  },
-  {
-    value: '25+',
-    label: 'השקות של אתרי תוכן מחוברים ל‑Sanity',
-  },
-] as const
-
 export function HeroSection({ hero }: HeroSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
+  useEffect(() => setIsVisible(true), [])
 
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
-
-  const fallbackTitle = '\u05D3\u05E3 \u05E0\u05D7\u05D9\u05EA\u05D4 \u05E9\u05DE\u05DE\u05D9\u05E8 \u05D9\u05D5\u05EA\u05E8 \u2014 \u05E2\u05E8\u05D9\u05DB\u05D4 \u05D1\u05E2\u05D1\u05E8\u05D9\u05EA \u05D1\u05DE\u05D4\u05D9\u05E8\u05D5\u05EA \u05E9\u05D9\u05D0'
-  const normalizedTitle = (hero.title || fallbackTitle).trim()
-  const [titlePrimaryRaw, ...titleSecondaryParts] = normalizedTitle.split('+')
-  const titlePrimary = titlePrimaryRaw?.trim() ?? ''
-  const titleSecondary = titleSecondaryParts.join('+').trim()
-  const showSplitTitle = titlePrimary.length > 0 && titleSecondary.length > 0
-
-  const descriptionParagraphs = useMemo(() => {
-    return hero.description
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .filter(Boolean)
-  }, [hero.description])
+  const normalizedTitle = (hero.title || '').trim()
+  const descriptionParagraphs = useMemo(
+    () => (hero.description || '').split(/\r?\n/).map((l) => l.trim()).filter(Boolean),
+    [hero.description]
+  )
 
   return (
     <section
@@ -50,6 +23,8 @@ export function HeroSection({ hero }: HeroSectionProps) {
       className="relative overflow-hidden bg-white dark:bg-slate-900"
       role="banner"
       aria-label={normalizedTitle || hero.subtitle}
+      lang="he"
+      dir="rtl"
     >
       <div
         className="absolute inset-x-0 -top-64 -z-10 h-[520px] bg-gradient-to-b from-sky-100/70 via-sky-50/30 to-transparent"
@@ -71,23 +46,11 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
             <div className="space-y-4">
               <h1 className="text-4xl font-extrabold leading-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-6xl">
-                {showSplitTitle ? (
-                  <>
-                    <span className="block text-blue-700">{titlePrimary}</span>
-                    <span className="block text-slate-900 dark:text-slate-100">{titleSecondary}</span>
-                  </>
-                ) : (
-                  normalizedTitle
-                )}
+                {normalizedTitle || 'דף נחיתה חכם עם CMS מותאם RTL'}
               </h1>
-
-              {(
-                hero.subtitle ||
-                '\\u05E4\\u05EA\\u05E8\\u05D5\\u05DF \\u05E9\\u05DC\\u05DD \\u05DC\\u05D9\\u05E6\\u05D9\\u05D0\\u05D4 \\u05DE\\u05D4\\u05D9\\u05E8\\u05D4 \\u05DC\\u05D0\\u05D5\\u05D5\\u05D9\\u05E8: \\u05E2\\u05D9\\u05E6\\u05D5\\u05D1 \\u05DE\\u05DE\\u05D5\\u05E7\\u05D3 \\u05D4\\u05DE\\u05E8\\u05D4, \\u05E0\\u05D9\\u05D4\\u05D5\\u05DC \\u05EA\\u05D5\\u05DB\\u05DF \\u05D1\\u05D6\\u05DE\\u05DF \\u05D0\\u05DE\\u05EA \\u05D5-SEO \\u05DE\\u05E6\\u05D5\\u05D9\\u05DF.'
-              ) && (
+              {(hero.subtitle || descriptionParagraphs.length > 0) && (
                 <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">
-                  {hero.subtitle ||
-                    '\u05E4\u05EA\u05E8\u05D5\u05DF \u05E9\u05DC\u05DD \u05DC\u05D9\u05E6\u05D9\u05D0\u05D4 \u05DE\u05D4\u05D9\u05E8\u05D4 \u05DC\u05D0\u05D5\u05D5\u05D9\u05E8: \u05E2\u05D9\u05E6\u05D5\u05D1 \u05DE\u05DE\u05D5\u05E7\u05D3 \u05D4\u05DE\u05E8\u05D4, \u05E0\u05D9\u05D4\u05D5\u05DC \u05EA\u05D5\u05DB\u05DF \u05D1\u05D6\u05DE\u05DF \u05D0\u05DE\u05EA \u05D5-SEO \u05DE\u05E6\u05D5\u05D9\u05DF.'}
+                  {hero.subtitle || descriptionParagraphs[0]}
                 </p>
               )}
             </div>
@@ -97,7 +60,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 {hero.primaryCtaText && hero.primaryCtaHref && (
                   <a
                     href={hero.primaryCtaHref}
-                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-7 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-slate-900 px-7 py-3 text-base font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
                   >
                     {hero.primaryCtaText}
                     <svg
@@ -112,44 +75,29 @@ export function HeroSection({ hero }: HeroSectionProps) {
                     </svg>
                   </a>
                 )}
-
                 {hero.secondaryCtaText && hero.secondaryCtaHref && (
                   <a
                     href={hero.secondaryCtaHref}
-                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl border border-slate-200 px-7 py-3 text-base font-semibold text-slate-700 transition hover:border-blue-700/50 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl border border-slate-300 px-7 py-3 text-base font-semibold text-slate-900 transition hover:bg-slate-50 dark:border-white/30 dark:text-white dark:hover:bg-white/10"
                   >
                     {hero.secondaryCtaText}
-                    <svg
-                      className="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={1.8}
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
                   </a>
                 )}
               </div>
             )}
 
-            <div className="space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
-              {descriptionParagraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-
-            {hero.ctaSupportText && (
-              <p className="text-sm text-slate-500 sm:text-base">{hero.ctaSupportText}</p>
-            )}
+            {descriptionParagraphs.slice(1).map((paragraph, i) => (
+              <p key={i} className="text-right text-slate-600 dark:text-slate-300">
+                {paragraph}
+              </p>
+            ))}
 
             <TechAccordion />
           </div>
 
-          {/* Demo column removed per request */}
+          {/* Right column intentionally empty per design */}
         </div>
-        </div>
+      </div>
     </section>
   )
 }
@@ -176,22 +124,22 @@ function TechAccordion() {
       id: 'next',
       title: 'Next.js',
       summary:
-        'פריימוורק מודרני מעל React: SSR/SSG, ניתוב חכם וביצועים גבוהים כברירת מחדל.',
+        'פריימוורק מודרני מעל React: SSR/SSG, ניתוב ותכן וביצועים גבוהים כברירת מחדל.',
       points: [
-        'ביצועים ו‑SEO מצוינים (SSR/SSG, Image Optimization)',
+        'SEO ידידותי (SSR/SSG, Image Optimization)',
         'שילוב טבעי עם Vercel ו‑Edge',
-        'App Router מודולרי וטעינה מדורגת',
+        'App Router מודולרי ונוח',
       ],
     },
     {
       id: 'sanity',
       title: 'Sanity',
       summary:
-        'CMS גמיש לעריכה בזמן אמת: סכמות דינמיות, טיוטות ו‑Preview, ו‑Portable Text עשיר.',
+        'CMS גמיש לעריכה בזמן אמת: סכמות דינמיות, תצוגות Preview ו‑Portable Text עשיר.',
       points: [
-        'עריכה בזמן אמת לצוותי תוכן (Drafts/Preview)',
-        'מודל תוכן גמיש שגדל עם המוצר',
-        'API מהיר + אינטגרציות CRM/BI וכלי שיווק',
+        'טיוטות ו‑Preview בזמן אמת',
+        'סכמות תוכן ב‑TypeScript',
+        'API חזק + אינטגרציות CRM/BI',
       ],
     },
     {
@@ -199,9 +147,9 @@ function TechAccordion() {
       title: 'Vercel',
       summary: 'פריסות מהירות, Preview לכל שינוי ותשתית Edge גלובלית.',
       points: [
-        'Preview אוטומטי לכל שינוי, שחרורים בטוחים',
-        'ביצועים גלובליים עם Edge Network',
-        'Analytics ומעקב ביצועים מובנים',
+        'סביבות Preview לכל פיצ׳ר',
+        'רשת Edge/CDN מהירה',
+        'Analytics ושילוב CI/CD',
       ],
     },
   ] as const
@@ -213,7 +161,7 @@ function TechAccordion() {
         return (
           <article
             key={card.id}
-            className="rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800/80 via-slate-800/40 to-blue-900/20 text-white shadow-[0_20px_60px_rgba(15,23,42,0.35)]"
+            className="rounded-3xl border bg-white text-slate-800 shadow-[0_16px_32px_rgba(15,23,42,0.08)] border-slate-200 dark:border-white/10 dark:bg-gradient-to-br dark:from-slate-800/80 dark:via-slate-800/40 dark:to-blue-900/20 dark:text-white"
           >
             <button
               type="button"
@@ -247,14 +195,14 @@ function TechAccordion() {
                 open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
               }`}
               role="region"
-              aria-label={`מידע על ${card.title}`}
+              aria-label={`פרטים על ${card.title}`}
             >
               <div className="min-h-0 px-6 pb-6">
                 <ul className="space-y-2 text-sm text-white/90 text-center" role="list">
                   {card.points.map((p) => (
                     <li key={p} className="flex items-center justify-center gap-2" role="listitem">
+                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-slate-400" aria-hidden="true" />
                       <span>{p}</span>
-                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-blue-400" aria-hidden="true" />
                     </li>
                   ))}
                 </ul>

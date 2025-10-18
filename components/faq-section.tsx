@@ -23,7 +23,7 @@ function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full flex-row-reverse items-center justify-between gap-4 rounded-2xl px-4 py-4 text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+        className="flex w-full flex-row-reverse items-center justify-between gap-4 rounded-2xl px-4 py-4 text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
         aria-expanded={isOpen}
         aria-controls={`${itemId}-content`}
         id={`${itemId}-trigger`}
@@ -118,7 +118,7 @@ export default function FAQSection({ faqItems }: FAQSectionProps) {
           </p>
           <a
             href="#contact"
-            className="mt-4 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            className="mt-4 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
           >
             צור/י קשר
             <svg
@@ -137,3 +137,5 @@ export default function FAQSection({ faqItems }: FAQSectionProps) {
     </section>
   )
 }
+
+

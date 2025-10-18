@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { ContactFormData, ContactFormErrors, ContactFormState } from '@/types/landing-page'
@@ -15,7 +15,8 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
       email: '',
       projectType: '',
       message: '',
-      selectedPackage: selectedPackage || ''
+      selectedPackage: selectedPackage || '',
+      goals: ''
     },
     errors: {},
     isSubmitting: false,
@@ -25,13 +26,13 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
 
   // Project types from the content
   const projectTypes = [
-    'בלוגים מקצועיים',
-    'אתרי חברה',
-    'פורטפוליו דיגיטלי',
-    'חנויות אונליין',
-    'אתרי אירועים',
-    'פלטפורמות חינוכיות',
-    'אחר'
+    '׳‘׳׳•׳’׳™׳ ׳׳§׳¦׳•׳¢׳™׳™׳',
+    '׳׳×׳¨׳™ ׳—׳‘׳¨׳”',
+    '׳₪׳•׳¨׳˜׳₪׳•׳׳™׳• ׳“׳™׳’׳™׳˜׳׳™',
+    '׳—׳ ׳•׳™׳•׳× ׳׳•׳ ׳׳™׳™׳',
+    '׳׳×׳¨׳™ ׳׳™׳¨׳•׳¢׳™׳',
+    '׳₪׳׳˜׳₪׳•׳¨׳׳•׳× ׳—׳™׳ ׳•׳›׳™׳•׳×',
+    '׳׳—׳¨'
   ]
 
   // Validation functions
@@ -43,22 +44,22 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
   const validateField = (field: keyof ContactFormData, value: string): string | undefined => {
     switch (field) {
       case 'name':
-        if (!value.trim()) return 'שם מלא הוא שדה חובה'
-        if (value.trim().length < 2) return 'שם חייב להכיל לפחות 2 תווים'
+        if (!value.trim()) return '׳©׳ ׳׳׳ ׳”׳•׳ ׳©׳“׳” ׳—׳•׳‘׳”'
+        if (value.trim().length < 2) return '׳©׳ ׳—׳™׳™׳‘ ׳׳”׳›׳™׳ ׳׳₪׳—׳•׳× 2 ׳×׳•׳•׳™׳'
         return undefined
       
       case 'email':
-        if (!value.trim()) return 'כתובת אימייל היא שדה חובה'
-        if (!validateEmail(value)) return 'כתובת אימייל לא תקינה'
+        if (!value.trim()) return '׳›׳×׳•׳‘׳× ׳׳™׳׳™׳™׳ ׳”׳™׳ ׳©׳“׳” ׳—׳•׳‘׳”'
+        if (!validateEmail(value)) return '׳›׳×׳•׳‘׳× ׳׳™׳׳™׳™׳ ׳׳ ׳×׳§׳™׳ ׳”'
         return undefined
       
       case 'projectType':
-        if (!value) return 'יש לבחור סוג פרויקט'
+        if (!value) return '׳™׳© ׳׳‘׳—׳•׳¨ ׳¡׳•׳’ ׳₪׳¨׳•׳™׳§׳˜'
         return undefined
       
       case 'message':
-        if (!value.trim()) return 'הודעה היא שדה חובה'
-        if (value.trim().length < 10) return 'הודעה חייבת להכיל לפחות 10 תווים'
+        if (!value.trim()) return '׳”׳•׳“׳¢׳” ׳”׳™׳ ׳©׳“׳” ׳—׳•׳‘׳”'
+        if (value.trim().length < 10) return '׳”׳•׳“׳¢׳” ׳—׳™׳™׳‘׳× ׳׳”׳›׳™׳ ׳׳₪׳—׳•׳× 10 ׳×׳•׳•׳™׳'
         return undefined
       
       default:
@@ -106,6 +107,8 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
         newErrors.message = undefined
       } else if (field === 'selectedPackage') {
         newData.selectedPackage = value
+      } else if (field === 'goals') {
+        newData.goals = value
       }
       
       return {
@@ -166,7 +169,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
       })
 
       if (!response.ok) {
-        throw new Error('שליחת ההודעה נכשלה')
+        throw new Error('׳©׳׳™׳—׳× ׳”׳”׳•׳“׳¢׳” ׳ ׳›׳©׳׳”')
       }
 
       setFormState(prev => ({
@@ -186,7 +189,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
       setFormState(prev => ({
         ...prev,
         isSubmitting: false,
-        submitError: error instanceof Error ? error.message : 'אירעה שגיאה בשליחת ההודעה'
+        submitError: error instanceof Error ? error.message : '׳׳™׳¨׳¢׳” ׳©׳’׳™׳׳” ׳‘׳©׳׳™׳—׳× ׳”׳”׳•׳“׳¢׳”'
       }))
     }
   }
@@ -198,7 +201,8 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
         email: '',
         projectType: '',
         message: '',
-        selectedPackage: selectedPackage || ''
+        selectedPackage: selectedPackage || '',
+        goals: ''
       },
       errors: {},
       isSubmitting: false,
@@ -216,23 +220,23 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2 animate-slide-in-up">ההודעה נשלחה בהצלחה!</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-2 animate-slide-in-up">׳”׳”׳•׳“׳¢׳” ׳ ׳©׳׳—׳” ׳‘׳”׳¦׳׳—׳”!</h3>
         <p className="text-gray-600 mb-6 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-          תודה על פנייתכם. נחזור אליכם בהקדם האפשרי.
+          ׳×׳•׳“׳” ׳¢׳ ׳₪׳ ׳™׳™׳×׳›׳. ׳ ׳—׳–׳•׳¨ ׳׳׳™׳›׳ ׳‘׳”׳§׳“׳ ׳”׳׳₪׳©׳¨׳™.
         </p>
         <div className="animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
           <button
             onClick={resetForm}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            className="bg-slate-900 text-white px-6 py-2 rounded-lg hover:bg-slate-900 transition-all duration-300 hover:scale-105 hover:shadow-lg"
           >
-            שלח הודעה נוספת
+            ׳©׳׳— ׳”׳•׳“׳¢׳” ׳ ׳•׳¡׳₪׳×
           </button>
           {onClose && (
             <button
               onClick={onClose}
               className="mr-4 text-gray-600 hover:text-gray-800 transition-all duration-300 hover:scale-105"
             >
-              סגור
+              ׳¡׳’׳•׳¨
             </button>
           )}
         </div>
@@ -243,14 +247,14 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
   return (
     <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8 animate-scale-in">
       <div className="mb-6 animate-slide-in-up">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">בואו נתחיל לעבוד</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">׳‘׳•׳׳• ׳ ׳×׳—׳™׳ ׳׳¢׳‘׳•׳“</h3>
         <p className="text-gray-600">
-          מלאו את הפרטים ונחזור אליכם עם הצעת מחיר מותאמת
+          ׳׳׳׳• ׳׳× ׳”׳₪׳¨׳˜׳™׳ ׳•׳ ׳—׳–׳•׳¨ ׳׳׳™׳›׳ ׳¢׳ ׳”׳¦׳¢׳× ׳׳—׳™׳¨ ׳׳•׳×׳׳׳×
         </p>
         {selectedPackage && (
-          <div className="mt-3 p-3 bg-blue-50 rounded-lg animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-            <p className="text-sm text-blue-800">
-              <span className="font-medium">חבילה נבחרת:</span> {selectedPackage}
+          <div className="mt-3 p-3 bg-slate-50 rounded-lg animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
+            <p className="text-sm text-slate-800">
+              <span className="font-medium">׳—׳‘׳™׳׳” ׳ ׳‘׳—׳¨׳×:</span> {selectedPackage}
             </p>
           </div>
         )}
@@ -260,7 +264,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
         {/* Name Field */}
         <div className="animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            שם מלא *
+            ׳©׳ ׳׳׳ *
           </label>
           <input
             type="text"
@@ -268,12 +272,12 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
             value={formState.data.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             onBlur={() => handleBlur('name')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md ${
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
               formState.errors.name 
                 ? 'border-red-500 bg-red-50 animate-pulse' 
                 : 'border-gray-300 hover:border-gray-400 focus:scale-105'
             }`}
-            placeholder="הכניסו את שמכם המלא"
+            placeholder="׳”׳›׳ ׳™׳¡׳• ׳׳× ׳©׳׳›׳ ׳”׳׳׳"
             disabled={formState.isSubmitting}
           />
           {formState.errors.name && (
@@ -289,7 +293,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
         {/* Email Field */}
         <div className="animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            כתובת אימייל *
+            ׳›׳×׳•׳‘׳× ׳׳™׳׳™׳™׳ *
           </label>
           <input
             type="email"
@@ -297,7 +301,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
             value={formState.data.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             onBlur={() => handleBlur('email')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md ${
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
               formState.errors.email 
                 ? 'border-red-500 bg-red-50 animate-pulse' 
                 : 'border-gray-300 hover:border-gray-400 focus:scale-105'
@@ -318,21 +322,21 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
         {/* Project Type Field */}
         <div className="animate-slide-in-up" style={{ animationDelay: '0.3s' }}>
           <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
-            סוג הפרויקט *
+            ׳¡׳•׳’ ׳”׳₪׳¨׳•׳™׳§׳˜ *
           </label>
           <select
             id="projectType"
             value={formState.data.projectType}
             onChange={(e) => handleInputChange('projectType', e.target.value)}
             onBlur={() => handleBlur('projectType')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md ${
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
               formState.errors.projectType 
                 ? 'border-red-500 bg-red-50 animate-pulse' 
                 : 'border-gray-300 hover:border-gray-400 focus:scale-105'
             }`}
             disabled={formState.isSubmitting}
           >
-            <option value="">בחרו סוג פרויקט</option>
+            <option value="">׳‘׳—׳¨׳• ׳¡׳•׳’ ׳₪׳¨׳•׳™׳§׳˜</option>
             {projectTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
@@ -352,7 +356,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
         {/* Message Field */}
         <div className="animate-slide-in-up" style={{ animationDelay: '0.4s' }}>
           <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-            הודעה *
+            ׳”׳•׳“׳¢׳” *
           </label>
           <textarea
             id="message"
@@ -360,12 +364,12 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
             value={formState.data.message}
             onChange={(e) => handleInputChange('message', e.target.value)}
             onBlur={() => handleBlur('message')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none hover:shadow-md ${
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 resize-none hover:shadow-md ${
               formState.errors.message 
                 ? 'border-red-500 bg-red-50 animate-pulse' 
                 : 'border-gray-300 hover:border-gray-400 focus:scale-105'
             }`}
-            placeholder="ספרו לנו על הפרויקט שלכם, הדרישות והציפיות..."
+            placeholder="׳¡׳₪׳¨׳• ׳׳ ׳• ׳¢׳ ׳”׳₪׳¨׳•׳™׳§׳˜ ׳©׳׳›׳, ׳”׳“׳¨׳™׳©׳•׳× ׳•׳”׳¦׳™׳₪׳™׳•׳×..."
             disabled={formState.isSubmitting}
           />
           {formState.errors.message && (
@@ -374,6 +378,34 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
               {formState.errors.message}
+            </p>
+          )}
+        </div>
+
+        {/* Goals Field (optional) */}
+        <div className="animate-slide-in-up" style={{ animationDelay: '0.45s' }}>
+          <label htmlFor="goals" className="block text-sm font-medium text-gray-700 mb-2">
+            ׳׳˜׳¨׳•׳× ׳”׳₪׳¨׳•׳™׳§׳˜ (׳׳•׳₪׳¦׳™׳•׳ ׳׳™)
+          </label>
+          <input
+            type="text"
+            id="goals"
+            value={formState.data.goals || ''}
+            onChange={(e) => handleInputChange('goals', e.target.value)}
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
+              formState.errors.goals 
+                ? 'border-red-500 bg-red-50 animate-pulse' 
+                : 'border-gray-300 hover:border-gray-400 focus:scale-105'
+            }`}
+            placeholder="׳׳“׳•׳’׳׳”: ׳”׳’׳“׳׳× ׳׳™׳“׳™׳, ׳ ׳™׳”׳•׳ ׳‘׳׳•׳’, ׳—׳™׳‘׳•׳¨ CRM"
+            disabled={formState.isSubmitting}
+          />
+          {formState.errors.goals && (
+            <p className="mt-1 text-sm text-red-600 flex items-center">
+              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+              {formState.errors.goals}
             </p>
           )}
         </div>
@@ -398,7 +430,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
             className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
               formState.isSubmitting
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-blue-600 hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 hover:-translate-y-1 animate-glow'
+                : 'bg-slate-900 hover:bg-slate-900 hover:shadow-lg transform hover:scale-105 hover:-translate-y-1 animate-glow'
             } text-white`}
           >
           {formState.isSubmitting ? (
@@ -407,10 +439,10 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              שולח הודעה...
+              ׳©׳•׳׳— ׳”׳•׳“׳¢׳”...
             </span>
           ) : (
-            'שלח הודעה'
+            '׳©׳׳— ׳”׳•׳“׳¢׳”'
           )}
         </button>
         </div>
@@ -424,7 +456,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
               className="w-full py-2 px-4 text-gray-600 hover:text-gray-800 transition-all duration-300 hover:scale-105"
               disabled={formState.isSubmitting}
             >
-              ביטול
+              ׳‘׳™׳˜׳•׳
             </button>
           </div>
         )}
@@ -432,3 +464,5 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
     </div>
   )
 }
+
+

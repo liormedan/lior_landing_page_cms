@@ -18,16 +18,18 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       id="testimonials"
       ref={sectionRef}
       className="bg-slate-50 py-24"
+      lang="he"
+      dir="rtl"
       aria-labelledby="testimonials-heading"
     >
       <div className="lp-container">
         <div
-          className={`mx-auto max-w-3xl text-right transition-all	duration-700 ${
+          className={`mx-auto max-w-3xl text-right transition-all duration-700 ${
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           <span className="inline-flex items-center justify-center rounded-full sky-chip px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-            מה הלקוחות שלנו אומרים
+            דברי לקוחות
           </span>
           <h2
             id="testimonials-heading"
@@ -52,7 +54,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
               style={{ transitionDelay: `${index * 160}ms` }}
-              aria-label={`עדות לקוח: ${item.name}`}
+              aria-label={`חוות דעת: ${item.name}`}
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -80,8 +82,8 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   </div>
                 </div>
                 {item.highlight && (
-                  <span className="inline-flex items-center gap-2 rounded-full bg-sky-200/40 px-3 py-1 text-xs font-semibold text-sky-700">
-                    <span className="inline-block h-2 w-2 rounded-full bg-blue-700/90" aria-hidden="true" />
+                  <span className="inline-flex items-center gap-2 rounded-full bg-slate-200/40 px-3 py-1 text-xs font-semibold text-slate-800">
+                    <span className="inline-block h-2 w-2 rounded-full bg-slate-900" aria-hidden="true" />
                     {item.highlight}
                   </span>
                 )}
@@ -96,12 +98,11 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
 
         <div className="mt-16 flex flex-col items-center gap-4 text-right">
           <p className="max-w-2xl text-base leading-relaxed text-slate-600 text-right">
-            רוצים לשמוע איך נראה התהליך מאחורי הקלעים? נשמח לחבר אתכם ללקוחות קיימים ולשתף
-            לוחות זמנים, תוצרים ותובנות מפתח.
+            רוצים לשמוע איך נראה התהליך מאחורי הקלעים? נשמח לחבר אתכם ללקוחות קיימים ולשתף בדוגמאות, תוצרים ותובנות.
           </p>
           <Link
             href="#contact"
-            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-blue-700/90 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-blue-800/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
           >
             לתאם שיחת היכרות
             <svg

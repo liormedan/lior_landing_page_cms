@@ -91,6 +91,7 @@ export interface ContactFormData {
   projectType: string
   message: string
   selectedPackage?: string
+  goals?: string
 }
 
 export interface ContactFormErrors {
@@ -99,6 +100,7 @@ export interface ContactFormErrors {
   projectType?: string
   message?: string
   general?: string
+  goals?: string
 }
 
 export interface ContactFormState {

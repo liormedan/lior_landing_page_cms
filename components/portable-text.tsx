@@ -51,7 +51,7 @@ const components: Partial<PortableTextReactComponents> = {
       const rel = value?.openInNewTab ? "noreferrer" : undefined
 
       return (
-        <Link href={href} target={target} rel={rel} className="text-blue-700 underline decoration-sky-400 underline-offset-4">
+        <Link href={href} target={target} rel={rel} className="text-slate-900 underline decoration-slate-400 underline-offset-4">
           {children}
         </Link>
       )
@@ -68,7 +68,7 @@ const components: Partial<PortableTextReactComponents> = {
       <h3 className="mt-8 text-2xl font-semibold text-slate-900 dark:text-slate-100">{children}</h3>
     ),
     blockquote: ({children}: PortableTextComponentProps<PortableTextBlock>) => (
-      <blockquote className="border-r-4 border-blue-700/50 bg-sky-50 px-6 py-4 text-lg italic text-sky-900 dark:border-sky-600 dark:bg-sky-950/40 dark:text-blue-200">
+      <blockquote className="border-r-4 border-slate-400 bg-slate-50 px-6 py-4 text-lg italic text-slate-800 dark:border-sky-600 dark:bg-sky-950/40 dark:text-blue-200">
         {children}
       </blockquote>
     ),

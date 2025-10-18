@@ -1,79 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+מערכת ניהול תוכן בעברית (CMS) על בסיס Sanity
+================================================
 
-## Getting Started
+המאגר הזה משרת הצעת שירות: אני בונה ומנהל עבורכם מערכת ניהול תוכן מלאה בעברית (RTL), על בסיס פלטפורמת Sanity. המערכת מתאימה לאתרי תוכן מכל הסוגים — בלוגים, מדורי חדשות, דפי מוצר, חנויות, עמודי נחיתה ועוד — עם עריכה בזמן אמת, טיוטות/פרסום, הרשאות, SEO ונגישות.
 
-First, run the development server:
+במקום למקד את הפרויקט ב"דף נחיתה", הפוקוס כאן הוא על CMS בעברית שאני מקים, מגדיר ומלווה שוטף. תכנית העבודה המלאה, כולל מיגרציה מאתר קיים ותמחור מוצע — בקובץ `BUILD_PLAN.md`.
+
+תצוגה והרצה מקומית
+-------------------
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+פתחו את `http://localhost:3000` לצפייה. ניתן לערוך את הקומפוננטים תחת `components/` והעמוד הראשי ב-`app/page.tsx`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+מה יש כאן
+----------
+- אתר Next.js תומך RTL שמדגים הצעת CMS בעברית.
+- חיבור מוכן ל‑Sanity לצורך פוסטים/תכנים (דרך `next-sanity`).
+- טפסי יצירת קשר ותמיכה בהגדרת ספק אימיילים (SendGrid/Resend).
+- קובץ תכנית ביצוע ומיגרציה: `BUILD_PLAN.md`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Email Setup (SendGrid)
-
-To enable sending emails from the contact form, set these env vars:
-
+הגדרת דוא"ל (לבחירתכם)
+----------------------
+כדי לקבל לידים ישירות למייל מהטופס:
 - `EMAIL_PROVIDER=sendgrid`
 - `SENDGRID_API_KEY=...`
 - `FROM_EMAIL=you@domain.com`
-- `FROM_NAME=Your Name` (optional)
-- `TO_EMAIL=dest@domain.com` (where to receive leads)
-- `SEND_CONFIRMATION=true` (optional, also emails the sender)
+- `TO_EMAIL=dest@domain.com`
 
-Without these, the API logs submissions to the console in development.
+חיבור ל‑Sanity
+--------------
+1) צרו פרויקט ב‑Sanity וקבעו:
+- `NEXT_PUBLIC_SANITY_PROJECT_ID`
+- `NEXT_PUBLIC_SANITY_DATASET`
 
-## Sanity CMS Setup
+2) לאפשר Preview (רשות):
+- `SANITY_READ_TOKEN`
+- `SANITY_PREVIEW_SECRET`
 
-This project reads blog content from Sanity using `next-sanity`.
+הגדירו את המשתנים ב‑`.env.local` (ראו `.env.example`).
 
-- Create a Sanity project at https://www.sanity.io and obtain:
-  - `NEXT_PUBLIC_SANITY_PROJECT_ID`
-  - `NEXT_PUBLIC_SANITY_DATASET`
-- Optionally create a read token for draft/preview support and set `SANITY_READ_TOKEN`.
-- Set the variables in `.env.local` (see `.env.example`).
+SEO ו‑RTL
+---------
+- RTL מוגדר גלובלית ב‑`app/layout.tsx`.
+- `app/robots.ts` ו‑`app/sitemap.ts` קיימים; הגדירו `NEXT_PUBLIC_SITE_URL` לכתובות מוחלטות תקינות.
 
-Environment variables:
+למה עוד לצפות
+-------------
+- פירוט שלבי ההקמה, מודלי התוכן, תהליך מיגרציה, וטווחי תמחור — בקובץ `BUILD_PLAN.md` שנעבוד לפיו צעד‑אחר‑צעד.
 
-- `NEXT_PUBLIC_SANITY_PROJECT_ID=...`
-- `NEXT_PUBLIC_SANITY_DATASET=production`
-- `SANITY_API_VERSION=2025-10-05`
-- `SANITY_READ_TOKEN=` (optional)
-- `SANITY_PREVIEW_SECRET=blog-preview-secret` (optional)
-
-Blog content model expected:
-
-- `post` with fields: `title`, `slug`, `excerpt`, `publishedAt`, `featured`, `mainImage`, `body`, `seo` (optional)
-- `author` with fields: `name`, `slug`, `role`, `avatar`, `bio`
-- `category` with fields: `title`, `slug`
-
-You can manage drafts/published states and categories directly in your Sanity Studio. If you don’t have a Studio embedded here, host one separately or add one under `/studio` (requires adding `sanity` package and config).
-
-## SEO & RTL
-
-- RTL is globally enabled (`lang="he" dir="rtl"`) in `app/layout.tsx:20`.
-- `app/robots.ts` and `app/sitemap.ts` are included. Set `NEXT_PUBLIC_SITE_URL` in your env so these generate correct absolute URLs.
-
-## Quote/Leads CTA
-
-The primary CTA in the hero is set to "קבל/י הצעה" and the contact form posts to `/api/contact`. Configure email provider (SendGrid or Resend) to receive leads by email.

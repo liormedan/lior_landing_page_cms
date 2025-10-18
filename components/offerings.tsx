@@ -1,42 +1,36 @@
-﻿"use client"
+"use client"
 
-import Link from "next/link"
+import { landingPageContent } from "@/lib/landing-page-content"
 import { useStaggeredAnimation } from "@/hooks/useScrollAnimation"
 
 export default function Offerings() {
+  const { heading, benefits, platformsHeading, platforms } = landingPageContent.offerings
+
   const items = [
     {
-      id: "landing",
-      title: "דף נחיתה מעוצב",
-      summary: "דף ממוקד המרה, מהיר ו‑RTL, עם ניהול תוכן מלא.",
-      features: [
-        "חיבור מלא ל‑Sanity CMS",
-        "עיצוב מותאם לפי בריף הלקוח",
-        "טופס לידים + שליחת מייל ללקוח מהאתר",
-      ],
-      cta: "קבל/י הצעה",
+      id: 'benefits',
+      title: heading,
+      summary: 'היתרונות המרכזיים של CMS מודרני לעסק שלכם.',
+      features: benefits.map((b) => `${b.title} – ${b.desc}`),
+      cta: landingPageContent.hero.ctas.secondary.label, // "רוצה לשמוע עוד?"
     },
     {
-      id: "blog",
-      title: "בלוג מעוצב",
-      summary: "בלוג מהיר עם SEO מצוין, נגיש וקל לעדכון.",
-      features: [
-        "ניהול פוסטים ב‑Sanity (טיוטה/פרסום/קטגוריות)",
-        "עיצוב קריא + תמונות וכותרות עשירות",
-        "טופס יצירת קשר + שליחת מייל ללקוח מהאתר",
-      ],
-      cta: "פתח/י שיחה",
+      id: 'platforms',
+      title: platformsHeading,
+      summary: 'פלטפורמות מומלצות לצרכים ולתקציבים שונים.',
+      features: platforms.map((p) => `${p.name} – ${p.blurb}`),
+      cta: landingPageContent.hero.ctas.primary.label, // "צור/י קשר לייעוץ חינם"
     },
   ] as const
 
   const { containerRef, visibleItems } = useStaggeredAnimation(items.length, 120)
 
   return (
-    <section id="offerings" className="py-20" aria-labelledby="offerings-heading">
+    <section id="offerings" className="py-20" aria-labelledby="offerings-heading" lang="he" dir="rtl">
       <div className="lp-container">
         <header className="mb-10 text-center">
-          <h2 id="offerings-heading" className="text-3xl font-bold">מה אני מציע</h2>
-          <p className="text-slate-600 dark:text-white/80">שתי החבילות ברורות — נחיתה או בלוג — עם CMS ותמיכה מלאה.</p>
+          <h2 id="offerings-heading" className="text-3xl font-bold">{heading}</h2>
+          <p className="text-slate-600 dark:text-white/80">סקירה קצרה של יתרונות CMS לעסק, לצד פלטפורמות מומלצות.</p>
         </header>
 
         <div ref={containerRef} className="grid gap-6 md:grid-cols-2">
@@ -57,28 +51,28 @@ export default function Offerings() {
               <ul className="mt-6 space-y-2 text-center" role="list">
                 {item.features.map((f) => (
                   <li key={f} className="flex items-center justify-center gap-2" role="listitem">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-blue-700/70" aria-hidden="true" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-slate-900/70" aria-hidden="true" />
                     <span className="text-slate-700 dark:text-white">{f}</span>
                   </li>
                 ))}
               </ul>
 
               <div className="mt-6 flex gap-3 justify-center">
-                <Link
+                <a
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-lg bg-blue-700/90 px-5 py-2 text-white hover:bg-blue-800/90 transition"
+                  className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2 text-white hover:bg-slate-800 transition"
                   aria-label={item.cta}
                 >
                   {item.cta}
-                </Link>
-                {item.id === "blog" && (
-                  <Link
-                    href="/blog"
+                </a>
+                {item.id === 'platforms' && (
+                  <a
+                    href="#pricing"
                     className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-5 py-2 text-slate-700 hover:bg-slate-50 transition dark:border-white/40 dark:text-white dark:hover:bg-white/10"
-                    aria-label="דוגמאות"
+                    aria-label="תמחור"
                   >
-                    דוגמאות
-                  </Link>
+                    תמחור
+                  </a>
                 )}
               </div>
             </div>
@@ -88,3 +82,4 @@ export default function Offerings() {
     </section>
   )
 }
+

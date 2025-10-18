@@ -65,6 +65,7 @@ async function sendEmail(formData: ContactFormData): Promise<void> {
     console.log('Project Type:', formData.projectType)
     console.log('Selected Package:', formData.selectedPackage || 'None')
     console.log('Message:', formData.message)
+    if (formData.goals) console.log('Goals:', formData.goals)
     console.log('---')
     return
   }
@@ -77,7 +78,7 @@ async function sendEmail(formData: ContactFormData): Promise<void> {
       <p style="margin:4px 0;"><strong>אימייל:</strong> ${formData.email}</p>
       <p style="margin:4px 0;"><strong>סוג פרויקט:</strong> ${formData.projectType}</p>
       ${formData.selectedPackage ? `<p style=\"margin:4px 0;\"><strong>חבילה נבחרת:</strong> ${formData.selectedPackage}</p>` : ''}
-      <div style="margin-top:12px;">
+__MARKER__
         <p style="margin:0 0 6px;"><strong>הודעה:</strong></p>
         <div style="background:#f1f5f9; padding:12px; border-radius:8px; line-height:1.6;">${formData.message}</div>
       </div>
@@ -281,7 +282,8 @@ export async function POST(request: NextRequest) {
       email: sanitizeInput(String(formData.email)),
       projectType: sanitizeInput(String(formData.projectType)),
       message: sanitizeInput(String(formData.message)),
-      selectedPackage: formData.selectedPackage ? sanitizeInput(String(formData.selectedPackage)) : undefined
+      selectedPackage: formData.selectedPackage ? sanitizeInput(String(formData.selectedPackage as string)) : undefined,
+      goals: formData.goals ? sanitizeInput(String(formData.goals as string)) : undefined,
     }
 
     // Send email

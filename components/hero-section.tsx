@@ -49,7 +49,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
           <div className="space-y-6">
             <h1 className="text-4xl font-extrabold leading-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-7xl">
-              {normalizedTitle || 'בניית דפי נחיתה חכמים עם CMS'}
+              {normalizedTitle || 'ניהול מערכת תוכן חכמה עם CMS'}
             </h1>
             {(hero.subtitle || descriptionParagraphs.length > 0) && (
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">
@@ -131,7 +131,7 @@ function TechAccordion() {
     {
       id: 'next',
       title: 'Next.js',
-      summary: 'תשתית React מודרנית לדפי נחיתה מהירים עם SEO מצוין ויכולות Edge.',
+      summary: 'תשתית React מודרנית למערכות תוכן מהירות עם SEO מצוין ויכולות Edge.',
       points: [
         'טעינה מיידית בזכות ISR ו-Static Generation.',
         'גישה ל-Edge Functions ולפיצ׳רים מתקדמים של Vercel.',

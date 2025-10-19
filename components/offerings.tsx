@@ -5,12 +5,13 @@ import { useStaggeredAnimation } from "@/hooks/useScrollAnimation"
 
 export default function Offerings() {
   const { heading, benefits, platformsHeading, platforms } = landingPageContent.offerings
+  const updatedHeading = "אפשרויות רבות לניהול מערכת התוכן"
   const { containerRef, visibleItems } = useStaggeredAnimation(2, 120)
 
   const items = [
     {
       id: "benefits",
-      title: heading,
+      title: updatedHeading,
       summary: "הדגשים המרכזיים שכל לקוח מקבל איתנו כבר מהיום הראשון.",
       features: benefits.map((benefit) => `${benefit.title} — ${benefit.desc}`),
       primaryCta: { label: landingPageContent.hero.ctas.primary.label, href: "#contact" },
@@ -31,10 +32,10 @@ export default function Offerings() {
       <div className="lp-container">
         <header className="mb-12 text-center">
           <h2 id="offerings-heading" className="text-3xl font-bold text-slate-900 dark:text-white">
-            {heading}
+            {updatedHeading}
           </h2>
           <p className="mt-4 text-base text-slate-600 dark:text-white/80">
-            בחרנו את הרכיבים הקריטיים כדי שתוכלו להשיק דף נחיתה מקצועי, מדויק ומוכן לצמיחה.
+            בחרנו את הרכיבים הקריטיים כדי שתוכלו לנהל מערכת תוכן מקצועית, מדויקת ומוכנה לצמיחה.
           </p>
         </header>
 

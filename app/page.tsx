@@ -20,14 +20,14 @@ import type { Metadata } from "next"
 const SectionNavHidden = () => null
 
 export const metadata: Metadata = {
-  title: "בניית דפי נחיתה עם CMS | חוויית RTL מלאה לעסקים",
+  title: "ניהול מערכת תוכן עם CMS | חוויית RTL מלאה לעסקים",
   description:
-    "דפי נחיתה חכמים ב-Next.js ו-Sanity, החל מ-₪4,900. מותאם לעברית, מובייל ואינטגרציות CRM כדי להפוך מבקרים ללקוחות.",
-  keywords: ["Next.js", "Sanity CMS", "Vercel", "RTL", "דפי נחיתה", "CMS לעסקים", "Landing Page"],
+    "מערכות תוכן חכמות ב-Next.js ו-Sanity, החל מ-₪4,900. מותאם לעברית, מובייל ואינטגרציות CRM כדי להפוך מבקרים ללקוחות.",
+  keywords: ["Next.js", "Sanity CMS", "Vercel", "RTL", "מערכות תוכן", "CMS לעסקים", "Content Management"],
   openGraph: {
-    title: "בניית דפי נחיתה שממירות בעברית",
+    title: "ניהול מערכת תוכן שמייצרת תוצאות בעברית",
     description:
-      "תהליך מלא להקמת דפי נחיתה חכמים עם CMS מתקדם, כולל חיבורים ל-CRM, SEO, תמיכה ו-RTL מדויק.",
+      "תהליך מלא להקמת וניהול מערכת תוכן חכמה עם CMS מתקדם, כולל חיבורים ל-CRM, SEO, תמיכה ו-RTL מדויק.",
     type: "website",
   },
 }

@@ -12,9 +12,9 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">סטודיו לדפי נחיתה חכמים</h3>
+            <h3 className="text-xl font-bold text-white">סטודיו למערכות תוכן חכמות</h3>
             <p className="text-sm leading-relaxed">
-              אנחנו בונים דפי נחיתה ואתרים עם CMS מודרני (Sanity / Next.js) שמותאם לשוק הישראלי, ל-RTL ולכלי שיווק מתקדמים. דגש על ביצועים, נגישות וחיבורי נתונים.
+              אנחנו מקימים מערכות תוכן ואתרים עם CMS מודרני (Sanity / Next.js) שמותאם לשוק הישראלי, ל-RTL ולכלי שיווק מתקדמים. דגש על ביצועים, נגישות וחיבורי נתונים.
             </p>
             <div className="flex items-center space-x-2 space-x-reverse text-xs">
               <HeartIcon className="h-4 w-4 text-red-500" />

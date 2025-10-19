@@ -24,7 +24,7 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
                   מתחילים שיחה קלה
                 </span>
                 <h2 id="contact-heading" className="text-3xl font-bold leading-tight sm:text-4xl">
-                  נבנה יחד דף נחיתה שמייצר פעולה
+                  נקים יחד מערכת תוכן שמייצרת פעולה
                 </h2>
                 <p className="text-base leading-relaxed text-slate-200">
                   השאירו פרטים ונחזור אליכם תוך יום עסקים אחד עם חומרים להצעת מחיר או תיאום פגישה. אין התחייבות, רק בדיקה אם יש התאמה.
@@ -82,7 +82,7 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-right backdrop-blur-sm">
                 <h3 className="text-lg font-semibold text-white text-center">מה קורה בשיחת ההיכרות?</h3>
                 <p className="mt-2 text-center text-slate-200">
-                  שיחה של כ-30 דקות שבה נבחן התאמה, נעבור על היעדים ונראה דפי נחיתה רלוונטיים.
+                  שיחה של כ-30 דקות שבה נבחן התאמה, נעבור על היעדים ונראה מערכות תוכן רלוונטיות.
                 </p>
                 <div className="mt-4 space-y-2 text-center text-slate-200">
                   <p>הגדרת קהל ומסר חד שמוביל לפעולה.</p>

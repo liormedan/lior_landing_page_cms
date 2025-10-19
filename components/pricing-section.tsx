@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import { landingPageContent } from '@/lib/landing-page-content'
@@ -21,7 +21,7 @@ export default function PricingSection() {
   }
 
   return (
-    <section id="pricing" className="bg-slate-50 dark:bg-slate-900 py-24" aria-labelledby="pricing-heading">
+    <section id="pricing" className="bg-slate-50 py-24 dark:bg-slate-900" aria-labelledby="pricing-heading">
       <div className="lp-container">
         <div className="mx-auto max-w-3xl text-right">
           <span className="sky-chip inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-700">
@@ -39,20 +39,25 @@ export default function PricingSection() {
               className={`sky-card flex h-full flex-col rounded-3xl p-6 text-right transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)] ${
                 pkg.id === 'growth' ? 'ring-2 ring-slate-700' : ''
               }`}
+              aria-labelledby={`${pkg.id}-title`}
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{pkg.name}</h3>
+                <h3 id={`${pkg.id}-title`} className="text-xl font-semibold text-slate-900 dark:text-white">
+                  {pkg.name}
+                </h3>
                 {pkg.id === 'growth' && (
-                  <span className="rounded-full bg-sky-300/40 px-3 py-1 text-xs font-semibold text-slate-800">׳”׳›׳™ ׳׳©׳×׳׳</span>
+                  <span className="rounded-full bg-sky-300/40 px-3 py-1 text-xs font-semibold text-slate-800">
+                    החבילה הפופולרית
+                  </span>
                 )}
               </div>
 
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{pkg.tagline}</p>
               <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">{pkg.price}</p>
 
-              <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300 text-right" role="list">
-                {pkg.features.map((feature, i) => (
-                  <li key={i} className="flex items-start justify-start gap-2" role="listitem">
+              <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300" role="list">
+                {pkg.features.map((feature, index) => (
+                  <li key={index} className="flex items-start justify-start gap-2" role="listitem">
                     <span className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-slate-900" aria-hidden="true" />
                     <span>{feature}</span>
                   </li>
@@ -77,7 +82,7 @@ export default function PricingSection() {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">
             <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-2xl">
               <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
-                <h3 className="text-lg font-semibold text-slate-900">׳™׳¦׳™׳¨׳× ׳§׳©׳¨</h3>
+                <h3 className="text-lg font-semibold text-slate-900">טופס יצירת קשר</h3>
                 <button onClick={onClose} className="rounded-full p-1 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700" type="button">
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -94,6 +99,4 @@ export default function PricingSection() {
     </section>
   )
 }
-
-
 

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
@@ -30,9 +30,7 @@ function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
       >
         <span className="flex-1 text-right text-base font-semibold text-white">{item.question}</span>
         <ChevronDownIcon
-          className={`h-5 w-5 text-slate-300 transition-transform duration-300 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
+          className={`h-5 w-5 text-slate-300 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
           aria-hidden="true"
         />
       </button>
@@ -53,7 +51,6 @@ function AccordionItem({ item, isOpen, onToggle }: AccordionItemProps) {
 }
 
 export default function FAQSection({ faqItems }: FAQSectionProps) {
-  // Start with all items closed by default
   const [openItems, setOpenItems] = useState<Set<number>>(new Set())
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.1 })
 
@@ -73,7 +70,7 @@ export default function FAQSection({ faqItems }: FAQSectionProps) {
     <section
       id="faq"
       ref={sectionRef}
-      className="bg-white dark:bg-slate-900 py-24"
+      className="bg-white py-24 dark:bg-slate-900"
       aria-labelledby="faq-heading"
     >
       <div className="lp-container">
@@ -83,16 +80,16 @@ export default function FAQSection({ faqItems }: FAQSectionProps) {
           }`}
         >
           <span className="inline-flex items-center justify-center rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">
-            שאלות נפוצות
+            תשובות לשאלות שחוזרות
           </span>
           <h2
             id="faq-heading"
             className="mt-6 text-3xl font-bold leading-tight text-slate-900 dark:text-slate-100 sm:text-4xl"
           >
-            שאלות ותשובות
+            שאלות נפוצות
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-            הנה מקום מרוכז לתשובות קצרות לשאלות נפוצות. אם לא מצאתם כאן — דברו איתנו.
+            אספנו את השאלות ששואלים אותנו כמעט בכל שיחה. נשארה שאלה פתוחה? אנחנו זמינים גם בוואטסאפ וגם במייל.
           </p>
         </div>
 
@@ -107,20 +104,16 @@ export default function FAQSection({ faqItems }: FAQSectionProps) {
           ))}
         </div>
 
-        <div className="mt-12 mx-auto max-w-4xl rounded-3xl border border-slate-700 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-center text-white shadow-[0_25px_60px_rgba(15,23,42,0.35)] flex flex-col items-center gap-4">
-          <h3 className="w-full text-lg font-semibold text-white">
-            יש לכם שאלה נוספת?
-          </h3>
-          <p className="mt-3 w-full text-base text-center leading-relaxed text-white/90">
-            יש לכם שאלה נוספת או צורך מיוחד?
-            <br />
-            נשמח לבנות איתכם מסמך דרישות קצר ולהציע פתרון שמתאים למבנה הצוות, הטכנולוגיה והתקציב שלכם. שיחת ייעוץ קצרה בדרך כלל מספיקה כדי להבין את התמונה.
+        <div className="mx-auto mt-12 flex max-w-4xl flex-col items-center gap-4 rounded-3xl border border-slate-700 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-center text-white shadow-[0_25px_60px_rgba(15,23,42,0.35)]">
+          <h3 className="w-full text-lg font-semibold text-white">עדיין מתלבטים?</h3>
+          <p className="mt-3 w-full text-base leading-relaxed text-white/90">
+            נשמח לשוחח, להראות דוגמאות רלוונטיות ולעבור על צרכים ספציפיים שלכם. מטרת השיחה היא להבין אם יש התאמה ולהציף תוצאות אפשריות.
           </p>
           <a
             href="#contact"
-            className="mt-4 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
+            className="mt-2 inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
           >
-            צור/י קשר
+            בואו נדבר
             <svg
               className="h-4 w-4"
               fill="none"
@@ -137,5 +130,4 @@ export default function FAQSection({ faqItems }: FAQSectionProps) {
     </section>
   )
 }
-
 

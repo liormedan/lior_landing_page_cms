@@ -1,6 +1,6 @@
-﻿'use client'
+'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ContactFormData, ContactFormErrors, ContactFormState } from '@/types/landing-page'
 
 interface ContactFormProps {
@@ -8,60 +8,57 @@ interface ContactFormProps {
   onClose?: () => void
 }
 
+const PROJECT_TYPES = [
+  'דף נחיתה להשקת מוצר',
+  'קמפיין לידים לעסק שירותי',
+  'מוצר SaaS שצריך חיבורי CRM',
+  'עמוד הרשמה לאירוע או וובינר',
+  'אתר תדמית קטן ומוכן לצמיחה',
+  'שדרוג דף קיים ל-RTL ונגישות',
+  'רכיב אחר / לא בטוחים עדיין',
+]
+
+const REQUIRED_FIELDS: Array<keyof ContactFormData> = ['name', 'email', 'projectType', 'message']
+
+const initialState = (selectedPackage?: string): ContactFormState => ({
+  data: {
+    name: '',
+    email: '',
+    projectType: '',
+    message: '',
+    goals: '',
+    selectedPackage: selectedPackage || '',
+  },
+  errors: {},
+  isSubmitting: false,
+  isSubmitted: false,
+  isSuccess: false,
+})
+
 export default function ContactForm({ selectedPackage, onClose }: ContactFormProps) {
-  const [formState, setFormState] = useState<ContactFormState>({
-    data: {
-      name: '',
-      email: '',
-      projectType: '',
-      message: '',
-      selectedPackage: selectedPackage || '',
-      goals: ''
-    },
-    errors: {},
-    isSubmitting: false,
-    isSubmitted: false,
-    isSuccess: false
-  })
+  const [formState, setFormState] = useState<ContactFormState>(() => initialState(selectedPackage))
 
-  // Project types from the content
-  const projectTypes = [
-    '׳‘׳׳•׳’׳™׳ ׳׳§׳¦׳•׳¢׳™׳™׳',
-    '׳׳×׳¨׳™ ׳—׳‘׳¨׳”',
-    '׳₪׳•׳¨׳˜׳₪׳•׳׳™׳• ׳“׳™׳’׳™׳˜׳׳™',
-    '׳—׳ ׳•׳™׳•׳× ׳׳•׳ ׳׳™׳™׳',
-    '׳׳×׳¨׳™ ׳׳™׳¨׳•׳¢׳™׳',
-    '׳₪׳׳˜׳₪׳•׳¨׳׳•׳× ׳—׳™׳ ׳•׳›׳™׳•׳×',
-    '׳׳—׳¨'
-  ]
-
-  // Validation functions
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
+  const projectTypeOptions = useMemo(() => PROJECT_TYPES, [])
 
   const validateField = (field: keyof ContactFormData, value: string): string | undefined => {
+    const trimmed = value.trim()
+
     switch (field) {
       case 'name':
-        if (!value.trim()) return '׳©׳ ׳׳׳ ׳”׳•׳ ׳©׳“׳” ׳—׳•׳‘׳”'
-        if (value.trim().length < 2) return '׳©׳ ׳—׳™׳™׳‘ ׳׳”׳›׳™׳ ׳׳₪׳—׳•׳× 2 ׳×׳•׳•׳™׳'
+        if (!trimmed) return 'נשמח לדעת איך לפנות אליך.'
+        if (trimmed.length < 2) return 'שם צריך להכיל לפחות 2 תווים.'
         return undefined
-      
       case 'email':
-        if (!value.trim()) return '׳›׳×׳•׳‘׳× ׳׳™׳׳™׳™׳ ׳”׳™׳ ׳©׳“׳” ׳—׳•׳‘׳”'
-        if (!validateEmail(value)) return '׳›׳×׳•׳‘׳× ׳׳™׳׳™׳™׳ ׳׳ ׳×׳§׳™׳ ׳”'
+        if (!trimmed) return 'מייל עבודה עוזר לנו לחזור אליך מהר.'
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) return 'כתובת המייל נראית לא תקינה.'
         return undefined
-      
       case 'projectType':
-        if (!value) return '׳™׳© ׳׳‘׳—׳•׳¨ ׳¡׳•׳’ ׳₪׳¨׳•׳™׳§׳˜'
+        if (!trimmed) return 'בחרו את סוג הפרויקט כדי שנדע להכין חומרים רלוונטיים.'
         return undefined
-      
       case 'message':
-        if (!value.trim()) return '׳”׳•׳“׳¢׳” ׳”׳™׳ ׳©׳“׳” ׳—׳•׳‘׳”'
-        if (value.trim().length < 10) return '׳”׳•׳“׳¢׳” ׳—׳™׳™׳‘׳× ׳׳”׳›׳™׳ ׳׳₪׳—׳•׳× 10 ׳×׳•׳•׳™׳'
+        if (!trimmed) return 'ספרו לנו בקצרה מה האתגר או המטרה של הדף.'
+        if (trimmed.length < 10) return 'נשמח לעוד כמה מילים כדי שנבין את התמונה המלאה.'
         return undefined
-      
       default:
         return undefined
     }
@@ -69,174 +66,131 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
 
   const validateForm = (): ContactFormErrors => {
     const errors: ContactFormErrors = {}
-    
-    const fieldsToValidate: (keyof ContactFormData)[] = ['name', 'email', 'projectType', 'message']
-    
-    fieldsToValidate.forEach((field) => {
+
+    REQUIRED_FIELDS.forEach((field) => {
       const value = formState.data[field]
       if (value !== undefined) {
         const error = validateField(field, value)
         if (error) {
-          if (field === 'name') errors.name = error
-          else if (field === 'email') errors.email = error
-          else if (field === 'projectType') errors.projectType = error
-          else if (field === 'message') errors.message = error
+          errors[field] = error
         }
       }
     })
-    
+
     return errors
   }
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
-    setFormState(prev => {
-      const newData = { ...prev.data }
-      const newErrors = { ...prev.errors }
-      
-      if (field === 'name') {
-        newData.name = value
-        newErrors.name = undefined
-      } else if (field === 'email') {
-        newData.email = value
-        newErrors.email = undefined
-      } else if (field === 'projectType') {
-        newData.projectType = value
-        newErrors.projectType = undefined
-      } else if (field === 'message') {
-        newData.message = value
-        newErrors.message = undefined
-      } else if (field === 'selectedPackage') {
-        newData.selectedPackage = value
-      } else if (field === 'goals') {
-        newData.goals = value
-      }
-      
-      return {
-        ...prev,
-        data: newData,
-        errors: newErrors
-      }
-    })
+    setFormState((prev) => ({
+      ...prev,
+      data: {
+        ...prev.data,
+        [field]: value,
+      },
+      errors: {
+        ...prev.errors,
+        [field]: undefined,
+      },
+    }))
   }
 
   const handleBlur = (field: keyof ContactFormData) => {
     const value = formState.data[field]
-    if (value !== undefined) {
-      const error = validateField(field, value)
-      if (error) {
-        setFormState(prev => {
-          const newErrors = { ...prev.errors }
-          if (field === 'name') newErrors.name = error
-          else if (field === 'email') newErrors.email = error
-          else if (field === 'projectType') newErrors.projectType = error
-          else if (field === 'message') newErrors.message = error
-          
-          return {
-            ...prev,
-            errors: newErrors
-          }
-        })
-      }
+    if (value === undefined) return
+    const error = validateField(field, value)
+    if (error) {
+      setFormState((prev) => ({
+        ...prev,
+        errors: {
+          ...prev.errors,
+          [field]: error,
+        },
+      }))
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
     const errors = validateForm()
-    
     if (Object.keys(errors).length > 0) {
-      setFormState(prev => ({
-        ...prev,
-        errors
-      }))
+      setFormState((prev) => ({ ...prev, errors }))
       return
     }
 
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       isSubmitting: true,
-      submitError: undefined
+      submitError: undefined,
     }))
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formState.data),
       })
 
       if (!response.ok) {
-        throw new Error('׳©׳׳™׳—׳× ׳”׳”׳•׳“׳¢׳” ׳ ׳›׳©׳׳”')
+        throw new Error('ארעה שגיאה בשליחה. נסו שוב או כתבו לנו ישירות במייל.')
       }
 
-      setFormState(prev => ({
+      setFormState((prev) => ({
         ...prev,
         isSubmitting: false,
-        isSubmitted: true
+        isSubmitted: true,
+        isSuccess: true,
       }))
 
-      // Auto close after 3 seconds if onClose is provided
       if (onClose) {
-        setTimeout(() => {
-          onClose()
-        }, 3000)
+        setTimeout(() => onClose(), 3000)
       }
-
     } catch (error) {
-      setFormState(prev => ({
+      setFormState((prev) => ({
         ...prev,
         isSubmitting: false,
-        submitError: error instanceof Error ? error.message : '׳׳™׳¨׳¢׳” ׳©׳’׳™׳׳” ׳‘׳©׳׳™׳—׳× ׳”׳”׳•׳“׳¢׳”'
+        submitError: error instanceof Error ? error.message : 'לא הצלחנו לשלוח את הטופס. נסו שוב בעוד דקה.',
       }))
     }
   }
 
   const resetForm = () => {
-    setFormState({
-      data: {
-        name: '',
-        email: '',
-        projectType: '',
-        message: '',
-        selectedPackage: selectedPackage || '',
-        goals: ''
-      },
-      errors: {},
-      isSubmitting: false,
-      isSubmitted: false,
-      isSuccess: false
-    })
+    setFormState(initialState(selectedPackage))
   }
 
-  // Success state
   if (formState.isSubmitted) {
     return (
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8 text-center animate-scale-in">
-        <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center animate-bounce">
-          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="mx-auto max-w-md animate-scale-in rounded-lg bg-white p-8 text-center shadow-lg">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
+          <svg className="h-8 w-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2 animate-slide-in-up">׳”׳”׳•׳“׳¢׳” ׳ ׳©׳׳—׳” ׳‘׳”׳¦׳׳—׳”!</h3>
-        <p className="text-gray-600 mb-6 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-          ׳×׳•׳“׳” ׳¢׳ ׳₪׳ ׳™׳™׳×׳›׳. ׳ ׳—׳–׳•׳¨ ׳׳׳™׳›׳ ׳‘׳”׳§׳“׳ ׳”׳׳₪׳©׳¨׳™.
+        <h3 className="text-2xl font-bold text-gray-900">הטופס התקבל!</h3>
+        <p className="mt-2 text-sm text-gray-600">
+          נחזור אליכם עד יום העסקים הבא עם תיאום פגישה או חומרים לתמחור. בינתיים תוכלו לשלוח לנו חומרים נוספים למייל team@cmsstudio.co.
         </p>
-        <div className="animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
+        {selectedPackage && (
+          <div className="mt-4 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
+            <span className="font-semibold">חבילת עניין: </span>
+            {selectedPackage}
+          </div>
+        )}
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button
+            type="button"
             onClick={resetForm}
-            className="bg-slate-900 text-white px-6 py-2 rounded-lg hover:bg-slate-900 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            className="rounded-lg bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
           >
-            ׳©׳׳— ׳”׳•׳“׳¢׳” ׳ ׳•׳¡׳₪׳×
+            שלחו עוד פרטים
           </button>
           {onClose && (
             <button
+              type="button"
               onClick={onClose}
-              className="mr-4 text-gray-600 hover:text-gray-800 transition-all duration-300 hover:scale-105"
+              className="rounded-lg border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
             >
-              ׳¡׳’׳•׳¨
+              סגירה מהירה
             </button>
           )}
         </div>
@@ -245,218 +199,110 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
   }
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8 animate-scale-in">
-      <div className="mb-6 animate-slide-in-up">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">׳‘׳•׳׳• ׳ ׳×׳—׳™׳ ׳׳¢׳‘׳•׳“</h3>
-        <p className="text-gray-600">
-          ׳׳׳׳• ׳׳× ׳”׳₪׳¨׳˜׳™׳ ׳•׳ ׳—׳–׳•׳¨ ׳׳׳™׳›׳ ׳¢׳ ׳”׳¦׳¢׳× ׳׳—׳™׳¨ ׳׳•׳×׳׳׳×
+    <div className="mx-auto w-full max-w-xl">
+      <div className="mb-6">
+        <h3 className="text-2xl font-bold text-gray-900">נשמח לשמוע עליכם</h3>
+        <p className="mt-1 text-sm text-gray-600">
+          מלאו כמה פרטים קצרים כדי שנוכל להכין פגישה או הצעה מדויקת. נחזור אליכם עם שלבים ברורים ומסמך דרישות ראשוני.
         </p>
         {selectedPackage && (
-          <div className="mt-3 p-3 bg-slate-50 rounded-lg animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-            <p className="text-sm text-slate-800">
-              <span className="font-medium">׳—׳‘׳™׳׳” ׳ ׳‘׳—׳¨׳×:</span> {selectedPackage}
-            </p>
+          <div className="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-800">
+            <span className="font-medium">חבילה שנבחרה: </span>
+            {selectedPackage}
           </div>
         )}
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Name Field */}
-        <div className="animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            ׳©׳ ׳׳׳ *
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={formState.data.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
-            onBlur={() => handleBlur('name')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
-              formState.errors.name 
-                ? 'border-red-500 bg-red-50 animate-pulse' 
-                : 'border-gray-300 hover:border-gray-400 focus:scale-105'
-            }`}
-            placeholder="׳”׳›׳ ׳™׳¡׳• ׳׳× ׳©׳׳›׳ ׳”׳׳׳"
-            disabled={formState.isSubmitting}
-          />
-          {formState.errors.name && (
-            <p className="mt-1 text-sm text-red-600 flex items-center">
-              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              {formState.errors.name}
-            </p>
-          )}
-        </div>
+        <TextField
+          id="name"
+          label="שם מלא *"
+          placeholder="לדוגמה: תמר לוי / Lior Studio"
+          value={formState.data.name}
+          onChange={(value) => handleInputChange('name', value)}
+          onBlur={() => handleBlur('name')}
+          error={formState.errors.name}
+          disabled={formState.isSubmitting}
+          delay="0.1s"
+        />
 
-        {/* Email Field */}
-        <div className="animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            ׳›׳×׳•׳‘׳× ׳׳™׳׳™׳™׳ *
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={formState.data.email}
-            onChange={(e) => handleInputChange('email', e.target.value)}
-            onBlur={() => handleBlur('email')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
-              formState.errors.email 
-                ? 'border-red-500 bg-red-50 animate-pulse' 
-                : 'border-gray-300 hover:border-gray-400 focus:scale-105'
-            }`}
-            placeholder="example@email.com"
-            disabled={formState.isSubmitting}
-          />
-          {formState.errors.email && (
-            <p className="mt-1 text-sm text-red-600 flex items-center">
-              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              {formState.errors.email}
-            </p>
-          )}
-        </div>
+        <TextField
+          id="email"
+          type="email"
+          label="אימייל עבודה *"
+          placeholder="name@company.com"
+          value={formState.data.email}
+          onChange={(value) => handleInputChange('email', value)}
+          onBlur={() => handleBlur('email')}
+          error={formState.errors.email}
+          disabled={formState.isSubmitting}
+          delay="0.2s"
+        />
 
-        {/* Project Type Field */}
-        <div className="animate-slide-in-up" style={{ animationDelay: '0.3s' }}>
-          <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
-            ׳¡׳•׳’ ׳”׳₪׳¨׳•׳™׳§׳˜ *
-          </label>
-          <select
-            id="projectType"
-            value={formState.data.projectType}
-            onChange={(e) => handleInputChange('projectType', e.target.value)}
-            onBlur={() => handleBlur('projectType')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
-              formState.errors.projectType 
-                ? 'border-red-500 bg-red-50 animate-pulse' 
-                : 'border-gray-300 hover:border-gray-400 focus:scale-105'
-            }`}
-            disabled={formState.isSubmitting}
-          >
-            <option value="">׳‘׳—׳¨׳• ׳¡׳•׳’ ׳₪׳¨׳•׳™׳§׳˜</option>
-            {projectTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-          {formState.errors.projectType && (
-            <p className="mt-1 text-sm text-red-600 flex items-center">
-              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              {formState.errors.projectType}
-            </p>
-          )}
-        </div>
+        <SelectField
+          id="projectType"
+          label="סוג הפרויקט *"
+          value={formState.data.projectType}
+          onChange={(value) => handleInputChange('projectType', value)}
+          onBlur={() => handleBlur('projectType')}
+          options={projectTypeOptions}
+          placeholder="בחרו את סוג הפרויקט"
+          error={formState.errors.projectType}
+          disabled={formState.isSubmitting}
+          delay="0.3s"
+        />
 
-        {/* Message Field */}
-        <div className="animate-slide-in-up" style={{ animationDelay: '0.4s' }}>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-            ׳”׳•׳“׳¢׳” *
-          </label>
-          <textarea
-            id="message"
-            rows={4}
-            value={formState.data.message}
-            onChange={(e) => handleInputChange('message', e.target.value)}
-            onBlur={() => handleBlur('message')}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 resize-none hover:shadow-md ${
-              formState.errors.message 
-                ? 'border-red-500 bg-red-50 animate-pulse' 
-                : 'border-gray-300 hover:border-gray-400 focus:scale-105'
-            }`}
-            placeholder="׳¡׳₪׳¨׳• ׳׳ ׳• ׳¢׳ ׳”׳₪׳¨׳•׳™׳§׳˜ ׳©׳׳›׳, ׳”׳“׳¨׳™׳©׳•׳× ׳•׳”׳¦׳™׳₪׳™׳•׳×..."
-            disabled={formState.isSubmitting}
-          />
-          {formState.errors.message && (
-            <p className="mt-1 text-sm text-red-600 flex items-center">
-              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              {formState.errors.message}
-            </p>
-          )}
-        </div>
+        <TextAreaField
+          id="message"
+          label="מה המטרה של הדף? *"
+          placeholder="ספרו לנו על ההצעה, הקהל ומה תרצו שיקרה אחרי שהלקוח משאיר פרטים."
+          value={formState.data.message}
+          onChange={(value) => handleInputChange('message', value)}
+          onBlur={() => handleBlur('message')}
+          error={formState.errors.message}
+          disabled={formState.isSubmitting}
+          delay="0.4s"
+        />
 
-        {/* Goals Field (optional) */}
-        <div className="animate-slide-in-up" style={{ animationDelay: '0.45s' }}>
-          <label htmlFor="goals" className="block text-sm font-medium text-gray-700 mb-2">
-            ׳׳˜׳¨׳•׳× ׳”׳₪׳¨׳•׳™׳§׳˜ (׳׳•׳₪׳¦׳™׳•׳ ׳׳™)
-          </label>
-          <input
-            type="text"
-            id="goals"
-            value={formState.data.goals || ''}
-            onChange={(e) => handleInputChange('goals', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-slate-700 focus:border-transparent transition-all duration-300 hover:shadow-md ${
-              formState.errors.goals 
-                ? 'border-red-500 bg-red-50 animate-pulse' 
-                : 'border-gray-300 hover:border-gray-400 focus:scale-105'
-            }`}
-            placeholder="׳׳“׳•׳’׳׳”: ׳”׳’׳“׳׳× ׳׳™׳“׳™׳, ׳ ׳™׳”׳•׳ ׳‘׳׳•׳’, ׳—׳™׳‘׳•׳¨ CRM"
-            disabled={formState.isSubmitting}
-          />
-          {formState.errors.goals && (
-            <p className="mt-1 text-sm text-red-600 flex items-center">
-              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              {formState.errors.goals}
-            </p>
-          )}
-        </div>
+        <TextField
+          id="goals"
+          label="איך נראה הצלחה בעיניכם? (לא חובה)"
+          placeholder="לדוגמה: 50 לידים בחודש, חיבור ל-HubSpot, להעלות מהירות טעינה."
+          value={formState.data.goals || ''}
+          onChange={(value) => handleInputChange('goals', value)}
+          disabled={formState.isSubmitting}
+          delay="0.45s"
+        />
 
-        {/* Submit Error */}
         {formState.submitError && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-600 flex items-center">
-              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              {formState.submitError}
-            </p>
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-600">
+            {formState.submitError}
           </div>
         )}
 
-        {/* Submit Button */}
         <div className="animate-slide-in-up" style={{ animationDelay: '0.5s' }}>
           <button
             type="submit"
             disabled={formState.isSubmitting}
-            className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
+            className={`w-full rounded-lg py-3 px-6 text-white transition-all duration-300 ${
               formState.isSubmitting
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-slate-900 hover:bg-slate-900 hover:shadow-lg transform hover:scale-105 hover:-translate-y-1 animate-glow'
-            } text-white`}
+                ? 'cursor-not-allowed bg-gray-400'
+                : 'bg-slate-900 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg'
+            }`}
           >
-          {formState.isSubmitting ? (
-            <span className="flex items-center justify-center">
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              ׳©׳•׳׳— ׳”׳•׳“׳¢׳”...
-            </span>
-          ) : (
-            '׳©׳׳— ׳”׳•׳“׳¢׳”'
-          )}
-        </button>
+            {formState.isSubmitting ? 'שולחים את הפרטים...' : 'שלחו את הפרטים'}
+          </button>
         </div>
 
-        {/* Close Button */}
         {onClose && (
           <div className="animate-slide-in-up" style={{ animationDelay: '0.6s' }}>
             <button
               type="button"
               onClick={onClose}
-              className="w-full py-2 px-4 text-gray-600 hover:text-gray-800 transition-all duration-300 hover:scale-105"
+              className="w-full rounded-lg py-2 text-sm text-gray-600 transition hover:text-gray-800"
               disabled={formState.isSubmitting}
             >
-              ׳‘׳™׳˜׳•׳
+              ביטול וסגירה
             </button>
           </div>
         )}
@@ -465,4 +311,140 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
   )
 }
 
+function TextField({
+  id,
+  label,
+  value,
+  onChange,
+  onBlur,
+  error,
+  disabled,
+  placeholder,
+  type = 'text',
+  delay,
+}: {
+  id: string
+  label: string
+  value: string
+  onChange: (value: string) => void
+  onBlur?: () => void
+  error?: string
+  disabled?: boolean
+  placeholder?: string
+  type?: string
+  delay?: string
+}) {
+  return (
+    <div className="animate-slide-in-up" style={delay ? { animationDelay: delay } : undefined}>
+      <label htmlFor={id} className="mb-2 block text-sm font-medium text-gray-700">
+        {label}
+      </label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={(event) => onChange(event.target.value)}
+        onBlur={onBlur}
+        disabled={disabled}
+        className={`w-full rounded-lg border px-4 py-3 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-slate-700 hover:shadow-md ${
+          error ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
+        }`}
+      />
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+    </div>
+  )
+}
 
+function TextAreaField({
+  id,
+  label,
+  value,
+  onChange,
+  onBlur,
+  error,
+  disabled,
+  placeholder,
+  delay,
+}: {
+  id: string
+  label: string
+  value: string
+  onChange: (value: string) => void
+  onBlur?: () => void
+  error?: string
+  disabled?: boolean
+  placeholder?: string
+  delay?: string
+}) {
+  return (
+    <div className="animate-slide-in-up" style={delay ? { animationDelay: delay } : undefined}>
+      <label htmlFor={id} className="mb-2 block text-sm font-medium text-gray-700">
+        {label}
+      </label>
+      <textarea
+        id={id}
+        rows={4}
+        value={value}
+        placeholder={placeholder}
+        onChange={(event) => onChange(event.target.value)}
+        onBlur={onBlur}
+        disabled={disabled}
+        className={`w-full resize-none rounded-lg border px-4 py-3 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-slate-700 hover:shadow-md ${
+          error ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
+        }`}
+      />
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+    </div>
+  )
+}
+
+function SelectField({
+  id,
+  label,
+  value,
+  onChange,
+  onBlur,
+  options,
+  placeholder,
+  error,
+  disabled,
+  delay,
+}: {
+  id: string
+  label: string
+  value: string
+  onChange: (value: string) => void
+  onBlur?: () => void
+  options: string[]
+  placeholder: string
+  error?: string
+  disabled?: boolean
+  delay?: string
+}) {
+  return (
+    <div className="animate-slide-in-up" style={delay ? { animationDelay: delay } : undefined}>
+      <label htmlFor={id} className="mb-2 block text-sm font-medium text-gray-700">
+        {label}
+      </label>
+      <select
+        id={id}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        onBlur={onBlur}
+        disabled={disabled}
+        className={`w-full rounded-lg border px-4 py-3 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-slate-700 hover:shadow-md ${
+          error ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
+        }`}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+    </div>
+  )
+}

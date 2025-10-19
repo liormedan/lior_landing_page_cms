@@ -2,9 +2,8 @@ import { HeroSection } from "@/components/hero-section"
 import TestimonialsSection from "@/components/testimonials-section"
 import FAQSection from "@/components/faq-section"
 import ContactSection from "@/components/contact-section"
-// RecentPosts removed from landing page scope
+import DemoSection from "@/components/demo-section"
 import Footer from "@/components/footer"
-// import SectionNav from "@/components/section-nav"
 import Offerings from "@/components/offerings"
 import ExplainerTabs from "@/components/explainer-tabs"
 import PackageCompare from "@/components/package-compare"
@@ -14,48 +13,30 @@ import {
   getHeroContent,
   getTestimonials,
   getFAQItems,
+  getDemoContent,
 } from "@/lib/landing-page-content"
-// Removed Sanity blog fetching for focused landing page
-// import { sanityFetch } from "@/lib/sanity.client"
-// import { RECENT_POSTS_QUERY } from "@/lib/queries"
-// import type { PostListItem } from "@/types/sanity"
 import type { Metadata } from "next"
 
-// Hide the side navigation by replacing it with a no-op component
-const SectionNavHidden = (_props: Record<string, unknown>) => null
+const SectionNavHidden = () => null
 
 export const metadata: Metadata = {
-  title: "דפי נחיתה עם CMS | אתרים מותאמים לעברית (RTL)",
+  title: "בניית דפי נחיתה עם CMS | חוויית RTL מלאה לעסקים",
   description:
-    "בניית דפי נחיתה מהירים ב‑Next.js עם CMS, התאמה מלאה ל‑RTL, SEO מובנה ורכיבים נגישים. אינטגרציות עם Sanity ועוד.",
-  keywords: ["Next.js", "Sanity CMS", "Vercel", "RTL", "אתרי תוכן", "דפי נחיתה"],
+    "דפי נחיתה חכמים ב-Next.js ו-Sanity, החל מ-₪4,900. מותאם לעברית, מובייל ואינטגרציות CRM כדי להפוך מבקרים ללקוחות.",
+  keywords: ["Next.js", "Sanity CMS", "Vercel", "RTL", "דפי נחיתה", "CMS לעסקים", "Landing Page"],
   openGraph: {
-    title: "דפי נחיתה עם CMS | RTL מותאם",
+    title: "בניית דפי נחיתה שממירות בעברית",
     description:
-      "פתרון Tailor‑made על בסיס Next.js ו‑Sanity עם ביצועים גבוהים, תמיכה מלאה בעברית (RTL) ו‑SEO חזק.",
+      "תהליך מלא להקמת דפי נחיתה חכמים עם CMS מתקדם, כולל חיבורים ל-CRM, SEO, תמיכה ו-RTL מדויק.",
     type: "website",
   },
 }
 
 export default async function HomePage() {
-  /* sections removed
-    { id: 'hero', label: 'ראשי' },
-    { id: 'technologies', label: 'טכנולוגיות' },
-    { id: 'projects', label: 'פרויקטים' },
-    { id: 'services', label: 'שירותים' },
-    { id: 'demo', label: 'דמו' },
-    { id: 'testimonials', label: 'לקוחות ממליצים' },
-    { id: 'faq', label: 'שאלות נפוצות' },
-    { id: 'pricing', label: 'תמחור' },
-    { id: 'posts', label: 'פוסטים' },
-    { id: 'contact', label: 'צור קשר' },
-  */
-
   const heroContent = getHeroContent()
   const testimonials = getTestimonials()
   const faqItems = getFAQItems()
-
-  // No recent posts on this simplified landing page
+  const demoContent = getDemoContent()
 
   return (
     <main className="min-h-screen text-right" role="main">
@@ -68,12 +49,13 @@ export default async function HomePage() {
 
       <SectionNavHidden
         sections={[
-          { id: 'hero', label: 'ראשי' },
-          { id: 'offerings', label: 'יתרונות' },
-          { id: 'testimonials', label: 'לקוחות ממליצים' },
-          { id: 'faq', label: 'שאלות נפוצות' },
-          { id: 'posts', label: 'פוסטים' },
-          { id: 'contact', label: 'צור קשר' },
+          { id: "hero", label: "ראשי" },
+          { id: "offerings", label: "מה תקבלו" },
+          { id: "demo", label: "דמו חי" },
+          { id: "testimonials", label: "לקוחות ממליצים" },
+          { id: "faq", label: "שאלות נפוצות" },
+          { id: "pricing", label: "תמחור" },
+          { id: "contact", label: "צור קשר" },
         ]}
       />
 
@@ -82,6 +64,9 @@ export default async function HomePage() {
         <Offerings />
         <AnimatedWrapper animation="slideUp" threshold={0.15}>
           <ExplainerTabs />
+        </AnimatedWrapper>
+        <AnimatedWrapper animation="slideUp" threshold={0.15}>
+          <DemoSection demo={demoContent} />
         </AnimatedWrapper>
         <AnimatedWrapper animation="fadeIn" threshold={0.15}>
           <PackageCompare />
@@ -95,7 +80,6 @@ export default async function HomePage() {
         <AnimatedWrapper animation="slideUp" threshold={0.15}>
           <FAQSection faqItems={faqItems} />
         </AnimatedWrapper>
-        {/* Posts section removed for focused landing page */}
         <AnimatedWrapper animation="scaleIn" threshold={0.2}>
           <ContactSection />
         </AnimatedWrapper>

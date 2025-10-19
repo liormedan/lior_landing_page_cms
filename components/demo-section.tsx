@@ -23,15 +23,15 @@ export default function DemoSection({ demo }: DemoSectionProps) {
   }
 
   return (
-    <section id="demo" ref={sectionRef} className="bg-white dark:bg-slate-900 py-24" aria-labelledby="demo-heading">
+    <section id="demo" ref={sectionRef} className="bg-white py-24 dark:bg-slate-900" aria-labelledby="demo-heading" lang="he" dir="rtl">
       <div className="lp-container">
         <div
-          className={`mx-auto max-w-3xl text-right transition-all	duration-700 ${
+          className={`mx-auto max-w-3xl text-right transition-all duration-700 ${
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           <span className="inline-flex items-center justify-center rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">
-            הצצה לאולפן Sanity שלנו
+            הצצה חיה ל-Sanity Studio
           </span>
           <h2
             id="demo-heading"
@@ -45,14 +45,14 @@ export default function DemoSection({ demo }: DemoSectionProps) {
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr),minmax(0,1fr)]">
           <div
             ref={contentRef}
-            className={`space-y-8 transition-all	duration-700 ${
+            className={`space-y-8 transition-all duration-700 ${
               contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
             }`}
           >
-            <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 text-right">
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">מה תראו בהדגמה?</h3>
+            <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 text-right dark:border-slate-700 dark:bg-slate-800/60">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">מה רואים בדמו?</h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                נעבור על מבני התוכן שחיברנו ללקוחות אמיתיים, נציג איך עובדת תצוגת ה-Preview, ונראה כיצד מזרימים את השינויים לאתר ה-Next.js בלחיצת כפתור.
+                עורך התוכן מעדכן כותרות, קרוסלות ותיבות קריאה לפעולה בזמן אמת. תצוגת Preview מראה במיידי כיצד השינויים נראים באתר, כולל מובייל ו-RTL.
               </p>
             </div>
 
@@ -68,26 +68,26 @@ export default function DemoSection({ demo }: DemoSectionProps) {
               ))}
             </ul>
 
-            <div className="sky-card rounded-3xl p-6">
+            <div className="sky-card rounded-3xl p-6 text-right">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-                למה זה חשוב
+                נקודות עיקריות
               </p>
               <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                הדגמה מעשית מאפשרת לצוות שלכם להבין כיצד כל שינוי משפיע על האתר, לראות את ה-Preview בזמן אמת, ולבדוק תהליכים כמו אישורים, Workflow ואינטגרציות לפני שמתחייבים.
+                ניתן להגדיר סטטוס טיוטה, לצפות בגרסאות קודמות ולתזמן פרסומים. חיבור ל-CRM שולח את הלידים בזמן אמת, והמערכת מתעדכנת עם מדדי ביצוע מתוך GA4.
               </p>
             </div>
           </div>
 
           <div
             ref={galleryRef}
-            className={`space-y-4 transition-all	duration-700 ${
+            className={`space-y-4 transition-all duration-700 ${
               galleryVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
             }`}
           >
             <div className="sky-card rounded-[32px]">
               <Image
                 src={demo.screenshots[selectedImage]}
-                alt={`צילום מסך מהדגמה – שקופית ${selectedImage + 1}`}
+                alt={`מסך הדגמה מספר ${selectedImage + 1}`}
                 width={960}
                 height={720}
                 className="w-full rounded-[32px] object-cover"
@@ -95,8 +95,10 @@ export default function DemoSection({ demo }: DemoSectionProps) {
                 priority
               />
 
-              <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl bg-sky-200/80 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-900 shadow-sm backdrop-blur">
-                <span>שקופית {selectedImage + 1} מתוך {demo.screenshots.length}</span>
+              <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl bg-sky-200/80 px-4 py-3 text-sm font-medium text-slate-600 shadow-sm backdrop-blur dark:text-slate-900">
+                <span>
+                  מסך {selectedImage + 1} מתוך {demo.screenshots.length}
+                </span>
                 <span className="flex items-center gap-2 text-xs">
                   <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
                   Live sync
@@ -110,16 +112,16 @@ export default function DemoSection({ demo }: DemoSectionProps) {
                   key={screenshot}
                   onClick={() => setSelectedImage(index)}
                   onKeyDown={(event) => handleThumbnailKeyDown(event, index)}
-                  className={`relative overflow-hidden sky-card rounded-2xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 ${
+                  className={`relative overflow-hidden rounded-2xl border border-transparent transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 ${
                     selectedImage === index ? 'ring-2 ring-sky-500' : 'hover:-translate-y-1'
                   }`}
-                  aria-label={`בחירת תצוגה מספר ${index + 1} מתוך ${demo.screenshots.length}`}
+                  aria-label={`הצגת מסך ${index + 1} מתוך ${demo.screenshots.length}`}
                   aria-pressed={selectedImage === index}
                   type="button"
                 >
                   <Image
                     src={screenshot}
-                    alt={`תצוגה ממוזערת מספר ${index + 1}`}
+                    alt={`תצוגה ממוזערת ${index + 1}`}
                     width={320}
                     height={240}
                     className="w-full object-cover"
@@ -129,16 +131,15 @@ export default function DemoSection({ demo }: DemoSectionProps) {
               ))}
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 text-right shadow-[0_25px_60px_rgba(15,23,42,0.05)] backdrop-blur-sm flex flex-col items-center gap-4">
-              <p className="w-full text-base leading-relaxed text-slate-600">
-                רוצים לראות את Sanity עם הנתונים שלכם? נבנה סביבת דמו מותאמת, נחבר אותנטיקציה
-                בסיסית ונעבור על התהליכים בלייב.
+            <div className="flex flex-col items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50/60 p-6 text-right text-base leading-relaxed text-slate-600 shadow-[0_25px_60px_rgba(15,23,42,0.05)] backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/60">
+              <p className="w-full">
+                רוצים לראות את הדמו אצלכם? נציג לכם איך אנחנו משלבים את הסטודיו שלכם במערכת ומה נדרש כדי לעלות תוך ימים ספורים.
               </p>
               <a
                 href="#contact"
                 className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
               >
-                לקביעת הדגמה אישית
+                קבעו שיחת דמו
                 <svg
                   className="h-4 w-4"
                   fill="none"
@@ -157,3 +158,4 @@ export default function DemoSection({ demo }: DemoSectionProps) {
     </section>
   )
 }
+

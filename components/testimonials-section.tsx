@@ -28,8 +28,8 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <span className="inline-flex items-center justify-center rounded-full sky-chip px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-            דברי לקוחות
+          <span className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm dark:bg-slate-100 dark:text-slate-900">
+            מה הלקוחות מספרים
           </span>
           <h2
             id="testimonials-heading"
@@ -37,7 +37,9 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           >
             {testimonials.title}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">{testimonials.subtitle}</p>
+          {testimonials.subtitle && (
+            <p className="mt-4 text-lg leading-relaxed text-slate-600">{testimonials.subtitle}</p>
+          )}
           {testimonials.supportingText && (
             <p className="mt-4 text-sm leading-relaxed text-slate-500">{testimonials.supportingText}</p>
           )}
@@ -54,7 +56,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
               style={{ transitionDelay: `${index * 160}ms` }}
-              aria-label={`חוות דעת: ${item.name}`}
+              aria-label={`המלצה מאת ${item.name}`}
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -76,9 +78,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   <div className="text-right">
                     <p className="text-sm font-semibold text-slate-900">{item.name}</p>
                     <p className="text-xs text-slate-500">{item.role}</p>
-                    {item.company && (
-                      <p className="text-xs text-slate-400">{item.company}</p>
-                    )}
+                    {item.company && <p className="text-xs text-slate-400">{item.company}</p>}
                   </div>
                 </div>
                 {item.highlight && (
@@ -97,14 +97,14 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         </div>
 
         <div className="mt-16 flex flex-col items-center gap-4 text-right">
-          <p className="max-w-2xl text-base leading-relaxed text-slate-600 text-right">
-            רוצים לשמוע איך נראה התהליך מאחורי הקלעים? נשמח לחבר אתכם ללקוחות קיימים ולשתף בדוגמאות, תוצרים ותובנות.
+          <p className="max-w-2xl text-base leading-relaxed text-slate-600">
+            רוצים לשמוע איך זה יכול לעבוד אצלכם? נשמח לערוך סשן קצר שבו נציג דוגמאות חיות ונבין מה יזיז את המחט.
           </p>
           <Link
             href="#contact"
             className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
           >
-            לתאם שיחת היכרות
+            לתאם שיחת הכרות
             <svg
               className="h-5 w-5"
               fill="none"

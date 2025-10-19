@@ -4,76 +4,92 @@ export const landingPageContent = {
   hero: {
     title: 'בניית דפי נחיתה חכמים עם CMS',
     lines: [
-      'הקמה וניהול אתרי תוכן מבוססי CMS',
-      'מבני תוכן מודולריים, קומפוננטות לשילוב ושינוי מהיר לפי צורך.',
-      'אינטגרציות חכמות עם Sanity וכלי שיווק, יחד עם SEO מובנה.',
+      'החל מ-₪4,900 בלבד לאתר עסק מקצועי, מותאם לעברית ולמובייל תוך ימים ספורים.',
+      'עיצוב מרהיב, RTL מדויק ותשתית Next.js + Sanity שמעניקה לכם שליטה מלאה בתוכן.',
+      'חיבורים ל-CRM, אוטומציות דיוור ותמיכה צמודה מהאפיון ועד ההשקה.',
     ],
+    badge: 'תהליך זריז וללא התחייבות',
+    ctaSupportText: 'נחזור אליך תוך 24 שעות עם הצעת מחיר מותאמת.',
     ctas: {
-      primary: { label: 'צור/י קשר לייעוץ חינם', href: '#contact' },
-      secondary: { label: 'רוצה לשמוע עוד?', href: '#contact' },
+      primary: { label: 'לתיאום שיחת ייעוץ', href: '#contact' },
+      secondary: { label: 'קבל הצעת מחיר', href: '#pricing' },
     },
   },
 
   offerings: {
-    heading: 'יתרונות CMS לעסק',
+    heading: 'מה מקבלים כשבונים איתנו דף נחיתה',
     benefits: [
-      { title: 'שליטה מלאה', desc: 'עדכנו דפים, בלוג, מוצרים ונכסים דיגיטליים ללא קוד.' },
-      { title: 'גמישות בזמן אמת', desc: 'מבני תוכן מודולריים, קומפוננטות ניתנות לשילוב ושינוי מהיר.' },
-      { title: 'התאמה אישית', desc: 'UI/UX לפי המותג, קומפוננטות ותבניות ידידותיות לעורכים.' },
-      { title: 'ניהול מכל מקום', desc: 'ממשק ענן מאובטח, הרשאות צוות וזרימות אישור.' },
-      { title: 'SEO מובנה', desc: 'מטא‑דאטה, סלאגים, סכמה ופרוויו חברתי — מוכנים לקידום.' },
+      { title: 'שליטה מלאה בתוכן', desc: 'עדכון טקסטים, מבצעים וטפסים בלייב בממשק עברי ידידותי.' },
+      { title: 'RTL ונייד בליגה אחרת', desc: 'טיפוגרפיה בעברית, אנימציות רספונסיביות וטעינה מהירה בכל מכשיר.' },
+      { title: 'חיבורים שעובדים בשבילך', desc: 'הטמעת CRM, מערכות דיוור ופיקסלים - בלי להתפשר על איכות הנתונים.' },
+      { title: 'ביצועים ומדידה', desc: 'SEO מובנה, Lighthouse 90+, אנליטיקה ותיוג אירועים ב-GA4, גיבויים אוטומטיים.' },
+      { title: 'ליווי אנושי צמוד', desc: 'מנהל.ת פרויקט זמין.ה, סטודיו עיצוב ומדריכים מוקלטים להפעלה עצמאית.' },
     ],
-    platformsHeading: 'פלטפורמות מומלצות',
+    platformsHeading: 'הטכנולוגיות שמאחורי התוצאה',
     platforms: [
-      { name: 'Sanity', blurb: 'Headless גמיש במיוחד, תוכן כשירות, סכמות TypeScript ואינטגרציות עשירות.' },
-      { name: 'WordPress', blurb: 'אקוסיסטם עצום, מאות תוספים, מתאים לבלוגים ואתרי תוכן קלאסיים.' },
-      { name: 'Wix', blurb: 'הקמה מהירה, עורך ויזואלי נוח, פתרון כולל לעסקים קטנים.' },
-      { name: 'Drupal', blurb: 'יציב ומאובטח לארגונים, מבני תוכן מורכבים והרשאות מתקדמות.' },
+      { name: 'Next.js', blurb: 'תשתית מודרנית לביצועים גבוהים, SEO חזק ותמיכה ב-ISR ו-Edge.' },
+      { name: 'Sanity CMS', blurb: 'ממשק עריכה בעברית עם Preview בזמן אמת וגרסאות תוכן.' },
+      { name: 'Vercel', blurb: 'פריסה מיידית ל-CDN עולמי, אבטחה וניטור בזמן אמת.' },
+      { name: 'אינטגרציות', blurb: 'חיבור ל-HubSpot, ActiveCampaign, Zapier ומערכות פנים ארגוניות.' },
     ],
   },
 
+  demo: {
+    title: 'איך נראה ניהול תוכן בזמן אמת',
+    description: 'דפדפו בדמו קצר שמראה איך צוות השיווק מעדכן דף נחיתה בדקות וללא מתכנתים.',
+    features: [
+      'Preview חי לפני פרסום, עם תמיכה מלאה ב-RTL ובמובייל.',
+      'טיוטות, הרשאות וגרסאות המותאמות לקמפיינים ולצוותים שונים.',
+      'סנכרון דו-כיווני ל-CRM ודיוור - HubSpot, ActiveCampaign, Salesforce ועוד.',
+      'מעקב אוטומטי אחרי טפסים והמרות, כולל תגיות לאנליטיקה ו-GA4.',
+      'ייבוא תכנים מאתרים קיימים (WordPress, Wix) למעבר חלק ומהיר.',
+      'Webhooks ו-API פתוח לשילוב תהליכים עסקיים ואוטומציות מותאמות.',
+    ],
+    screenshots: ['/images/sanity-demo-1.svg', '/images/sanity-demo-2.svg', '/images/sanity-demo-3.svg'],
+  },
+
   pricing: {
-    heading: 'תמחור',
-    note: 'טווח המחירים תלוי בהיקף ותכולה. נשמח לדייק יחד את החבילה המתאימה.',
+    heading: 'חבילות ותמחור שקוף',
+    note: 'המחירים אינם כוללים מע"מ וכוללים העלאה ופריסה ב-Vercel.',
     plans: [
       {
-        id: 'starter',
-        name: 'Starter',
-        price: 'החל מ‑₪4,900',
-        tagline: 'פתרון מהיר לדף נחיתה עם CMS בסיסי.',
+        id: 'essential',
+        name: 'Essential',
+        price: '₪4,900',
+        tagline: 'נקודת פתיחה חכמה לעסקים שרוצים לעלות לאוויר מהר עם בסיס יציב.',
         features: [
-          'עד 5 מקטעים (Hero, יתרונות, עדויות, FAQ, יצירת קשר)',
-          'הטמעת SEO בסיסי ו‑Open Graph',
-          'ביצועים מיטביים והקשחת נגישות בסיסית',
-          'סיור מסירה קצר והדרכה',
+          'עד 5 מקטעים קריטיים (Hero, יתרונות, גלריית דוגמאות, FAQ, טופס ליד).',
+          'עיצוב מותאם מותג + רכיבי RTL וקריאות גבוהה במובייל.',
+          'התממשקות בסיסית ל-CRM או למערכת דיוור אחת + Google Analytics.',
+          'הדרכת וידאו מוקלטת ונוהל עדכונים מפורט לצוות שלכם.',
         ],
-        cta: 'דברו איתנו על Starter',
+        cta: 'דברו איתי על חבילת Essential',
       },
       {
         id: 'growth',
         name: 'Growth',
-        price: 'החל מ‑₪9,900',
-        tagline: 'למשרדים/עסקים שזקוקים ליותר תוכן וגמישות.',
+        price: '₪9,900',
+        tagline: 'מותאם לקמפיינים מתמשכים ו-A/B Testing עם שכבת אוטומציה מתקדמת.',
         features: [
-          'עד 12 מקטעים + קומפוננטות חוזרות',
-          'התאמות UI/UX לפי מותג ותבניות לעורכים',
-          'SEO מתקדם + מטא נתונים ודפי שיתוף',
-          'אינטגרציות שיווק (CRM/Forms/Analytics)',
+          'עד 10 מקטעים, כולל ספריית רכיבים לכל קמפיין ובלוג כמהדורת תוכן.',
+          'עיצוב UX/UI מעמיק עם מיקרו-אינטראקציות ורכיבי אנימציה קלים.',
+          'חיבורי CRM מרובים, אוטומציות דיוור, סנכרון ללידים ותיוג המרות.',
+          'סט דוחות Looker Studio או GA4 כולל אירועים ותיעוד KPI.',
         ],
-        cta: 'בחירת חבילת Growth',
+        cta: 'נשמע מתאים - צרו קשר לחבילת Growth',
       },
       {
-        id: 'pro',
-        name: 'Pro',
-        price: 'לפי דרישה',
-        tagline: 'Headless/Enterprise מותאם אישית מקצה לקצה.',
+        id: 'scale',
+        name: 'Scale',
+        price: 'הצעת מחיר מותאמת',
+        tagline: 'לארגונים שרוצים Headless מלא, תהליכים מרובי שפות ואינטגרציות מורכבות.',
         features: [
-          'Headless CMS (לרוב Sanity) + סכמות מותאמות',
-          'Workflow לעורכים: טיוטה > סקירה > פרסום',
-          'אינטגרציות מתקדמות ו‑API',
-          'ביצועים, אבטחה ונגישות מחמירים',
+          'ספריית קומפוננטות מותאמת, ניהול גרסאות ותמיכה במספר מותגים.',
+          'Headless CMS מלא עם Workflow מותאם, הרשאות מורכבות ותזמונים.',
+          'DevOps מנוהל: סביבות פיתוח, אבטחה, ניטור וזמינות SLA.',
+          'חיבורים מותאמים אישית ל-ERP, Data Warehouse ומערכות פנים ארגוניות.',
         ],
-        cta: 'נדבר על Pro',
+        cta: 'נתאם שיחה ונתפור חבילת Scale',
       },
     ],
   },
@@ -81,29 +97,66 @@ export const landingPageContent = {
   faq: {
     heading: 'שאלות נפוצות',
     items: [
-      { q: 'למי מתאים אתר מבוסס CMS?', a: 'לעסקים שצריכים לעדכן תוכן באופן תדיר, לבלוגים, למותגים עם קטלוג מוצרים או תכנים עשירים.' },
-      { q: 'האם אפשר להרחיב בעתיד?', a: 'כן. אנו בונים מבנה מודולרי המאפשר הוספת מקטעים, קומפוננטות ואינטגרציות בהמשך בקלות.' },
-      { q: 'איך CMS עוזר ל‑SEO?', a: 'שליטה במטא‑דאטה, סלאגים, סכמה, Sitemap ותצוגות שיתוף משפרת את הנראות האורגנית.' },
-      { q: 'אפשר תמיכה בעברית ו‑RTL?', a: 'בהחלט. המערכת וה‑UI נבנים עם RTL בראש, כולל טיפוגרפיה וכיווניות תקינה.' },
-      { q: 'מה לגבי אבטחה וביצועים?', a: 'מיישמים Best Practices, שימוש ב‑CDN, הקשחת הרשאות ו‑CI/CD חכם לטובת יציבות ומהירות.' },
+      {
+        q: 'כמה זמן לוקח עד שהדף באוויר?',
+        a: 'חבילת Essential נמסרת בתוך 10-14 ימי עבודה הכוללים אפיון, עיצוב ופיתוח. בחבילות המורחבות אנו מוסיפים שבועות בהתאם לכמות האוטומציות והאינטגרציות הנדרשות.',
+      },
+      {
+        q: 'איזו הכנה צריך מצידכם?',
+        a: 'מספיק תדריך קצר על הקהל, ההצעה והטון המותגי. אנחנו דואגים לקופי ראשוני, לעיצוב ולבניית הטפסים. במהלך הפרויקט נפיק סשן קצר לאישור חומרים ולכיוון סופי.',
+      },
+      {
+        q: 'אפשר לחבר ל-CRM, זאפייר ודיוור קיים?',
+        a: 'בוודאי. אנחנו מחברים באופן שוטף ל-HubSpot, Salesforce, ActiveCampaign, Monday, Zapier ועוד. אם יש מערכת פנימית, נבנה Webhooks או API מותאם לפי הצורך.',
+      },
+      {
+        q: 'מה קורה אחרי ההשקה?',
+        a: 'מעבירים הדרכה מסודרת, מספקים הקלטות, נוהל עדכונים ותמיכה לשבועיים לאחר העלייה לאוויר. ניתן לצרף ריטיינר תחזוקה שכולל A/B Testing ועדכוני תוכן שוטפים.',
+      },
+      {
+        q: 'יש פתרון לעסקים קטנים או סטרטאפים בתחילת הדרך?',
+        a: 'כן. חבילת Essential נבנתה במיוחד לעסקים בצמיחה, ואפשר לפרוס את התשלום לשני חלקים. נשמח להתאים גם גרסת MVP לדף נחיתה אחד כדי להתחיל למדוד תוצאות.',
+      },
     ],
   },
 
   testimonials: {
-    heading: 'לקוחות ממליצים',
+    heading: 'לקוחות מספרים',
+    subtitle: 'עסקים קטנים ובינוניים שבחרו בנו לדפי נחיתה ממירים.',
+    supportingText: 'כל פרויקט מקבל צוות קטן ומסור שמוביל משלב הרעיון עד להשקה ומדידה.',
     items: [
-      { name: 'נועה ל.', role: 'מנהלת שיווק', quote: 'תהליך זריז ותוצאה מדויקת למותג. סוף סוף אפשר לעדכן תוכן לבד.' },
-      { name: 'יואב ש.', role: 'בעלים, סטארטאפ', quote: 'ה‑CMS וה‑RTL עובדים מעולה. האתר מהיר וקל לקידום.' },
-      { name: 'מיכל ר.', role: 'מנהלת תוכן', quote: 'ממשק עריכה נוח, גמיש וידידותי לצוות. ממליצה בחום.' },
+      {
+        name: 'טל רותם',
+        role: 'מנכ"לית סטודיו למיתוג',
+        company: 'Studio TR',
+        quote: '״בתוך שבועיים היה לנו דף נחיתה שמייצר פי שלושה פניות. הצוות זריז, יסודי ומגיב לכל שינוי בלייב.״',
+        avatar: '/images/placeholder.svg',
+        highlight: 'עלייה של 35% בלידים',
+      },
+      {
+        name: 'מיכאל פרקש',
+        role: 'מנהל שיווק',
+        company: 'FinNext',
+        quote: '״המערכת של Sanity עם האוטומציות שהוספתם חסכה לנו שעות עבודה. סוף סוף יש לנו RTL מדויק ומדידה מסודרת.״',
+        avatar: '/images/placeholder.svg',
+        highlight: 'חיסכון של 8 שעות בשבוע',
+      },
+      {
+        name: 'הילה שחר',
+        role: 'שותפה ומובילת מוצר',
+        company: 'UpRight',
+        quote: '״היישום היה מוקפד, התמיכה גם אחרי העלייה לאוויר והיכולת לשנות תוכן בלי מתכנתים - זה מה שחיפשנו.״',
+        avatar: '/images/placeholder.svg',
+      },
     ],
   },
 
   navigation: {
     services: [
-      { label: 'אתרי תוכן', href: '/services/content-sites' },
-      { label: 'תחזוקה מתמשכת', href: '/services/maintenance' },
-      { label: 'קומפוננטות מותאמות', href: '/services/components' },
-      { label: 'אינטגרציות ומערכות', href: '/services/integrations' },
+      { label: 'בניית דפי נחיתה', href: '/services/landing-pages' },
+      { label: 'אוטומציות שיווק', href: '/services/automation' },
+      { label: 'ניהול תוכן CMS', href: '/services/cms' },
+      { label: 'עיצוב ומיתוג', href: '/services/design' },
     ],
     footerLinks: [
       { label: 'בית', href: '/' },
@@ -115,19 +168,18 @@ export const landingPageContent = {
   },
 
   contact: {
-    heading: 'נשמח לשמוע על הפרויקט שלך',
-    subheading: 'ספרו לנו בכמה מילים מה המטרה ומה חשוב לכם — ונחזור עם כיוון מדויק.',
+    heading: 'נבנה ביחד את הדף שמביא לקוחות',
+    subheading: 'השאירו שם, מייל וקצת רקע ואחזור אליכם לשיחת היכרות קצרה - בלי מחויבות.',
     placeholders: {
-      name: 'שם מלא',
-      email: 'אימייל',
-      phone: 'טלפון (לא חובה)',
-      goals: 'מטרות הפרויקט, קהל יעד ותוכן מרכזי',
+      name: 'שם מלא או שם חברה',
+      email: 'דוא"ל עבודה',
+      phone: 'טלפון לעדכון מהיר (לא חובה)',
+      goals: 'מה חשוב שיקרה בדף? הצעה, הרשמה, מכירה או משהו אחר',
     },
-    submit: 'שלח/י',
+    submit: 'שלחו לי פרטים',
   },
 } as const
 
-// Helpers mapped to existing component expectations
 export function getLandingPageContent(): LandingPageContent {
   return {
     hero: {
@@ -138,13 +190,14 @@ export function getLandingPageContent(): LandingPageContent {
       primaryCtaHref: landingPageContent.hero.ctas.primary.href,
       secondaryCtaText: landingPageContent.hero.ctas.secondary.label,
       secondaryCtaHref: landingPageContent.hero.ctas.secondary.href,
-      badge: '',
+      badge: landingPageContent.hero.badge ?? '',
+      ctaSupportText: landingPageContent.hero.ctaSupportText ?? '',
     },
     technologies: [],
     projectTypes: [],
     services: [],
     testimonials: getTestimonials(),
-    demo: { title: '', description: '', features: [], screenshots: [] },
+    demo: landingPageContent.demo,
     faq: getFAQItems(),
     pricing: getPricingPackages(),
   }
@@ -157,26 +210,30 @@ export function getHeroContent() {
 export function getTestimonials(): TestimonialsContent {
   return {
     title: landingPageContent.testimonials.heading,
-    subtitle: '',
+    subtitle: landingPageContent.testimonials.subtitle ?? '',
     items: landingPageContent.testimonials.items,
+    supportingText: landingPageContent.testimonials.supportingText,
   }
 }
 
 export function getFAQItems(): FAQItem[] {
-  return landingPageContent.faq.items.map((it) => ({
-    question: it.q,
-    answer: it.a,
+  return landingPageContent.faq.items.map((item) => ({
+    question: item.q,
+    answer: item.a,
     category: 'general',
   }))
 }
 
 export function getPricingPackages() {
-  return landingPageContent.pricing.plans.map((p) => ({
-    name: p.name,
-    price: p.price,
-    features: p.features,
-    highlighted: p.id === 'growth',
-    ctaText: p.cta,
+  return landingPageContent.pricing.plans.map((plan) => ({
+    name: plan.name,
+    price: plan.price,
+    features: plan.features,
+    highlighted: plan.id === 'growth',
+    ctaText: plan.cta,
   }))
 }
 
+export function getDemoContent() {
+  return landingPageContent.demo
+}

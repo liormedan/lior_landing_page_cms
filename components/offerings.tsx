@@ -5,78 +5,85 @@ import { useStaggeredAnimation } from "@/hooks/useScrollAnimation"
 
 export default function Offerings() {
   const { heading, benefits, platformsHeading, platforms } = landingPageContent.offerings
+  const { containerRef, visibleItems } = useStaggeredAnimation(2, 120)
 
   const items = [
     {
-      id: 'benefits',
+      id: "benefits",
       title: heading,
-      summary: 'היתרונות המרכזיים של CMS מודרני לעסק שלכם.',
-      features: benefits.map((b) => `${b.title} – ${b.desc}`),
-      cta: landingPageContent.hero.ctas.secondary.label, // "רוצה לשמוע עוד?"
+      summary: "הדגשים המרכזיים שכל לקוח מקבל איתנו כבר מהיום הראשון.",
+      features: benefits.map((benefit) => `${benefit.title} — ${benefit.desc}`),
+      primaryCta: { label: landingPageContent.hero.ctas.primary.label, href: "#contact" },
+      secondaryCta: { label: "צפו בדמו", href: "#demo" },
     },
     {
-      id: 'platforms',
+      id: "platforms",
       title: platformsHeading,
-      summary: 'פלטפורמות מומלצות לצרכים ולתקציבים שונים.',
-      features: platforms.map((p) => `${p.name} – ${p.blurb}`),
-      cta: landingPageContent.hero.ctas.primary.label, // "צור/י קשר לייעוץ חינם"
+      summary: "הסטאק המוכח שמאפשר לנו לשמור על יציבות, מהירות ושליטה מלאה בתוכן.",
+      features: platforms.map((platform) => `${platform.name} — ${platform.blurb}`),
+      primaryCta: { label: landingPageContent.hero.ctas.secondary.label, href: "#pricing" },
+      secondaryCta: { label: "שאלו אותנו על חיבורים", href: "#contact" },
     },
   ] as const
-
-  const { containerRef, visibleItems } = useStaggeredAnimation(items.length, 120)
 
   return (
     <section id="offerings" className="py-20" aria-labelledby="offerings-heading" lang="he" dir="rtl">
       <div className="lp-container">
-        <header className="mb-10 text-center">
-          <h2 id="offerings-heading" className="text-3xl font-bold">{heading}</h2>
-          <p className="text-slate-600 dark:text-white/80">סקירה קצרה של יתרונות CMS לעסק, לצד פלטפורמות מומלצות.</p>
+        <header className="mb-12 text-center">
+          <h2 id="offerings-heading" className="text-3xl font-bold text-slate-900 dark:text-white">
+            {heading}
+          </h2>
+          <p className="mt-4 text-base text-slate-600 dark:text-white/80">
+            בחרנו את הרכיבים הקריטיים כדי שתוכלו להשיק דף נחיתה מקצועי, מדויק ומוכן לצמיחה.
+          </p>
         </header>
 
         <div ref={containerRef} className="grid gap-6 md:grid-cols-2">
-          {items.map((item, i) => (
-            <div
-              key={item.id}
-              className={`rounded-2xl border bg-white dark:bg-slate-900 dark:border-slate-800 p-6 text-center shadow-sm transition-all duration-500 will-change-transform motion-safe:transform ${
-                visibleItems.has(i) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              } hover:shadow-md hover:-translate-y-0.5`}
-            >
-              <div className="flex items-start justify-center gap-4 w-full">
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white text-center">{item.title}</h3>
-                  <p className="mt-2 text-slate-600 dark:text-white/90 text-center">{item.summary}</p>
+          {items.map((item, index) => {
+            const isVisible = visibleItems.has(index)
+            return (
+              <article
+                key={item.id}
+                className={`rounded-2xl border border-slate-200 bg-white p-6 text-right shadow-sm transition-all duration-500 dark:border-slate-800 dark:bg-slate-900 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                } hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.08)]`}
+                aria-labelledby={`${item.id}-title`}
+              >
+                <div className="text-center">
+                  <h3 id={`${item.id}-title`} className="text-xl font-semibold text-slate-900 dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-white/80">{item.summary}</p>
                 </div>
-              </div>
 
-              <ul className="mt-6 space-y-2 text-center" role="list">
-                {item.features.map((f) => (
-                  <li key={f} className="flex items-center justify-center gap-2" role="listitem">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-slate-900/70" aria-hidden="true" />
-                    <span className="text-slate-700 dark:text-white">{f}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-700 dark:text-white/90" role="list">
+                  {item.features.map((feature) => (
+                    <li key={feature} className="flex items-start justify-start gap-2 text-right" role="listitem">
+                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-slate-900/70" aria-hidden="true" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <div className="mt-6 flex gap-3 justify-center">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2 text-white hover:bg-slate-800 transition"
-                  aria-label={item.cta}
-                >
-                  {item.cta}
-                </a>
-                {item.id === 'platforms' && (
+                <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row-reverse sm:justify-center">
                   <a
-                    href="#pricing"
-                    className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-5 py-2 text-slate-700 hover:bg-slate-50 transition dark:border-white/40 dark:text-white dark:hover:bg-white/10"
-                    aria-label="תמחור"
+                    href={item.primaryCta.href}
+                    className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
                   >
-                    תמחור
+                    {item.primaryCta.label}
                   </a>
-                )}
-              </div>
-            </div>
-          ))}
+                  {item.secondaryCta && (
+                    <a
+                      href={item.secondaryCta.href}
+                      className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl border border-slate-300 px-6 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 dark:border-white/30 dark:text-white dark:hover:bg-white/10"
+                    >
+                      {item.secondaryCta.label}
+                    </a>
+                  )}
+                </div>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

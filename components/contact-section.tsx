@@ -71,10 +71,10 @@ export default function ContactSection({ selectedPackage }: ContactSectionProps)
                     </svg>
                   </button>
                   <a
-                    href="tel:+972501234567"
+                    href="tel:+972547382675"
                     className="inline-flex flex-row-reverse items-center justify-center gap-2 rounded-xl border border-white/30 px-6 py-3 text-base font-semibold text-white transition hover:border-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                   >
-                    050-123-4567
+                    054-738-2675
                   </a>
                 </div>
               </div>

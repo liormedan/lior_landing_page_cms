@@ -168,7 +168,7 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
         </div>
         <h3 className="text-2xl font-bold text-gray-900">הטופס התקבל!</h3>
         <p className="mt-2 text-sm text-gray-600">
-          נחזור אליכם עד יום העסקים הבא עם תיאום פגישה או חומרים לתמחור. בינתיים תוכלו לשלוח לנו חומרים נוספים למייל team@cmsstudio.co.
+          נחזור אליכם עד יום העסקים הבא עם תיאום פגישה או חומרים לתמחור. בינתיים תוכלו לשלוח לנו חומרים נוספים למייל liormedan1@gmail.com.
         </p>
         {selectedPackage && (
           <div className="mt-4 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">

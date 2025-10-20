@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useMemo, useState } from 'react'
 import type { HeroContent } from '@/types/landing-page'
@@ -110,28 +110,13 @@ export function HeroSection({ hero }: HeroSectionProps) {
   )
 }
 
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.8}
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
-  )
-}
-
 function TechAccordion() {
-  const [openId, setOpenId] = useState<string | null>(null)
-  const cards = [
+    const tabs = [
     {
       id: 'next',
       title: 'Next.js',
-      summary: 'תשתית React מודרנית למערכות תוכן מהירות עם SEO מצוין ויכולות Edge.',
+      badge: 'NEXT',
+      summary: 'תשתית React מודרנית לדפי נחיתה מהירים עם SEO מצוין ויכולות Edge.',
       points: [
         'טעינה מיידית בזכות ISR ו-Static Generation.',
         'גישה ל-Edge Functions ולפיצ׳רים מתקדמים של Vercel.',
@@ -141,6 +126,7 @@ function TechAccordion() {
     {
       id: 'sanity',
       title: 'Sanity CMS',
+      badge: 'Sanity',
       summary: 'ממשק עריכה בעברית עם Preview חי וגרסאות תוכן לייב.',
       points: [
         'עריכה בזמן אמת כולל טיוטות והרשאות לצוותים שונים.',
@@ -151,7 +137,8 @@ function TechAccordion() {
     {
       id: 'vercel',
       title: 'Vercel',
-      summary: 'תשתית פריסה מאובטחת עם CDN עולמי ומדידות סרק זמן אמת.',
+      badge: '▲',
+      summary: 'תשתית פריסה מאובטחת עם CDN עולמי ומדידות זמן אמת.',
       points: [
         'Preview לכל Pull Request כדי לקבל פידבק מהיר.',
         'Analytics, Error Tracking והתראות ביצועים מובנות.',
@@ -160,64 +147,59 @@ function TechAccordion() {
     },
   ] as const
 
+  const [activeId, setActiveId] = useState<(typeof tabs)[number]['id']>('next')
+  const activeTab = tabs.find((tab) => tab.id === activeId) ?? tabs[0]
+
   return (
-    <div className="grid gap-4 pt-10 sm:grid-cols-3">
-      {cards.map((card) => {
-        const open = openId === card.id
-        return (
-          <article
-            key={card.id}
-            className="rounded-3xl border border-slate-200 bg-white text-slate-800 shadow-[0_16px_32px_rgba(15,23,42,0.08)] transition dark:border-white/10 dark:bg-gradient-to-br dark:from-slate-800/80 dark:via-slate-800/40 dark:to-blue-900/20 dark:text-white"
-          >
+    <div className="rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 text-white shadow-[0_35px_80px_rgba(15,23,42,0.35)]">
+      <div
+        role="tablist"
+        aria-label="סוגי הטכנולוגיות"
+        className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4"
+      >
+        {tabs.map((tab) => {
+          const selected = tab.id === activeId
+          return (
             <button
+              key={tab.id}
+              role="tab"
               type="button"
-              onClick={() => setOpenId(open ? null : card.id)}
-              className="flex w-full items-center justify-between gap-3 px-6 py-4"
-              aria-expanded={open}
-              aria-controls={`tech-${card.id}`}
-            >
-              <div className="flex-1 text-center">
-                <div className="mx-auto mb-1 flex h-6 w-6 items-center justify-center">
-                  {card.id === 'next' && (
-                    <span className="text-[10px] font-black tracking-widest">NEXT</span>
-                  )}
-                  {card.id === 'sanity' && (
-                    <span className="text-[12px] font-extrabold">Sanity</span>
-                  )}
-                  {card.id === 'vercel' && (
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
-                      <polygon points="12,3 22,20 2,20" className="fill-current" />
-                    </svg>
-                  )}
-                </div>
-                <h3 className="text-base font-semibold">{card.title}</h3>
-                <p className="mt-1 text-sm text-white/80 dark:text-white/70">{card.summary}</p>
-              </div>
-              <Chevron open={open} />
-            </button>
-            <div
-              id={`tech-${card.id}`}
-              className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ${
-                open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+              aria-selected={selected}
+              aria-controls={`tech-panel-${tab.id}`}
+              id={`tech-tab-${tab.id}`}
+              onClick={() => setActiveId(tab.id)}
+              className={`flex flex-1 items-center justify-center gap-2 rounded-2xl border px-4 py-2 text-sm font-semibold transition sm:flex-none sm:min-w-[140px] ${
+                selected
+                  ? 'border-white/30 bg-white/10 text-white shadow-lg'
+                  : 'border-white/10 bg-white/5 text-white/70 hover:bg-white/10'
               }`}
-              role="region"
-              aria-label={`עיקרי היתרונות של ${card.title}`}
             >
-              <div className="min-h-0 px-6 pb-6">
-                <ul className="space-y-2 text-sm text-slate-700 dark:text-white/85 text-center" role="list">
-                  {card.points.map((point) => (
-                    <li key={point} className="flex items-center justify-center gap-2" role="listitem">
-                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-slate-400" aria-hidden="true" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </article>
-        )
-      })}
+              <span>{tab.badge}</span>
+              <span>{tab.title}</span>
+            </button>
+          )
+        })}
+      </div>
+
+      <div
+        role="tabpanel"
+        id={`tech-panel-${activeTab.id}`}
+        aria-labelledby={`tech-tab-${activeTab.id}`}
+        className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 text-center"
+      >
+        <h3 className="text-xl font-semibold text-white">{activeTab.title}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-white/80">{activeTab.summary}</p>
+        <ul className="mt-6 space-y-3 text-sm text-white/90" role="list">
+          {activeTab.points.map((point) => (
+            <li key={point} className="flex items-center justify-center gap-2" role="listitem">
+              <span className="inline-block h-2 w-2 rounded-full bg-sky-400" aria-hidden="true" />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
+
 

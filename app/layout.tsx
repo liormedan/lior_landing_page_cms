@@ -5,7 +5,6 @@ import { Heebo } from "next/font/google"
 
 import "./globals.css"
 import { ScrollProgress, ScrollToTop } from "@/components/ui/scroll-progress"
-import ThemeToggle from "@/components/theme-toggle"
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -26,14 +25,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="he" dir="rtl" className="h-full">
+    <html lang="he" dir="rtl" className="dark h-full">
       <body
-        className={`${heebo.variable} ${geistMono.variable} min-h-screen antialiased`}
+        className={`${heebo.variable} ${geistMono.variable} min-h-screen bg-slate-950 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 antialiased`}
       >
         <ScrollProgress />
         <div className="flex min-h-screen flex-col">{children}</div>
         <ScrollToTop />
-        <ThemeToggle className="fixed top-6 left-6 z-50" />
       </body>
     </html>
   )

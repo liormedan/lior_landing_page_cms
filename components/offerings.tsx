@@ -1,10 +1,10 @@
-"use client"
+﻿"use client"
 
 import { landingPageContent } from "@/lib/landing-page-content"
 import { useStaggeredAnimation } from "@/hooks/useScrollAnimation"
 
 export default function Offerings() {
-  const { heading, benefits, platformsHeading, platforms } = landingPageContent.offerings
+  const { benefits, platformsHeading, platforms } = landingPageContent.offerings
   const updatedHeading = "אפשרויות רבות לניהול מערכת התוכן"
   const { containerRef, visibleItems } = useStaggeredAnimation(2, 120)
 
@@ -90,4 +90,5 @@ export default function Offerings() {
     </section>
   )
 }
+
 

@@ -1,4 +1,4 @@
-import { HeroSection } from "@/components/hero-section"
+﻿import { HeroSection } from "@/components/hero-section"
 import TestimonialsSection from "@/components/testimonials-section"
 import FAQSection from "@/components/faq-section"
 import ContactSection from "@/components/contact-section"
@@ -20,12 +20,12 @@ import type { Metadata } from "next"
 const SectionNavHidden = () => null
 
 export const metadata: Metadata = {
-  title: "ניהול מערכת תוכן עם CMS | חוויית RTL מלאה לעסקים",
+  title: "בניית דפי נחיתה עם CMS | חוויית RTL מלאה לעסקים",
   description:
-    "מערכות תוכן חכמות ב-Next.js ו-Sanity, החל מ-₪4,900. מותאם לעברית, מובייל ואינטגרציות CRM כדי להפוך מבקרים ללקוחות.",
-  keywords: ["Next.js", "Sanity CMS", "Vercel", "RTL", "מערכות תוכן", "CMS לעסקים", "Content Management"],
+    "דפי נחיתה חכמים ב-Next.js ו-Sanity, החל מ-₪3,000. מותאם לעברית, מובייל ואינטגרציות CRM כדי להפוך מבקרים ללקוחות.",
+  keywords: ["Next.js", "Sanity CMS", "Vercel", "RTL", "דפי נחיתה", "CMS לעסקים", "Landing Page"],
   openGraph: {
-    title: "ניהול מערכת תוכן שמייצרת תוצאות בעברית",
+    title: "בניית דפי נחיתה עם CMS | חוויית RTL מלאה לעסקים",
     description:
       "תהליך מלא להקמת וניהול מערכת תוכן חכמה עם CMS מתקדם, כולל חיבורים ל-CRM, SEO, תמיכה ו-RTL מדויק.",
     type: "website",
@@ -88,3 +88,5 @@ export default async function HomePage() {
     </main>
   )
 }
+
+

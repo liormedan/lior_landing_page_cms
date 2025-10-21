@@ -22,12 +22,12 @@ const SectionNavHidden = () => null
 export const metadata: Metadata = {
   title: "בניית דפי נחיתה עם CMS | חוויית RTL מלאה לעסקים",
   description:
-    "דפי נחיתה חכמים ב-Next.js ו-Sanity, החל מ-₪3,000. מותאם לעברית, מובייל ואינטגרציות CRM כדי להפוך מבקרים ללקוחות.",
+    "דפי נחיתה חכמים ב-Next.js ו-Sanity, החל מ-₪2,900. מותאם לעברית, מובייל ואינטגרציות CRM כדי להפוך מבקרים ללקוחות.",
   keywords: ["Next.js", "Sanity CMS", "Vercel", "RTL", "דפי נחיתה", "CMS לעסקים", "Landing Page"],
   openGraph: {
     title: "בניית דפי נחיתה עם CMS | חוויית RTL מלאה לעסקים",
     description:
-      "תהליך מלא להקמת וניהול מערכת תוכן חכמה עם CMS מתקדם, כולל חיבורים ל-CRM, SEO, תמיכה ו-RTL מדויק.",
+      "תהליך מלא להקמת דפי נחיתה חכמים עם CMS מתקדם, כולל חיבורים ל-CRM, SEO ותמיכה ב-RTL מדויק.",
     type: "website",
   },
 }
@@ -88,5 +88,8 @@ export default async function HomePage() {
     </main>
   )
 }
+
+
+
 
 

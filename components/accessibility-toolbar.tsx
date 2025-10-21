@@ -40,6 +40,7 @@ const sanitizeState = (value: unknown): AccessibilityState => {
 export default function AccessibilityToolbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [state, setState] = useState<AccessibilityState>(defaultState)
+  const highContrastActive = state.highContrast > 0
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -110,7 +111,11 @@ export default function AccessibilityToolbar() {
         aria-expanded={isOpen}
         aria-controls="accessibility-toolbar-panel"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="rounded-full bg-slate-900/90 p-3 text-white shadow-lg shadow-slate-900/40 backdrop-blur transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
+        className={`rounded-full p-3 shadow-lg shadow-slate-900/40 backdrop-blur transition focus:outline-none focus-visible:ring-2 ${
+          highContrastActive
+            ? 'bg-sky-400 text-slate-900 hover:bg-sky-300 focus-visible:ring-sky-200'
+            : 'bg-slate-900/90 text-white hover:bg-slate-800 focus-visible:ring-slate-200'
+        }`}
       >
         <span className="sr-only">תוסף נגישות</span>
         <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -122,7 +127,9 @@ export default function AccessibilityToolbar() {
       {isOpen && (
         <div
           id="accessibility-toolbar-panel"
-          className="w-72 rounded-2xl border border-white/15 bg-slate-900/95 p-4 text-sm text-white shadow-xl backdrop-blur-md"
+          className={`w-72 rounded-2xl border p-4 text-sm shadow-xl backdrop-blur-md ${
+            highContrastActive ? 'border-sky-300 bg-slate-800 text-white' : 'border-white/15 bg-slate-900/95 text-white'
+          }`}
           role="dialog"
           aria-label="תוסף נגישות אתר"
         >
@@ -222,4 +229,3 @@ function LinkButton() {
     </a>
   )
 }
-

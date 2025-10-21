@@ -5,6 +5,8 @@ import { Heebo } from "next/font/google"
 
 import "./globals.css"
 import { ScrollProgress, ScrollToTop } from "@/components/ui/scroll-progress"
+import CookieConsent from "@/components/cookie-consent"
+import AccessibilityToolbar from "@/components/accessibility-toolbar"
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -30,6 +32,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         className={`${heebo.variable} ${geistMono.variable} min-h-screen bg-slate-950 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 antialiased`}
       >
         <ScrollProgress />
+        <CookieConsent />
+        <AccessibilityToolbar />
         <div className="flex min-h-screen flex-col">{children}</div>
         <ScrollToTop />
       </body>

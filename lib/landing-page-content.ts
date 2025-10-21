@@ -164,6 +164,7 @@ export const landingPageContent = {
       { label: 'תמחור', href: '#pricing' },
       { label: 'שאלות נפוצות', href: '#faq' },
       { label: 'צור קשר', href: '#contact' },
+      { label: 'הצהרת נגישות', href: '/accessibility' },
     ],
   },
 

@@ -1,21 +1,40 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 const STORAGE_KEY = 'cms-accessibility'
 
 type AccessibilityState = {
-  highContrast: boolean
-  largeText: boolean
-  underlineLinks: boolean
-  reduceMotion: boolean
+  highContrast: number
+  largeText: number
+  underlineLinks: number
+  reduceMotion: number
 }
 
 const defaultState: AccessibilityState = {
-  highContrast: false,
-  largeText: false,
-  underlineLinks: false,
-  reduceMotion: false,
+  highContrast: 0,
+  largeText: 0,
+  underlineLinks: 0,
+  reduceMotion: 0,
+}
+
+const clamp = (value: unknown, min = 0, max = 100): number => {
+  const n = Number(value)
+  if (Number.isNaN(n)) return min
+  return Math.min(Math.max(n, min), max)
+}
+
+const sanitizeState = (value: unknown): AccessibilityState => {
+  if (!value || typeof value !== 'object') {
+    return defaultState
+  }
+  const record = value as Partial<Record<keyof AccessibilityState, unknown>>
+  return {
+    highContrast: clamp(record.highContrast),
+    largeText: clamp(record.largeText),
+    underlineLinks: clamp(record.underlineLinks),
+    reduceMotion: clamp(record.reduceMotion),
+  }
 }
 
 export default function AccessibilityToolbar() {
@@ -27,9 +46,12 @@ export default function AccessibilityToolbar() {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY)
       if (saved) {
-        const parsed = JSON.parse(saved) as AccessibilityState
-        setState(parsed)
-        applyState(parsed)
+        const parsed = JSON.parse(saved)
+        const sanitized = sanitizeState(parsed)
+        setState(sanitized)
+        applyState(sanitized)
+      } else {
+        applyState(defaultState)
       }
     } catch (error) {
       console.warn('Failed to read accessibility preferences', error)
@@ -43,11 +65,43 @@ export default function AccessibilityToolbar() {
     }
   }, [state])
 
-  const toggleHighContrast = () => setState((prev) => ({ ...prev, highContrast: !prev.highContrast }))
-  const toggleLargeText = () => setState((prev) => ({ ...prev, largeText: !prev.largeText }))
-  const toggleUnderlineLinks = () => setState((prev) => ({ ...prev, underlineLinks: !prev.underlineLinks }))
-  const toggleReduceMotion = () => setState((prev) => ({ ...prev, reduceMotion: !prev.reduceMotion }))
-  const resetAccessibility = () => setState(defaultState)
+  const controls = useMemo(
+    () => [
+      {
+        id: 'highContrast',
+        label: 'ניגודיות',
+        description: 'שינוי עוצמת הניגודיות',
+        value: state.highContrast,
+        onChange: (value: number) => setState((prev) => ({ ...prev, highContrast: value })),
+      },
+      {
+        id: 'largeText',
+        label: 'גודל טקסט',
+        description: 'הגדלת גופנים באתר',
+        value: state.largeText,
+        onChange: (value: number) => setState((prev) => ({ ...prev, largeText: value })),
+      },
+      {
+        id: 'underlineLinks',
+        label: 'הדגשת קישורים',
+        description: 'עוצמת הקו התחתון בקישורים',
+        value: state.underlineLinks,
+        onChange: (value: number) => setState((prev) => ({ ...prev, underlineLinks: value })),
+      },
+      {
+        id: 'reduceMotion',
+        label: 'הפחתת אנימציות',
+        description: 'קביעת עוצמת האנימציה',
+        value: state.reduceMotion,
+        onChange: (value: number) => setState((prev) => ({ ...prev, reduceMotion: value })),
+      },
+    ],
+    [state],
+  )
+
+  const resetAccessibility = () => {
+    setState(defaultState)
+  }
 
   return (
     <div className="fixed bottom-20 left-6 z-[95] flex flex-col items-stretch gap-2">
@@ -60,7 +114,7 @@ export default function AccessibilityToolbar() {
       >
         <span className="sr-only">תוסף נגישות</span>
         <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.485 6.485l-2.121-2.121M8.636 9.515 6.515 7.394m0 9.192 2.121-2.121m9.192 0-2.121 2.121" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.485 6.485-2.121-2.121M8.636 9.515 6.515 7.394m0 9.192 2.121-2.121m9.192 0-2.121 2.121" />
           <circle cx="12" cy="12" r="3.5" />
         </svg>
       </button>
@@ -68,64 +122,30 @@ export default function AccessibilityToolbar() {
       {isOpen && (
         <div
           id="accessibility-toolbar-panel"
-          className="w-64 rounded-2xl border border-white/15 bg-slate-900/95 p-4 text-sm text-white shadow-xl backdrop-blur-md"
+          className="w-72 rounded-2xl border border-white/15 bg-slate-900/95 p-4 text-sm text-white shadow-xl backdrop-blur-md"
           role="dialog"
           aria-label="תוסף נגישות אתר"
         >
           <h2 className="mb-3 text-base font-semibold">התאמות נגישות</h2>
-          <div className="flex flex-col gap-2">
-            <button
-              type="button"
-              onClick={toggleHighContrast}
-              className={`flex items-center justify-between rounded-lg border px-3 py-2 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200 ${
-                state.highContrast ? 'border-sky-400 bg-sky-500/20' : 'border-white/20 hover:bg-white/5'
-              }`}
-            >
-              <span>ניגודיות גבוהה</span>
-              <ToggleIndicator active={state.highContrast} />
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleLargeText}
-              className={`flex items-center justify-between rounded-lg border px-3 py-2 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200 ${
-                state.largeText ? 'border-sky-400 bg-sky-500/20' : 'border-white/20 hover:bg-white/5'
-              }`}
-            >
-              <span>הגדלת גופן</span>
-              <ToggleIndicator active={state.largeText} />
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleUnderlineLinks}
-              className={`flex items-center justify-between rounded-lg border px-3 py-2 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200 ${
-                state.underlineLinks ? 'border-sky-400 bg-sky-500/20' : 'border-white/20 hover:bg-white/5'
-              }`}
-            >
-              <span>הדגשת קישורים</span>
-              <ToggleIndicator active={state.underlineLinks} />
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleReduceMotion}
-              className={`flex items-center justify-between rounded-lg border px-3 py-2 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200 ${
-                state.reduceMotion ? 'border-sky-400 bg-sky-500/20' : 'border-white/20 hover:bg-white/5'
-              }`}
-            >
-              <span>הפחתת אנימציות</span>
-              <ToggleIndicator active={state.reduceMotion} />
-            </button>
+          <div className="flex flex-col gap-4">
+            {controls.map(({ id, label, description, value, onChange }) => (
+              <SliderControl
+                key={id}
+                id={id}
+                label={label}
+                description={description}
+                value={value}
+                onChange={onChange}
+              />
+            ))}
 
             <button
               type="button"
               onClick={resetAccessibility}
-              className="mt-2 rounded-lg border border-white/10 px-3 py-2 text-left text-white/80 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
+              className="mt-1 rounded-lg border border-white/10 px-3 py-2 text-right text-white/80 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
             >
               איפוס התאמות
             </button>
-
             <LinkButton />
           </div>
         </div>
@@ -134,24 +154,62 @@ export default function AccessibilityToolbar() {
   )
 }
 
+function SliderControl({
+  id,
+  label,
+  description,
+  value,
+  onChange,
+}: {
+  id: string
+  label: string
+  description: string
+  value: number
+  onChange: (value: number) => void
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label htmlFor={`slider-${id}`} className="flex items-center justify-between gap-2">
+        <div>
+          <span className="text-sm font-medium text-white">{label}</span>
+          <p className="text-xs text-white/70">{description}</p>
+        </div>
+        <span className="text-xs font-semibold text-white/70">{value}%</span>
+      </label>
+      <input
+        id={`slider-${id}`}
+        type="range"
+        min={0}
+        max={100}
+        step={5}
+        value={value}
+        onChange={(event) => onChange(Number(event.currentTarget.value))}
+        className="accent-sky-400"
+      />
+    </div>
+  )
+}
+
 function applyState(state: AccessibilityState) {
   if (typeof document === 'undefined') return
   const root = document.documentElement
-  root.classList.toggle('a11y-high-contrast', state.highContrast)
-  root.classList.toggle('a11y-large-text', state.largeText)
-  root.classList.toggle('a11y-underline-links', state.underlineLinks)
-  root.classList.toggle('a11y-reduce-motion', state.reduceMotion)
-}
 
-function ToggleIndicator({ active }: { active: boolean }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`inline-block h-2.5 w-2.5 rounded-full transition ${
-        active ? 'bg-sky-400 shadow-[0_0_0_4px_rgba(56,189,248,0.35)]' : 'bg-white/40'
-      }`}
-    />
-  )
+  const contrastActive = state.highContrast > 0
+  const fontScale = 1 + state.largeText / 100
+  const underlineActive = state.underlineLinks > 0
+  const underlineFactor = state.underlineLinks / 100
+  const motionActive = state.reduceMotion > 0
+  const motionScale = Math.max(0.05, 1 - state.reduceMotion / 100)
+
+  root.classList.toggle('a11y-high-contrast', contrastActive)
+  root.classList.toggle('a11y-large-text', state.largeText > 0)
+  root.classList.toggle('a11y-underline-links', underlineActive)
+  root.classList.toggle('a11y-reduce-motion', motionActive)
+
+  root.style.setProperty('--a11y-contrast-filter', contrastActive ? `contrast(${1 + state.highContrast / 100})` : 'none')
+  root.style.setProperty('--a11y-font-scale', fontScale.toString())
+  root.style.setProperty('--a11y-underline-factor', underlineFactor.toString())
+  root.style.setProperty('--a11y-motion-scale', motionScale.toString())
 }
 
 function LinkButton() {
@@ -164,3 +222,4 @@ function LinkButton() {
     </a>
   )
 }
+

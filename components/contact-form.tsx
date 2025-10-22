@@ -9,13 +9,13 @@ interface ContactFormProps {
 }
 
 const PROJECT_TYPES = [
-  'מערכת תוכן להשקת מוצר',
-  'קמפיין לידים לעסק שירותי',
-  'מוצר SaaS שצריך חיבורי CRM',
-  'עמוד הרשמה לאירוע או וובינר',
-  'אתר תדמית קטן ומוכן לצמיחה',
-  'שדרוג דף קיים ל-RTL ונגישות',
-  'רכיב אחר / לא בטוחים עדיין',
+  'אתר תדמית עסקי',
+  'חנות אונליין / אתר מכירות',
+  'בלוג או אתר תוכן',
+  'דף נחיתה לקמפיין שיווקי',
+  'מערכת CMS מתקדמת',
+  'שדרוג אתר קיים ל-RTL ונגישות',
+  'פרויקט אחר / לא בטוחים עדיין',
 ]
 
 const REQUIRED_FIELDS: Array<keyof ContactFormData> = ['name', 'email', 'projectType', 'message']
@@ -254,8 +254,8 @@ export default function ContactForm({ selectedPackage, onClose }: ContactFormPro
 
         <TextAreaField
           id="message"
-          label="מה המטרה של הדף? *"
-          placeholder="ספרו לנו על ההצעה, הקהל ומה תרצו שיקרה אחרי שהלקוח משאיר פרטים."
+          label="מה המטרה של האתר? *"
+          placeholder="ספרו לנו על העסק, הקהל היעד ומה תרצו שיקרה באתר - מכירות, לידים, מידע או משהו אחר."
           value={formState.data.message}
           onChange={(value) => handleInputChange('message', value)}
           onBlur={() => handleBlur('message')}

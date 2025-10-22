@@ -40,11 +40,26 @@ const sanitizeState = (value: unknown): AccessibilityState => {
 export default function AccessibilityToolbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [state, setState] = useState<AccessibilityState>(defaultState)
+  const [isInitialized, setIsInitialized] = useState(false)
   const highContrastActive = state.highContrast > 0
 
   useEffect(() => {
     if (typeof window === 'undefined') return
+    
+    // Check for reset flag in sessionStorage (cleared on page refresh)
+    const shouldReset = window.sessionStorage.getItem('accessibility-reset')
+    
     try {
+      if (shouldReset) {
+        // Reset to default and clear localStorage
+        window.localStorage.removeItem(STORAGE_KEY)
+        window.sessionStorage.removeItem('accessibility-reset')
+        setState(defaultState)
+        applyState(defaultState)
+        setIsInitialized(true)
+        return
+      }
+
       const saved = window.localStorage.getItem(STORAGE_KEY)
       if (saved) {
         const parsed = JSON.parse(saved)
@@ -54,8 +69,12 @@ export default function AccessibilityToolbar() {
       } else {
         applyState(defaultState)
       }
+      setIsInitialized(true)
     } catch (error) {
       console.warn('Failed to read accessibility preferences', error)
+      setState(defaultState)
+      applyState(defaultState)
+      setIsInitialized(true)
     }
   }, [])
 
@@ -102,6 +121,16 @@ export default function AccessibilityToolbar() {
 
   const resetAccessibility = () => {
     setState(defaultState)
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem(STORAGE_KEY)
+    }
+  }
+
+  const resetOnNextLoad = () => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('accessibility-reset', 'true')
+      window.location.reload()
+    }
   }
 
   return (
@@ -146,13 +175,23 @@ export default function AccessibilityToolbar() {
               />
             ))}
 
-            <button
-              type="button"
-              onClick={resetAccessibility}
-              className="mt-1 rounded-lg border border-white/10 px-3 py-2 text-right text-white/80 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
-            >
-              איפוס התאמות
-            </button>
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={resetAccessibility}
+                className="rounded-lg border border-white/10 px-3 py-2 text-right text-white/80 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
+              >
+                איפוס התאמות
+              </button>
+              <button
+                type="button"
+                onClick={resetOnNextLoad}
+                className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-right text-red-300 transition hover:bg-red-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-300"
+                title="איפוס מלא של כל ההגדרות בטעינה הבאה"
+              >
+                איפוס מלא + רענון
+              </button>
+            </div>
             <LinkButton />
           </div>
         </div>

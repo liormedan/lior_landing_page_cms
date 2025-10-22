@@ -9,6 +9,18 @@ export default function CookieConsent() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
+    
+    // Check for reset flag in sessionStorage (cleared on page refresh)
+    const shouldReset = window.sessionStorage.getItem('cookie-reset')
+    
+    if (shouldReset) {
+      // Reset cookie consent and show banner again
+      window.localStorage.removeItem(STORAGE_KEY)
+      window.sessionStorage.removeItem('cookie-reset')
+      setIsVisible(true)
+      return
+    }
+
     const existingConsent = window.localStorage.getItem(STORAGE_KEY)
     if (!existingConsent) {
       setIsVisible(true)
@@ -52,6 +64,20 @@ export default function CookieConsent() {
             className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
           >
             מאשר/ת
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                window.sessionStorage.setItem('cookie-reset', 'true')
+                window.sessionStorage.setItem('accessibility-reset', 'true')
+                window.location.reload()
+              }
+            }}
+            className="rounded-lg border border-white/20 px-3 py-2 text-sm text-white/70 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
+            title="איפוס כל ההגדרות ורענון הדף"
+          >
+            איפוס הכל
           </button>
           <a
             href="#contact"

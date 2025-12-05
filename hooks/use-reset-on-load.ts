@@ -33,14 +33,3 @@ export function useResetOnLoad() {
     }
   }, [])
 }
-
-/**
- * פונקציה עזר להוספת פרמטר auto-reset לכתובת
- */
-export function enableAutoReset() {
-  if (typeof window === 'undefined') return
-
-  const url = new URL(window.location.href)
-  url.searchParams.set('auto-reset', 'true')
-  window.location.href = url.toString()
-}

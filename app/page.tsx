@@ -17,8 +17,6 @@ import {
 } from "@/lib/landing-page-content"
 import type { Metadata } from "next"
 
-const SectionNavHidden = () => null
-
 export const metadata: Metadata = {
   title: "בניית דפי נחיתה עם CMS | חוויית RTL מלאה לעסקים",
   description:
@@ -46,18 +44,6 @@ export default async function HomePage() {
       >
         דלג לתוכן הראשי
       </a>
-
-      <SectionNavHidden
-        sections={[
-          { id: "hero", label: "ראשי" },
-          { id: "offerings", label: "מה תקבלו" },
-          { id: "demo", label: "דמו חי" },
-          { id: "testimonials", label: "לקוחות ממליצים" },
-          { id: "faq", label: "שאלות נפוצות" },
-          { id: "pricing", label: "תמחור" },
-          { id: "contact", label: "צור קשר" },
-        ]}
-      />
 
       <div id="main-content">
         <HeroSection hero={heroContent} />
@@ -88,8 +74,3 @@ export default async function HomePage() {
     </main>
   )
 }
-
-
-
-
-
